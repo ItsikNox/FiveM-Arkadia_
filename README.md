@@ -106,6 +106,20 @@ Text Commands
 /r ID Respond privately to a /report
 /me 3D Text
 
+# Jobs List
+
+Abatteur
+
+Ambulance = ambulance
+Police = police
+Mécano = mecano
+Raffineur = raffineur
+Vigneron = vigne
+Taxi = taxi
+Armurerie = ammu
+
+
+
 # Admin Commands
 
 Ajouter un Métier à un joueur/Adding a Business to a Player
