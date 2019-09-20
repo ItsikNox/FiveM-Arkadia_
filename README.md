@@ -24,7 +24,7 @@ French FiveM Server developped & edited by ikNox#6088
 
 **DiscordRichPresence :**
 
-* "[esx]\\[discord]\DiscordRichPresence\client.lua" lignz 5, 7, 24, 26, 28, 30, 35, 37, 39, 43, 45, 48, 50 & 52
+* "[esx]\\[discord]\DiscordRichPresence\client.lua" ligne 5, 7, 24, 26, 28, 30, 35, 37, 39, 43, 45, 48, 50 & 52
 
 **FRANCAIS**
 
