@@ -24,7 +24,7 @@ Changer l'annonce de l'ip lors de l'ouverture du serveur/Change the IP announcem
 
 DiscordRichPresence :
 
-"[esx]\\[discord]\DiscordRichPresence\client.lua"
+"[esx]\\[discord]\DiscordRichPresence\client.lua" lignz 5, 7, 24, 26, 28, 30, 35, 37, 39, 43, 45, 48, 50 & 52
 
 FRANCAIS
 
@@ -82,20 +82,21 @@ resources\[esx]\\[non-esx]\Arkadia_personalmenu\stream\commonmenu.ytd
 ouvrez commonmenu.ytd avec OpenIV et changer l'image/open commonmenu.ytd with OpenIV and change the image
 
 # Key Bindings
-F2 Quick interaction menu - -
-F5 Interaction menu - -
-F6 Job Menu - -
+```
+F2 Quick interaction menu
+F5 Interaction menu
+F6 Job Menu
 F8 Console*
-F9 Organisation Menu - -
-F10 Phone - -
+F9 Organisation Menu
+F10 Phone
 F11 Scoreboard
-SHIFT + 1 Teleport to waypoint - -
-HOME Es_admin - -
+SHIFT + 1 Teleport to waypoint
+HOME Es_admin
 
-L Car trunk - -
+L Car trunk
 
-Ctrl Crouch - -
-X Hands Up - -
+Ctrl Crouch
+X Hands Up
 Y radargun menu open 246
 E radargun freeze 38
 
@@ -105,20 +106,33 @@ Text Commands
 /report Sent a message to the admin
 /r ID Respond privately to a /report
 /me 3D Text
+```
 
 # Jobs List
-
-Abatteur
-
+```
+Abatteur = slaughterer
+Couturier = tailor
+Bûcheron = lumberjack
 Ambulance = ambulance
 Police = police
 Mécano = mecano
-Raffineur = raffineur
+Pompiste = pompiste
 Vigneron = vigne
 Taxi = taxi
 Armurerie = ammu
+Mixologist = fueler
+Journaliste = journaliste
+```
 
-
+# Organisation List
+```
+Famillies = famillies
+Clan Kano =kano
+LaZone = lazone
+Mercenaire = mercenaire
+Podolskaia = podolskaia
+Syndicat = syndicat
+```
 
 # Admin Commands
 
