@@ -59,6 +59,11 @@ French FiveM Server developped & edited by ikNox#6088
 
 * "[essential]\essentialmode\server\util.lua"
 
+**Changer le message "Synchronisation de votre personnage."/Change the message "Synchronisation de votre personnage." :**
+
+
+* resources\\[essential]\es_extended\server\functions.lua ligne 110
+
 **Un script de Semi-Whitelist est aussi disponible, pour l'utiliser lancer "esx_douane" ensuite direction/A Semi-Whitelist script is also available, to use it launch "esx_douane" then direction :**
 
 **FRANCAIS
