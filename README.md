@@ -24,7 +24,7 @@ Changer l'annonce de l'ip lors de l'ouverture du serveur/Change the IP announcem
 
 DiscordRichPresence :
 
-"[esx]\\[discord]\DiscordRichPresence\client.lua"
+"[esx]\\[discord]\DiscordRichPresence\client.lua" lignz 5, 7, 24, 26, 28, 30, 35, 37, 39, 43, 45, 48, 50 & 52
 
 FRANCAIS
 
