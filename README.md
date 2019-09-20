@@ -83,20 +83,20 @@ ouvrez commonmenu.ytd avec OpenIV et changer l'image/open commonmenu.ytd with Op
 
 # Key Bindings
 ```
-F2 Quick interaction menu - -
-F5 Interaction menu - -
-F6 Job Menu - -
+F2 Quick interaction menu
+F5 Interaction menu
+F6 Job Menu
 F8 Console*
-F9 Organisation Menu - -
-F10 Phone - -
+F9 Organisation Menu
+F10 Phone
 F11 Scoreboard
-SHIFT + 1 Teleport to waypoint - -
-HOME Es_admin - -
+SHIFT + 1 Teleport to waypoint
+HOME Es_admin
 
-L Car trunk - -
+L Car trunk
 
-Ctrl Crouch - -
-X Hands Up - -
+Ctrl Crouch
+X Hands Up
 Y radargun menu open 246
 E radargun freeze 38
 
@@ -110,7 +110,7 @@ Text Commands
 
 # Jobs List
 ```
-Abatteur =
+Abatteur = slaughterer
 Couturier = tailor
 Bûcheron = lumberjack
 Ambulance = ambulance
