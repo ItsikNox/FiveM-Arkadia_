@@ -81,7 +81,32 @@ resources\[esx]\\[non-esx]\Arkadia_personalmenu\stream\commonmenu.ytd
 
 ouvrez commonmenu.ytd avec OpenIV et changer l'image/open commonmenu.ytd with OpenIV and change the image
 
-COMMANDES ADMIN
+#Key Bindings
+F2 Quick interaction menu - -
+F5 Interaction menu - -
+F6 Job Menu - -
+F8 Console*
+F9 Organisation Menu - -
+F10 Phone - -
+F11 Scoreboard
+SHIFT + 1 Teleport to waypoint - -
+HOME Es_admin - -
+
+L Car trunk - -
+
+Ctrl Crouch - -
+X Hands Up - -
+Y radargun menu open 246
+E radargun freeze 38
+
+Text Commands
+/ano Anonymous message
+/ooc Message Outside Roleplay
+/report Sent a message to the admin
+/r ID Respond privately to a /report
+/me 3D Text
+
+#Admin Commands
 
 Ajouter un Métier à un joueur/Adding a Business to a Player
 /setjob ID NomMetier Grade
