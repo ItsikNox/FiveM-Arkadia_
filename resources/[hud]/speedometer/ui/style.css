@@ -1,0 +1,169 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url("fonts/Roboto-Bold.woff2") format("woff2"), url("fonts/Roboto-Bold.woff") format("woff"), url("fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("fonts/Roboto-Regular.woff2") format("woff2"), url("fonts/Roboto-Regular.woff") format("woff"), url("fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@-webkit-keyframes fadeLoop {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes fadeLoop {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  overflow: hidden;
+  height: 100%; }
+
+.background, .outer {
+  -webkit-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%; }
+
+.progress {
+  -webkit-transition: 0.35s stroke-dashoffset;
+  -o-transition: 0.35s stroke-dashoffset;
+  transition: 0.35s stroke-dashoffset;
+  -webkit-transform: rotate(140deg);
+  -ms-transform: rotate(140deg);
+  transform: rotate(140deg);
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%; }
+
+.huds {
+  height: 100%;
+  width: 100%; }
+  .huds .hud.dashboard {
+    position: absolute;
+    height: 40px;
+    bottom: 60px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%); }
+    .huds .hud.dashboard div {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 10px; }
+      .huds .hud.dashboard div svg {
+        opacity: .2; }
+    .huds .hud.dashboard .active svg {
+      opacity: .8; }
+    .huds .hud.dashboard .clignotant.active svg {
+      -webkit-animation: fadeLoop 1s step-start infinite !important;
+      animation: fadeLoop 1s step-start infinite !important; }
+      .huds .hud.dashboard .clignotant.active svg path {
+        stroke: #f39c12 !important; }
+    .huds .hud.dashboard .feu-position.active svg {
+      opacity: 1; }
+      .huds .hud.dashboard .feu-position.active svg path {
+        fill: #2ecc71; }
+    .huds .hud.dashboard .feu-route.active svg {
+      opacity: 1; }
+      .huds .hud.dashboard .feu-route.active svg path {
+        fill: #0984e3; }
+    .huds .hud.dashboard .speedometer {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      -webkit-clip-path: polygon(100% 45%, 80% 45%, 60% 100%, 0% 100%, 0% 0%, 100% 0%);
+      clip-path: polygon(100% 45%, 80% 45%, 60% 100%, 0% 100%, 0% 0%, 100% 0%); }
+      .huds .hud.dashboard .speedometer svg {
+        opacity: 1;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: scale(2) translate(-25%, -25%);
+        -ms-transform: scale(2) translate(-25%, -25%);
+        transform: scale(2) translate(-25%, -25%); }
+      .huds .hud.dashboard .speedometer .outer {
+        opacity: .3;
+        -webkit-transform: rotate(180deg) scale(1.2);
+        -ms-transform: rotate(180deg) scale(1.2);
+        transform: rotate(180deg) scale(1.2); }
+      .huds .hud.dashboard .speedometer .text {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        margin: 0; }
+        .huds .hud.dashboard .speedometer .text .speed {
+          color: white;
+          font-size: 26px;
+          display: block; }
+        .huds .hud.dashboard .speedometer .text .kmh {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 10px;
+          display: block;
+          text-transform: uppercase; }
+  .huds .hud.fuel {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+    position: absolute;
+    bottom: -60px;
+    right: 87px;
+    position: absolute;
+    text-align: center;
+    margin: 15px 0; }
+    .huds .hud.fuel span {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      display: block;
+      margin-top: 0px; }
+    .huds .hud.fuel svg {
+      opacity: 1 !important; }
+
+.hud.fuel span {
+  opacity: 0;
+  margin-top: -4px; }
+
+.hud.fuel span:after {
+  position: absolute;
+  content: '%';
+  top: 1px;
+  right: 4px;
+  font-size: 7px; }
+
+.hud.fuel g {
+  -webkit-transform: translate(16px, 13px);
+  -ms-transform: translate(16px, 13px);
+  transform: translate(16px, 13px); }
+
+.orangeStroke {
+  stroke: #ffaf02; }
+
+.redStroke {
+  stroke: #FF0245; }

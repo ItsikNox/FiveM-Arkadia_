@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
+body {
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+}
+
+.background-image {
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	background-image: radial-gradient(circle, #495173, #5b6789, #6d7da0, #8094b7, #94accf);
+	opacity: 0.6;
+	height: 1800px;
+	width: 1990px;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+}
+
+img {
+	position: relative;
+	z-index: 1;
+	margin-right: auto;
+	margin-top: 20%;
+	font-size: 10px;
+	background-color: #d64856;
+	border-radius: 50%;
+}
+
+.tittle {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #d64856;
+	color: #fff;
+	border: 0;
+	padding: 1%;
+	width: 100%;
+	font-family: 'Raleway', sans-serif;
+}
+
+.interview {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 4%;
+	border: 0;
+	color: #fff;
+	background-color: #d64856;
+	font-family: 'Raleway', sans-serif;
+}
+
+.interview:hover {
+	border: 0;
+	background-color: #fff;
+	color: #252525;
+	cursor: pointer;
+}
+
+.container {
+	position: relative;
+	white-space: nowrap;
+	overflow-x: hidden;
+	height: 20em;
+	width: 80em;
+	top: 40vh;
+	margin: auto;
+	-webkit-transform: translateY(-7.2em);
+	transform: translateY(-7.2em);
+}
+
+.inner {
+	position: absolute;
+	transition: -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.job {
+	font-family: sans-serif;
+	line-height: 12em;
+	width: 15em;
+	height: 15em;
+	background-image: radial-gradient(circle, #724849, #845758, #9b6969, #b78080, #cf9494);
+	opacity: 0.6;
+	border-radius: 2px;
+	display: inline-block;
+	margin: 0 0.05em;
+	position: relative;
+	bottom: -2em;
+	transition: background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	color: #fff;
+	margin-right: 3%;
+}
+
+.job:hover {
+	background: #36394aee;
+	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.4);
+}
+
+.job[data-scale="1"],
+.job[data-scale="3"] {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.job[data-scale="2"] {
+	-webkit-transform: scale(1.2);
+	transform: scale(1.2);
+}
+

@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,700');
+
+body {
+    background-image: url(https://i.imgur.com/xws8SM5.jpg);
+
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.servername {
+    color: #e7e7e7;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+
+    font-size: 70px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    font-weight: 400;
+
+    margin: 350px auto;
+    animation: travel 4s;
+}
+
+strong {
+    font-weight: 800;
+}
+
+.enable_music {
+    color: #e7e7e7;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    font-weight: 400;
+
+    margin: 50px auto;
+    animation: music 3s;
+}
+
+
+@keyframes music {
+    from {
+        opacity: 0.1;
+        transform: translateY(-80px);
+    }
+
+    to { 
+        transform: translateY(0px);
+    }
+}
+
+
+
+.overcast {
+    z-index: -1;
+
+    background: rgba(0, 0, 0, 0.486);
+    position: absolute;
+    
+    width: 15000px;
+    height: 15000px;
+
+    margin-left: -150px;
+    margin-top: -1500px;
+}
+
+.undertext {
+    color: #e7e7e7;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    font-weight: 100;
+
+    margin: -350px auto;
+    animation: under 10s;
+}
+
+@keyframes under {
+    from {
+        opacity: 0.0;
+        transform: translateY(-20px);
+    }
+
+    to { 
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+
+@keyframes travel {
+    from {
+        opacity: 0.01;
+        transform: translateY(130px);
+    }
+
+    to { 
+        transform: translateY(0px);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.progress {
+  width: 1930px;
+  max-width: 1930px;
+  height: 10px;
+  position: absolute;
+  bottom: -0.6vh;
+  left: 50%;
+  background: rgba(255, 255, 255, 0);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+
+}
+.progress:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 10px;
+  background: #e7e7e7;
+  animation: load 60s linear;
+}
+@-moz-keyframes load {
+  0% {
+    width: 0;
+  }
+  10% {
+    width: 5%;
+  }
+  20% {
+    width: 15%;
+  }
+  30% {
+    width: 25%;
+  }
+  40% {
+    width: 30%;
+  }
+  50% {
+    width: 44%;
+  }
+  60% {
+    width: 50%;
+  }
+  70% {
+    width: 72%;
+  }
+  80% {
+    width: 84%;
+  }
+  90% {
+    width: 92%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@-webkit-keyframes load {
+  0% {
+    width: 0;
+  }
+  10% {
+    width: 5%;
+  }
+  20% {
+    width: 15%;
+  }
+  30% {
+    width: 25%;
+  }
+  40% {
+    width: 30%;
+  }
+  50% {
+    width: 44%;
+  }
+  60% {
+    width: 50%;
+  }
+  70% {
+    width: 72%;
+  }
+  80% {
+    width: 84%;
+  }
+  90% {
+    width: 92%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@-o-keyframes load {
+  0% {
+    width: 0;
+  }
+  10% {
+    width: 5%;
+  }
+  20% {
+    width: 15%;
+  }
+  30% {
+    width: 25%;
+  }
+  40% {
+    width: 30%;
+  }
+  50% {
+    width: 44%;
+  }
+  60% {
+    width: 50%;
+  }
+  70% {
+    width: 72%;
+  }
+  80% {
+    width: 84%;
+  }
+  90% {
+    width: 92%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes load {
+  0% {
+    width: 0;
+  }
+  10% {
+    width: 5%;
+  }
+  20% {
+    width: 15%;
+  }
+  30% {
+    width: 25%;
+  }
+  40% {
+    width: 30%;
+  }
+  50% {
+    width: 44%;
+  }
+  60% {
+    width: 50%;
+  }
+  70% {
+    width: 72%;
+  }
+  80% {
+    width: 84%;
+  }
+  90% {
+    width: 92%;
+  }
+  100% {
+    width: 100%;
+  }
+}

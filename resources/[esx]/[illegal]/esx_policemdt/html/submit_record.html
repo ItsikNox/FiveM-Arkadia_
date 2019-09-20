@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Mobile Data Terminal</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/local.css" />
+
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>   
+	
+	<script src="js/angular.min.js"></script>
+	<script src="script.js" type="text/javascript"></script>
+
+      <style>
+
+        div {
+            padding-bottom:20px;
+        }
+
+    </style>
+</head>
+<body ng-app="nui" ng-controller="nuiController" ng-mousemove="onMouseMove($event)" style="background-color: transparent; margin-top: 50px;">
+    <div style="background-color: #222222; padding-left: 125px;" id="wrapper">
+          <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Basculer la navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="warrants_list.html">Terminal mobile de données de la police</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul style="width: 125px;" id="active" class="nav navbar-nav side-nav">
+                    <li><a href="warrants_list.html"><i class="fa fa-bullseye"></i> Avertissements</a></li>
+                    <li><a href="bolos_list.html"><i class="fa fa-tasks"></i> Bolos</a></li>
+                    <li><a href="arrests_list.html"><i class="fa fa-tasks"></i> Arrestations</a></li>
+					<li class="selected"><a href="submit_record.html"><i class="fa fa-tasks"></i> Créer un enregistrement</a></li>
+                </ul>
+				<ul class="nav navbar-nav navbar-right navbar-user">
+					<li>
+						<a href="#"><i class="fa fa-user"></i> Steve Miller</a>
+					</li>
+				</ul>
+            </div>
+        </nav>
+
+       <div>
+        <div class="row text-center">
+            <h2>Nouvel enregistrement dans la base de données</h2>
+        </div>
+        <div>
+            <label for="target_ident" class="col-md-2">
+                Cible:
+            </label>
+            <div class="col-md-9">
+                <input style="color: black;" type="text" class="form-control" id="target_ident" placeholder="Enter data">
+            </div>
+            <div class="col-md-1">
+                <i class="fa fa-asterisk fa-2x"></i>
+            </div>
+        </div>        
+        <div>
+            <label for="desc" class="col-md-2">
+                Description:
+            </label>
+            <div class="col-md-9">
+                <input style="color: black;" type="text" class="form-control" id="desc" placeholder="Enter description">
+            </div>
+             <div class="col-md-1">
+                <i class="fa fa-asterisk fa-2x"></i>
+            </div>
+        </div>
+        <div>
+            <label for="charges" class="col-md-2">
+                Charges:
+            </label>
+            <div class="col-md-9">
+                <input style="color: black;" class="form-control" id="charges" placeholder="Enter data">
+            </div>
+             <div class="col-md-1">
+                <i class="fa fa-asterisk fa-2x"></i>
+            </div>
+        </div>
+		<div>
+            <label for="type_memes" class="col-md-2">
+                Type:
+            </label>
+            <div class="col-md-9">
+                <select style="color: black;" name="type_memes" id="type_memes" class="form-control">
+                    <option>--Veuillez sélectionner--</option>
+                    <option>Avertissement</option>
+                    <option>Bolo</option>
+                    <option>Arrestation</option>
+                </select>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <button style="background-color: #337ab7; border-color: #337ab7;" type="submit" class="btn btn-info">
+                    Soumettre
+                </button>
+            </div>
+        </div>
+    </div>  
+    </div>
+
+</body>
+</html>

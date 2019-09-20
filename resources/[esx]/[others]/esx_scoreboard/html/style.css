@@ -1,0 +1,97 @@
+html {
+	color: #34495e;
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+}
+
+#wrap {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	width: 58vw;
+	min-height: 185px;
+	margin-top: 2%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: rgb(46, 46, 46, 0.85);
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5), 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+	color: rgba(255, 255, 255, 0.9);
+	border-radius: 2px;
+}
+
+p {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	float: left;
+	margin-left: 14px;
+	padding-left: 14px;
+	font-size: 0.75vw;
+}
+
+.header {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	height: 3px;
+	width: auto;
+	background-color: #1C1C1C;
+	padding-left: 0px;
+	padding-right: 0px;
+	border-top-left-radius: 2px 2px;
+	border-top-right-radius: 2px 2px;
+}
+
+.jobs {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	padding-top: 10px;
+	background-color: #1C1C1C;
+	height: 3vw;
+	width: 100%;
+	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3), 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.jobs p {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+}
+
+table {
+	text-align: left;
+	color: white;
+	overflow:scroll;
+	/* height:80em; */
+	margin-top:20px;
+}
+
+th, td {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	padding-left: 30px;
+}
+
+th {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	padding-top: 10px;
+	height: 40px;
+}
+
+tr {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	font-size: 0.5vw;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+tr.heading {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	font-size: 0.5vw;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.serverinfo {
+	font-family:Microsoft JhengHei;
+	font-weight:bold;
+	font-size: 0.6vw;
+	text-align: center;
+}

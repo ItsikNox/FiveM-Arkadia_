@@ -1,0 +1,283 @@
+<html>
+    <head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <style>
+			 #depositUI, #withdrawUI, #transferUI, #general, #topbar, #waiting
+			 {display: none;}
+		</style>
+	</head>
+    <body>
+    	<div class="container">
+    		<div id="result"></div>
+    		<div class="topbar" id="topbar">
+    			<div class="cont-p-1">
+    				<div class="parale-1 "></div>
+    			</div>
+    			<div class="cont-p-2">
+    				<div class="parale-2"></div>
+    			</div>
+    			<div class="cont-p-3">
+    				<div class="parale-3"></div>
+    			</div>
+    			<nav>
+    				<div class="logo-topbar"></div>
+    				<button class="btn-sign-out">Souhaitez-vous vous déconnecter ?<i class="fas fa-sign-out-alt"></i></button>
+    			</nav> 
+    		</div>
+<!-- ########### GENERAL ###########  -->
+    		<div class="cont-content" id="general">
+    			<div class="flex">
+    				<div class="balance box-shadow">
+	    				<p>Bienvenue<br>
+	    					<span class="name"><span class="username1"></span></span><br>
+	    					Vous avez<br>
+	    					<span class="money"><span class="curbalance"></span><span class="euro"> €</span></span>
+	    				</p>
+		    		</div>
+		    		<div class="list-btn">
+		    			<button class="btn btn-blue" id="deposit">
+		    				<i class="far fa-money-bill-alt"></i>
+		    				<span class="far fa-money-bill-alt icon"></span>
+		    				<p>Déposer<br>
+		    				<span>votre liquide en lieu sûr</span></p>
+		    			</button>
+			    		<button class="btn btn-violet" id="withdraw">
+			    			<i class="far fa-credit-card"></i>
+		    				<span class="far fa-credit-card icon"></span>
+		    				<p>Retirer<br>
+		    				<span>de l'argent depuis votre compte</span></p>
+			    		</button>
+			    		<button class="btn btn-orange" id="transfer">
+			    			<i class="fas fa-exchange-alt"></i>
+		    				<span class="fas fa-exchange-alt icon"></span>
+		    				<p>Virement<br>
+		    				<span>à une connaissance</span></p>
+			    		</button>
+		    		</div>
+    			</div>
+    			<div class="flex">
+    				<div class="pub box-shadow confiance">
+    					<p>
+    						<span>Vous nous faites confiance</span><br>
+    						Le nombre de création de comptes de la banque de National City a augmenté de 7 % depuis 2017
+    					</p>
+    					<div class="circle-confiance"></div>
+    				</div>
+    				<div class="pub box-shadow social">
+    					<p>
+							<span> </span><br>
+							<b>Vous êtes nombreux, merci !</b>
+						</p>
+    				</div>
+    			</div>
+	    	</div>
+<!-- ########### DEPOSIT ###########  -->
+	    	<div class="cont-content" id="depositUI">
+    			<div class="flex">
+    				<div class="btn btn-blue banniere">
+    					<p>Déposer votre argent<br>
+		    			<span>dans le lieu le plus sécurisé de toute la ville de Zoria Life</span></p>
+    				</div>
+    				<button class="btn btn-grey back">
+    					<i class="fas fa-bars"></i>
+	    				<span class="fas fa-arrow-left icon"></span>
+	    				<p>Retour<br>
+	    				<span>Au menu principal</span></p>
+    				</button>
+    			</div>
+    			<form id="deposit1">
+    				<div class="input-cont box-shadow">
+    					<label>Combien souhaitez vous déposer ?</label>
+    					<input id="amount" type="number" placeholder="0 €">
+    				</div>
+    				<button class="btn btn-green" type="submit">
+    					<i class="fas fa-check"></i>
+	    				<span class="fas fa-check icon"></span>
+	    				<p>Valider<br>
+	    				<span>Votre dépôt</span></p>
+    				</button>
+				</form>
+	    	</div>
+<!-- ########### WITHDRAW ###########  -->
+	    	<div class="cont-content" id="withdrawUI">
+    			<div class="flex">
+    				<div class="btn btn-violet banniere">
+    					<p>Retirer de l'argent<br>
+		    			<span>depuis votre compte banquaire</span></p>
+    				</div>
+    				<button class="btn btn-grey back">
+    					<i class="fas fa-bars"></i>
+	    				<span class="fas fa-arrow-left icon"></span>
+	    				<p>Retour<br>
+	    				<span>Au menu principal</span></p>
+    				</button>
+    			</div>
+    			<form id="withdraw1">
+    				<div class="input-cont box-shadow">
+    					<label>Combien souhaitez vous retirer ?</label>
+    					<input id="amountw" type="number" placeholder="0 €">
+    				</div>
+    				<button class="btn btn-green" type="submit">
+    					<i class="fas fa-check"></i>
+	    				<span class="fas fa-check icon"></span>
+	    				<p>Valider<br>
+	    				<span>Votre retrait</span></p>
+    				</button>
+				</form>
+	    	</div>
+<!-- ########### TRANSFER ###########  -->
+	    	<div class="cont-content" id="transferUI">
+    			<div class="flex">
+    				<div class="btn btn-orange banniere">
+    					<p>Faire un virement<br>
+		    			<span>à une connaissance</span></p>
+    				</div>
+    				<button class="btn btn-grey back">
+    					<i class="fas fa-bars"></i>
+	    				<span class="fas fa-arrow-left icon"></span>
+	    				<p>Retour<br>
+	    				<span>Au menu principal</span></p>
+    				</button>
+    			</div>
+    			<form id="transfer1">
+    				<div class="double-input">
+    					<div class="input-cont box-shadow">
+	    					<label>Combien souhaitez vous donner ?</label>
+	    					<input id="amountt" type="number" placeholder="0 €">
+	    				</div>
+	    				<div class="input-cont box-shadow">
+	    					<label>A qui souhaitez vous faire le virement ?</label>
+	    					<input id="to" type="text" placeholder="nom & prenom">
+	    				</div>
+    				</div>
+    				<button class="btn btn-green" type="submit">
+    					<i class="fas fa-check"></i>
+	    				<span class="fas fa-check icon"></span>
+	    				<p>Valider<br>
+	    				<span>Votre virement</span></p>
+    				</button>
+				</form>
+	    	</div>
+<!-- ########### WAITING ###########  -->
+	    	<div class="cont-waiting" id="waiting">
+	    		<div class="content-waiting">
+    				<div class="mainlogo"></div>
+    				<p><span>Veuillez</span> vous connecter<br>
+    				à l'aide <span>de</span> votre empreinte digitale</p>
+    				<div id="fingerprint-content">
+    					<div class="fingerprint-default"></div>
+    					<div class="fingerprint-active"></div>
+    					<div class="fingerprint-bar"></div>
+    				</div>
+    			</div>
+    			<div class="bg-waiting">
+    				<div class="cont-p-4">
+    					<div class="parale-4"></div>
+    				</div>
+    				<div class="cont-p-5">
+    					<div class="parale-5"></div>
+    				</div>
+    				<div class="cont-p-6">
+    					<div class="parale-6"></div>
+    				</div>
+    				<div class="cont-p-7">
+    					<div class="parale-7"></div>
+    				</div>
+    			</div>
+	    	</div>
+    	</div>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    	<script type="text/javascript">
+    		$(function() {
+				window.addEventListener('message', function(event) {
+					if (event.data.type === "openGeneral"){
+		                $('#waiting').show();
+		                $('body').addClass("active");
+					} else if(event.data.type === "balanceHUD") {
+							$('.username1').html(event.data.player);
+							$('.curbalance').html(event.data.balance);
+					} else if (event.data.type === "closeAll"){
+		                $('#waiting, #general, #transferUI, #withdrawUI, #depositUI, #topbar').hide();
+		                $('body').removeClass("active");
+					}
+					else if (event.data.type === "result") {
+						if (event.data.t == "success")
+							$("#result").attr('class', 'alert-green');
+						else
+							$("#result").attr('class', 'alert-orange');
+						$("#result").html(event.data.m).show().delay(5000).fadeOut();
+					}
+				});
+			});
+    		$('.btn-sign-out').click(function(){
+	            $('#general, #waiting, #transferUI, #withdrawUI, #depositUI, #topbar').hide();
+	            $('body').removeClass("active");
+	            $.post('http://new_banking/NUIFocusOff', JSON.stringify({}));
+	        })
+	        $('.back').click(function(){
+	            $('#depositUI, #withdrawUI, #transferUI').hide();
+	            $('#general').show();
+	        })
+	        $('#deposit').click(function(){
+	            $('#general').hide();
+	            $('#depositUI').show();
+	        })
+	        $('#withdraw').click(function(){
+	            $('#general').hide();
+	            $('#withdrawUI').show();
+	        })
+	        $('#transfer').click(function(){
+	            $('#general').hide();
+	            $('#transferUI').show();
+	        })
+	        $('#fingerprint-content').click(function(){
+	            $('.fingerprint-active, .fingerprint-bar').addClass("active")
+	            setTimeout(function(){
+		  		$('#general').css('display', 'block')
+					$('#topbar').css('display', 'flex')
+					$('#waiting').css('display', 'none')
+					$('.fingerprint-active, .fingerprint-bar').removeClass("active")
+				}, 1400);
+	        })
+	        $("#deposit1").submit(function(e) {
+		        e.preventDefault(); // Prevent form from submitting
+		        $.post('http://new_banking/deposit', JSON.stringify({
+		            amount: $("#amount").val()
+		        }));
+				$('#depositUI').hide();
+				$('#general').show();
+				$("#amount").val('');
+			});
+			$("#transfer1").submit(function(e) {
+		        e.preventDefault(); // Prevent form from submitting
+		        $.post('http://new_banking/transfer', JSON.stringify({
+					to: $("#to").val(),
+		            amountt: $("#amountt").val()
+		        }));
+				$('#transferUI').hide();
+				$('#general').show();
+				$("#amountt").val('');
+			});
+			$("#withdraw1").submit(function(e) {
+				e.preventDefault(); // Prevent form from submitting
+		        $.post('http://new_banking/withdrawl', JSON.stringify({
+		            amountw: $("#amountw").val()
+		        }));
+				$('#withdrawUI').hide();
+				$('#general').show();
+				$("#amountw").val('');
+			});
+			document.onkeyup = function(data){
+		        if (data.which == 27){
+		            $('#general, #waiting, #transferUI, #withdrawUI, #depositUI, #topbar').hide();
+		            $('body').removeClass("active");
+		            $.post('http://new_banking/NUIFocusOff', JSON.stringify({}));
+		        }
+		    }
+    	</script>
+    </body>
+  </html>

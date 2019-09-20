@@ -1,0 +1,58 @@
+<html>
+
+<head>
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<script src="nui://esx_scoreboard/html/listener.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="nui://esx_scoreboard/html/style.css">
+</head>
+
+<body>
+	<div style="display: none;" id="wrap">
+
+		<div class="header">
+			<div class="jobs">
+				<p style="color:red;"> 👨‍⚕️ <span id="ems">0</span> </p>
+				<p style="color:#5ea1e0;"> 👮🏻 <span id="police">0</span> </p>
+				<p style="color:yellow;"> 🚖 <span id="taxi">0</span> </p>
+				<p style="color:grey;"> 🔧 <span id="mechanic">0</span> </p>
+				<!-- <p style="color:lightblue;"> 🐔 <span id="slaughterer">0</span> </p>
+				<p style="color:red;"> ⛽ <span id="fueler">0</span> </p>
+				<p style="color:green;"> 🌲 <span id="lumberjack">0</span> </p>				
+				<p style="color:lightblue;"> 👚 <span id="tailor">0</span> </p>		 -->
+				<!--<p style="color:lightblue;"> 🎥 <span id="reporter">0</span> </p>	-->					
+				<!-- <p style="color:yellow;"> ⛏️ <span id="miner">0</span> </p> -->
+				<p style="color:#58ce93;"> 🏘️ <span id="estate">0</span> </p>
+				<p style="color:#f8b119;"> 🚗 <span id="cardeal">0</span> </p>
+				<!--<p style="color:#616161;"> 💣 <span id="arma">0</span> </p>-->
+				<!--<p style="color:rgb(126, 83, 77);"> 💼 <span id="stato">0</span> </p>-->
+				<p style="color:lightblue;"> 💤 <span id="unemployed">0</span> </p>
+			</div>
+		</div>
+
+		<div class="playerlist">
+			<table id="playerlist" width="100%">
+				<tr class="heading">
+					<th>Nom</th>
+					<th>ID</th>
+					<th>Ping</th>
+					<th>Nom</th>
+					<th>ID</th>
+					<th>Ping</th>
+					<th>Nom</th>
+					<th>ID</th>
+					<th>Ping</th>
+					<th>Nom</th>
+					<th>ID</th>
+					<th>Ping</th>
+				</tr>
+			</table>
+		</div>
+
+		<div class="serverinfo">
+			Joueurs: <span id="player_count">0</span> / 128 <span style="font-size: 0.6vw"> | </span>Temps de jeu: <span id="play_time"></span>
+		</div>
+
+	</div>
+</body>
+
+</html>

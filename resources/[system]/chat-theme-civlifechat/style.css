@@ -1,0 +1,132 @@
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+.color-0{color: #ffffff;}
+.color-1{color: #ff4444;}
+.color-2{color: #99cc00;}
+.color-3{color: #ffbb33;}
+.color-4{color: #0099cc;}
+.color-5{color: #33b5e5;}
+.color-6{color: #aa66cc;}
+.color-8{color: #cc0000;}
+.color-9{color: #cc0068;}
+    src: url("../BarlowCondensed.ttf");
+
+* {
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.no-grow {
+  flex-grow: 0;
+}
+
+em {
+  font-style: normal;
+}
+
+#app {
+  font-family: 'Barlow Condensed', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: white;
+  background-color: transparent;
+}
+
+.chat-window {
+  position: absolute;
+  top: 150px;
+  right: 15px;
+  width: 50%;
+  height: 400px;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-animation-duration: 2s;
+}
+
+
+
+.chat-messages {
+  position: relative;
+  height: 45%;
+  font-size: 1.0rem;
+
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
+.chat-input {
+  font-size: 0.9rem;
+  position: absolute;
+
+  top: 250px;
+  left: 1400px;
+  width: 25%;
+
+  box-sizing: border-box;
+}
+
+.prefix {
+  position: absolute;
+  margin-top: 2px;
+  left: -10px;
+}
+
+textarea {
+  font-size: 1.0rem;
+  display: block;
+  box-sizing: border-box;
+  padding: 5px;
+  color: white;
+  background-color: rgba(207, 227, 114, 0);
+  width: 50%;
+  border-width: 0;
+  height: 30%;
+  overflow: hidden;
+}
+
+textarea:focus, input:focus {
+    outline: none;
+}
+
+.msg {
+  margin-bottom: 5px;
+}
+
+.twitter
+{
+  height: 10%;
+  width: 90%;
+  background: #ffbb33;
+  border-radius: 5px;
+  color: #0000;
+}
+
+.multiline {
+  margin-left: 1.5rem;
+  text-indent: -1.5rem;
+  white-space: pre-line;
+}
+
+.suggestions {
+  list-style-type: none;
+  padding: 5px;
+  padding-left: 27px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  color: white;
+  background-color: rgba(207, 227, 114, 0);
+  width: 100%;
+}
+
+.help {
+  color: #b0bbbd;
+}
+
+.disabled {
+  color: #b0bbbd;
+}
+
+.suggestion {
+  margin-bottom: 5px;
+}

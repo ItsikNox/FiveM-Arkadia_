@@ -1,0 +1,6 @@
+-- *******
+-- Copyright (C) JSFOUR - All Rights Reserved
+-- You are not allowed to sell this script or re-upload it
+-- Visit my page at https://github.com/jonassvensson4
+-- Written by Jonas Svensson, July 2018
+-- *******

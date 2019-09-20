@@ -1,0 +1,36 @@
+html {
+	overflow: hidden;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+#container {
+	position: absolute;
+	top: 92%;
+	bottom: -100%;
+	right: 0%; /*25*/
+	width: 80px;
+	height: 80px;
+	display: none;
+	flex-direction: column;
+}
+
+header {
+	width: 80px;
+	height: 80px;
+	/*background-color: #a519ea;*/
+	opacity: 0.8;
+	border-top-left-radius: 40px;
+	border-top-right-radius: 40px;
+
+}
+
+header img {
+	width: 80px;
+	height: 80px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}

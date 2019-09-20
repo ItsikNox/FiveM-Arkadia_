@@ -1,0 +1,142 @@
+/* MADE BY SLIZZARN - DISCORD: slizzarn#1144 GITHUB: https://github.com/slizzarn-fivem */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins|Roboto+Condensed');
+
+#controls {
+	font-family: 'Poppins', sans-serif;
+	font-size: 3em;
+	color: #FFF;
+	position: absolute;
+	bottom: 40;
+	right: 40;
+}
+
+.controls {
+	display: none;
+}
+
+.dialog {
+	font-family: 'Poppins', sans-serif;
+	background-color: #212121;
+  color: #fff;
+	position: absolute;
+	overflow: hidden;
+	top: 50%;
+	left: 50%;
+	width: 600px;
+	height: 132px;
+	transform: translate(-50%, -50%);
+  border-bottom: 5px solid #212121;
+  border-top: 5px solid #212121;
+  border-radius: 7px;
+  -webkit-box-shadow: 10px 9px 42px -5px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 10px 9px 42px -5px rgba(0, 0, 0, 0.52);
+box-shadow: 10px 9px 42px -5px rgba(0, 0, 0, 0.52);
+}
+
+.head {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color: #00e1ff;
+}
+
+.dialog.big {
+	height: 200px;
+}
+
+.dialog .head {
+	background-color: #27272d;
+	text-align: center;
+	height: 40px;
+}
+
+.dialog .head span::before {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.dialog input[type="text"] {
+	width: 60%;
+	height: 32px;
+  outline: 0;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  margin-top: 26px;
+  margin-left: 125px;
+  transition: all 0.2s ease-in-out;
+  color: white;
+  border: 2px solid #3d3d3d;
+  border-radius: 6px;
+}
+
+.dialog input[type="text"]:active, .dialog input[type="text"]:hover {
+  color: white;
+}
+
+.dialog textarea {
+	width: 100%;
+	height: 128px;
+}
+
+.dialog button[name="submit"] {
+	width: 17.6%;
+	height: 32px;
+  margin-left: 160px;
+  font-weight: 300;
+  color: #adea78;
+  border: 1px solid #adea78;
+  border-radius: 6px;
+  text-transform: uppercase;
+  background: 0;
+  outline: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.dialog button {
+  z-index: 9999;
+	transform: translate(-0%, 50%);
+}
+
+.dialog button[name="cancel"] {
+	width: 17.6%;
+	height: 32px;
+  margin-left: 80px;
+  border: 1px solid #ea8379;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 200;
+  color: #ea8379;
+  outline: 0;
+  background: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.dialog button[name="cancel"]:hover {
+  letter-spacing: 1px;
+  color: #e83625;
+  width: 17.6%;
+  border: 1.2px solid #e83625;
+  border-radius: 6px;
+}
+
+.dialog button[name="submit"]:hover {
+  letter-spacing: 1px;
+  color: #7fe825;
+  width: 17.6%;
+  border: 1.2px solid #7fe825;
+  border-radius: 6px;
+}
+
+.head::before,
+.head::after {
+	content: "";
+	flex-grow: 1;
+	background: #00e1ff;
+	height: 2px;
+	margin: 0px 3px;
+}
+
+/* MADE BY SLIZZARN - DISCORD: slizzarn#1144 GITHUB: https://github.com/slizzarn-fivem */

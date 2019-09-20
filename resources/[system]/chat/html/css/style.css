@@ -1,0 +1,234 @@
+/*@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');*/
+.color-0 {
+  color: #ffffff;
+}
+.color-1 {
+  color: #ff4444;
+}
+.color-2 {
+  color: #99cc00;
+}
+.color-3 {
+  color: #ffbb33;
+}
+.color-4 {
+  color: #0099cc;
+}
+.color-5 {
+  color: #33b5e5;
+}
+.color-6 {
+  color: #aa66cc;
+}
+.color-8 {
+  color: #cc0000;
+}
+.color-9 {
+  color: #cc0068;
+}
+/*src: url("../BarlowCondensed.ttf");*/
+
+* {
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.no-grow {
+  flex-grow: 0;
+}
+
+em {
+  font-style: normal;
+}
+
+#app {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: white;
+  background-color: transparent;
+}
+
+.chat-window {
+  position: absolute;
+  top: 2.5%;
+  right: 15px;
+  width: 38%;
+  height: 530px;
+  max-width: 550px;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-animation-duration: 2s;
+}
+
+.chat-messages {
+  max-height: 140%;
+  font-size: 1.4rem;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+
+.chat-input {
+  font-size: 1.65vh;
+  position: absolute;
+  top: 33.8%;
+  right: 0px;
+  width: 38%;
+  max-width: 610px;
+  box-sizing: border-box;
+}
+
+.prefix {
+  font-size: 1.8vh;
+  position: absolute;
+  margin-top: 0.8%;
+  margin-left: 1.5%;
+  left: 0.208%;
+}
+
+textarea {
+  font-size: 1.5vh;
+  display: block;
+  box-sizing: border-box;
+  padding-top: 1.1%;
+  padding-left: 5.4%;
+  padding-bottom: 1.4%;
+  padding-right: 1.6%;
+  color: rgb(255, 255, 255);
+  background-color: rgba(55, 69, 95, 0.5);
+  width: 65%;
+  border: 2px solid rgba(92, 117, 160, 0.9);
+  border-radius: 3px;
+  height: 3.15%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  resize: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.msg {
+  margin-bottom: 5px;
+}
+
+.suggestions {
+  list-style-type: none;
+  padding: 5px;
+  padding-left: 27px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  color: white;
+  background-color: rgba(55, 69, 95, 0.5);
+  border: 0px solid rgba(92, 117, 160, 0.9);
+  width: 65%;
+}
+
+.help {
+  margin-top: -10px;
+  color: #b0bbbd;
+}
+
+.disabled {
+  margin-top: -10px;
+  color: #b0bbbd;
+}
+
+.suggestion {
+  margin-bottom: 0.5px;
+}
+
+.chat-message-vpn {
+  display: inline-block !important;
+  padding: 0.6vw;
+  padding-top: 0.6vw;
+  padding-bottom: 0.7vw;
+  margin: 0.1vw;
+  margin-left: 0.4vw;
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 0.7);
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+
+.chat-message-ad {
+  display: inline-block !important;
+  padding: 0.6vw;
+  padding-top: 0.6vw;
+  padding-bottom: 0.7vw;
+  margin: 0.1vw;
+  margin-left: 0.4vw;
+  border-radius: 10px;
+  background-color: rgba(245, 248, 67, 0.7);
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.chat-message-ooc {
+  display: inline-block !important;
+  padding: 0.6vw;
+  padding-top: 0.6vw;
+  padding-bottom: 0.7vw;
+  margin: 0.1vw;
+  margin-left: 0.4vw;
+  border-radius: 10px;
+  background-color: rgba(128, 128, 128, 0.9);
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.chat-message {
+  display: inline-block !important;
+  padding: 0.6vw;
+  padding-top: 0.6vw;
+  padding-bottom: 0.7vw;
+  margin: 0.1vw;
+  margin-left: 0.4vw;
+  border-radius: 10px;
+  background-color: rgba(73, 147, 221, 0.75);
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.chat-message-body {
+  margin-top: 10px;
+}
+
+.chat-message.advert {
+  background-color: rgba(47, 92, 115, 0.75);
+}
+
+.chat-message.server {
+  background-color: rgba(184, 41, 41, 0.75);
+}
+
+.chat-message.system {
+  background-color: rgba(67, 57, 111, 0.75);
+}
+
+.chat-message.emergency {
+  background-color: rgba(224, 50, 50, 0.75);
+}
+
+.chat-message.nonemergency {
+  background-color: rgba(112, 25, 25, 0.75);
+}
+
+.chat-message.success {
+  background-color: rgba(77, 189, 77, 0.705);
+}

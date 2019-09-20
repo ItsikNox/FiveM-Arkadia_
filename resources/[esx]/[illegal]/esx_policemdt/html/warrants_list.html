@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal mobile de données de la police</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/local.css" />
+	
+	<style>
+		.lds-dual-ring {
+		  display: inline-block;
+		  width: 134px;
+		  height: 134px;
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  margin-top: -50px;
+		  margin-left: -50px;
+		}
+		.lds-dual-ring:after {
+		  content: " ";
+		  display: block;
+		  width: 86px;
+		  height: 86px;
+		  margin: 1px;
+		  border-radius: 50%;
+		  border: 8px solid #797979;
+		  border-color: #797979 transparent #797979 transparent;
+		  animation: lds-dual-ring 1.2s linear infinite;
+		}
+		@keyframes lds-dual-ring {
+		  0% {
+			transform: rotate(0deg);
+		  }
+		  100% {
+			transform: rotate(360deg);
+		  }
+		}
+	</style>
+	
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- you need to include the shieldui css and js assets in order for the charts to work -->
+    <link rel="stylesheet" type="1/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+    <link id="gridcss" rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/dark-bootstrap/all.min.css" />
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+	<script src="js/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="js/shieldui-all.min.js"></script>
+    <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+	
+	<script src="js/angular.min.js"></script>
+	<script src="script.js" type="text/javascript"></script>
+</head>
+<body ng-app="nui" ng-controller="nuiController" ng-mousemove="onMouseMove($event)" style="overflow-x: hidden; background-color: transparent; margin-top: 50px;">
+    <div id="loading_preview" style="display: none; z-index: 99;" class="lds-dual-ring"></div>
+	<div class="row" style="right: 0; position: absolute; z-index: 98;">
+		<div id="notify_wrapper" class="col-lg-12">
+			<div id="notify_box" style="display: none;" class="alert alert-dismissable alert-success">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<span id="notify_text" style="font-weight: bold;"></span>
+			</div>
+		</div>
+	</div>
+	<div style="padding-left: 125px; background-color: #222222; display: none;" id="wrapper">
+		  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Basculer la navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="crimes_list.html">Terminal mobile de données de la police</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul style="width: 145px;" id="active" class="nav navbar-nav side-nav">
+                    <li id="warrants_menu" class="selected"><a onclick="load_menu('warrants');"><i class="fa fa-bullseye"></i> Avertissements</a></li>
+                    <li id="bolos_menu"><a onclick="load_menu('bolos');"><i class="fa fa-tasks"></i> Bolos</a></li>
+                    <li id="arrests_menu"><a onclick="load_menu('arrests');"><i class="fa fa-tasks"></i> Arrestations</a></li>
+										<li id="report_menu"><a onclick="load_menu('new_report');"><i class="fa fa-tasks"></i> Créer un enregistrement</a></li>
+										<li id="search_li"><a onclick="load_menu('search_menu');"><i class="fa fa-search"></i> Rechercher</a></li>
+										<li><a onclick="CloseTerminal();"><i class="fa fa-window-close"></i> Fermer Terminal</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div id="table_page" class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Record </h3>
+                        </div>
+                        <div class="panel-body">
+							<div id="shieldui-grid1" role="grid" aria-readonly="true" class="sui-grid sui-grid-core">
+								<div class="sui-gridheader">
+									<table class="sui-table">
+										<colgroup>
+											<col>
+											<col>
+											<col style="width: 34%;">
+											<col style="width: 34%;">
+											<col>
+											<col>
+										</colgroup>
+										<thead>
+											<tr role="row" class="sui-columnheader">
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Officier</a></th>
+												<th class="sui-headercell"><a id="suspect_title" class="sui-link sui-unselectable">Nom du suspect</a></th>
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Description</a></th>
+												<th role="columnheader" class="sui-headercell"><a class="sui-link sui-unselectable">Charges</a></th>
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Date d'ajout</a></th>
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Actions</a></th>
+											</tr>
+										</thead>
+										<tbody class="sui-hide">
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="sui-gridcontent">
+									<table class="sui-table">
+										<colgroup>
+											<col>
+											<col>
+											<col style="width: 34%;">
+											<col style="width: 34%;">
+											<col>
+											<col>
+										</colgroup>
+										<tbody id="warrants_memes">
+			
+										</tbody>
+									</table>
+								</div>
+								<div style="text-align: center;" id="page_div">
+								
+								</div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div id="form_page" style="display: none;" class="row">
+				<div class="row text-center">
+					<h2>Nouvel enregistrement dans la base de données</h2>
+				</div>
+				<div>
+					<label for="target_ident" class="col-md-2">
+						Cible:
+					</label>
+					<div class="col-md-9">
+						<input style="color: black;" type="text" class="form-control" id="target_ident" placeholder="Enter Data">
+					</div>
+					<div class="col-md-1">
+						<i class="fa fa-asterisk fa-2x"></i>
+					</div>
+				</div>        
+				<div>
+					<label for="desc" class="col-md-2">
+						Description:
+					</label>
+					<div class="col-md-9">
+						<input style="color: black;" type="text" class="form-control" id="desc" placeholder="Enter Description Of What Happend">
+					</div>
+					 <div class="col-md-1">
+						<i class="fa fa-asterisk fa-2x"></i>
+					</div>
+				</div>
+				<div>
+					<label for="charges" class="col-md-2">
+						Charges:
+					</label>
+					<div class="col-md-9">
+						<input style="color: black;" class="form-control" id="charges" placeholder="Enter Suspect's Charges That He Got On Him">
+					</div>
+					 <div class="col-md-1">
+						<i class="fa fa-asterisk fa-2x"></i>
+					</div>
+				</div>
+				<div>
+					<label for="type_memes" class="col-md-2">
+						Type:
+					</label>
+					<div class="col-md-9">
+						<select style="color: black;" name="type_memes" id="type_memes" class="form-control">
+							<option value="none">Sélectionnez Options</option>
+							<option value="war">Avertissement</option>
+							<option value="bol">Bolo</option>
+							<option value="arrest">Arrestation</option>
+						</select>
+					</div>            
+				</div>
+				<div class="row">
+					<div class="col-md-12" style="text-align: center; margin-top: 14px;">
+						<button style="background-color: #337ab7; border-color: #337ab7;" type="submit" onclick="submit_report();" class="btn btn-info">
+							Soumettre
+						</button>
+					</div>
+				</div>
+			</div>
+			<div id="search_page" style="display: none;" class="row">
+				<div class="row text-center">
+					<h2>Info de recherche dans la base de données</h2>
+				</div>
+				<div>
+					<label for="target_ident_search" class="col-md-2">
+						Cible:
+					</label>
+					<div class="col-md-9">
+						<input style="color: black;" type="text" class="form-control" id="target_ident_search" placeholder="Enter Data">
+					</div>
+					<div class="col-md-1">
+						<i class="fa fa-asterisk fa-2x"></i>
+					</div>
+				</div>        
+				<div>
+					<label for="type_search" class="col-md-2">
+						Search for:
+					</label>
+					<div class="col-md-9">
+						<select style="color: black;" name="type_search" id="type_search" class="form-control">
+							<option value="none">Sélectionnez Options</option>
+							<option value="pers">Personne</option>
+							<option value="veh">Véhicule</option>
+						</select>
+					</div>            
+				</div>
+				<div class="row">
+					<div class="col-md-12" style="text-align: center; margin-top: 14px;">
+						<button style="background-color: #337ab7; border-color: #337ab7;" type="submit" onclick="search_info();" class="btn btn-info">
+							Rechercher
+						</button>
+					</div>
+				</div>
+			</div>
+            <div id="players_page" class="row" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Recherche de joueurs - Résultats </h3>
+                        </div>
+                        <div class="panel-body">
+							<div id="shieldui-grid1" role="grid" aria-readonly="true" class="sui-grid sui-grid-core">
+								<div class="sui-gridheader">
+									<table class="sui-table">
+										<colgroup>
+											<col>
+											<col>
+											<col>
+											<col>
+											<col>
+											<col>
+										</colgroup>
+										<thead>
+											<tr role="row" class="sui-columnheader">
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Nom</a></th>
+												<th class="sui-headercell"><a id="suspect_title" class="sui-link sui-unselectable">Propriétés</a></th>
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Amendes impayées</a></th>
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Licences</a></th>
+												<th role="columnheader" class="sui-headercell"><a class="sui-link sui-unselectable">Métier</a></th>
+												<th role="columnheader" class="sui-headercell"><a class="sui-link sui-unselectable">Avertissements</a></th>
+											</tr>
+										</thead>
+										<tbody class="sui-hide">
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="sui-gridcontent">
+									<table class="sui-table">
+										<colgroup>
+											<col>
+											<col>
+											<col>
+											<col>
+											<col>
+											<col>
+										</colgroup>
+										<tbody id="search_table">
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div id="vehicles_page" class="row" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Recherche de véhicule - Résultats </h3>
+                        </div>
+                        <div class="panel-body">
+							<div id="shieldui-grid1" role="grid" aria-readonly="true" class="sui-grid sui-grid-core">
+								<div class="sui-gridheader">
+									<table class="sui-table">
+										<colgroup>
+											<col>
+											<col>
+											<col>
+										</colgroup>
+										<thead>
+											<tr role="row" class="sui-columnheader">
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Nom du véhicule</a></th>
+												<th class="sui-headercell"><a id="suspect_title" class="sui-link sui-unselectable">Plaque d'immatriculation</a></th>
+												<th class="sui-headercell"><a class="sui-link sui-unselectable">Propriétaire</a></th>
+											</tr>
+										</thead>
+										<tbody class="sui-hide">
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="sui-gridcontent">
+									<table class="sui-table">
+										<colgroup>
+											<col>
+											<col>
+											<col>
+										</colgroup>
+										<tbody id="search_table_vehicles">
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<input id="current_page" type="hidden" value="warrants" />
+    <!-- /#wrapper -->
+	<script>
+		function search_info() {
+			var type_input = document.getElementById('type_search').value;
+			if (type_input == 'none') {
+				$("#notify_box").removeClass("alert-success");
+				$("#notify_box").removeClass("alert-danger");
+				$("#notify_box").addClass("alert-danger");
+				document.getElementById("notify_text").innerHTML = 'Please fill all fileds with data!';
+				$('#notify_box').show();
+			}
+			if (type_input == 'pers') {
+				var field = document.getElementById('target_ident_search').value;
+				if (field == '') {
+					$("#notify_box").removeClass("alert-success");
+					$("#notify_box").removeClass("alert-danger");
+					$("#notify_box").addClass("alert-danger");
+					document.getElementById("notify_text").innerHTML = 'Please fill all fileds with data!';
+					$('#notify_box').show();
+				} else {
+					var char_name = field.split(" ", 2);
+					$('#loading_preview').show();
+					$.post('http://esx_policemdt/esx_policemdt:SearchPersonClient', JSON.stringify({
+						fname: char_name[0],
+						sname: char_name[1]
+					}));
+				}
+			}
+			if (type_input == 'veh') {
+				var field = document.getElementById('target_ident_search').value;
+				if (field == '') {
+					$("#notify_box").removeClass("alert-success");
+					$("#notify_box").removeClass("alert-danger");
+					$("#notify_box").addClass("alert-danger");
+					document.getElementById("notify_text").innerHTML = 'Please fill all fileds with data!';
+					$('#notify_box').show();
+				} else {
+					$('#loading_preview').show();
+					$.post('http://esx_policemdt/esx_policemdt:SearchVehicleClient', JSON.stringify({
+						plate: field
+					}));
+				}
+			}
+		}
+		
+		function delete_record(id) {
+			var current_page = document.getElementById('current_page').value;
+			////console.log('Asking to delete report. Current page is: ' + current_page);
+			if (current_page == 'warrants') {
+				$('#loading_preview').show();
+				$.post('http://esx_policemdt/esx_policemdt:DeleteReportClient', JSON.stringify({
+					id: id,
+					type: current_page
+				}));
+			}
+			if (current_page == 'bolos') {
+				$('#loading_preview').show();
+				$.post('http://esx_policemdt/esx_policemdt:DeleteReportClient', JSON.stringify({
+					id: id,
+					type: current_page
+				}));
+			}
+			if (current_page == 'arrests') {
+				$('#loading_preview').show();
+				$.post('http://esx_policemdt/esx_policemdt:DeleteReportClient', JSON.stringify({
+					id: id,
+					type: current_page
+				}));
+			}
+		}
+		
+		function submit_report() {
+			var report_type = document.getElementById('type_memes').value;
+			var target = document.getElementById('target_ident').value;
+			var desc = document.getElementById('desc').value;
+			var charges = document.getElementById('charges').value;
+			
+			document.getElementById('notify_wrapper').innerHTML = '<div id="notify_box" style="display: none;" class="alert alert-dismissable alert-success"><button type="button" class="close" data-dismiss="alert">×</button><span id="notify_text" style="font-weight: bold;"></span></div>';
+			
+			if ((report_type == 'none') || (target == '') || (desc == '') || (charges == '')) {
+				$("#notify_box").removeClass("alert-success");
+				$("#notify_box").removeClass("alert-danger");
+				$("#notify_box").addClass("alert-danger");
+				document.getElementById("notify_text").innerHTML = 'Veuillez remplir tous les champs avec les données !';
+				$('#notify_box').show();
+			} else {
+				$('#loading_preview').show();
+				$.post('http://esx_policemdt/esx_policemdt:NewReportClient', JSON.stringify({
+					report_type: report_type,
+					target: target,
+					desc: desc,
+					charges: charges
+				}));
+			}
+		}
+		
+		$(document).ready(function() {
+			$('#type_memes').selectmenu();
+			$('#type_search').selectmenu();
+		});
+		
+		function load_menu(type) {
+			if (type == 'search_menu') {
+				$('#search_page').show();
+				$('#form_page').hide();
+				$('#table_page').hide();
+				$('#players_page').hide();
+				$('#vehicles_page').hide();
+				document.getElementById("current_page").value = 'search_page';
+				document.getElementById("warrants_memes").innerHTML = '';
+				document.getElementById("page_div").innerHTML = '';
+
+				$(".selected").removeClass("selected");
+				$("#search_li").addClass("selected");
+			}
+			if (type == 'warrants') {
+				$('#loading_preview').show();
+				$('#form_page').hide();
+				$('#search_page').hide();
+				$('#players_page').hide();
+				$('#vehicles_page').hide();
+				$('#table_page').show();
+				document.getElementById("current_page").value = 'warrants';
+				document.getElementById("warrants_memes").innerHTML = '';
+				document.getElementById("page_div").innerHTML = '';
+				document.getElementById("suspect_title").innerHTML = 'Nom du suspect';
+				$(".selected").removeClass("selected");
+				$("#warrants_menu").addClass("selected");
+				$.post('http://esx_policemdt/esx_policemdt:GetWarrantsClient', JSON.stringify({
+					page: 1
+				}));
+			}
+			if (type == 'bolos') {
+				$('#loading_preview').show();
+				$('#form_page').hide();
+				$('#search_page').hide();
+				$('#players_page').hide();
+				$('#vehicles_page').hide();
+				$('#table_page').show();
+				document.getElementById("current_page").value = 'bolos';
+				document.getElementById("warrants_memes").innerHTML = '';
+				document.getElementById("page_div").innerHTML = '';
+				document.getElementById("suspect_title").innerHTML = 'Plaque d\'immatriculation';
+				$(".selected").removeClass("selected");
+				$("#bolos_menu").addClass("selected");
+				$.post('http://esx_policemdt/esx_policemdt:GetBolosClient', JSON.stringify({
+					page: 1
+				}));
+			}
+			if (type == 'arrests') {
+				$('#loading_preview').show();
+				$('#form_page').hide();
+				$('#search_page').hide();
+				$('#players_page').hide();
+				$('#vehicles_page').hide();
+				$('#table_page').show();
+				document.getElementById("current_page").value = 'arrests';
+				document.getElementById("warrants_memes").innerHTML = '';
+				document.getElementById("page_div").innerHTML = '';
+				document.getElementById("suspect_title").innerHTML = 'Nom du détenu';
+				$(".selected").removeClass("selected");
+				$("#arrests_menu").addClass("selected");
+				$.post('http://esx_policemdt/esx_policemdt:GetArrestsClient', JSON.stringify({
+					page: 1
+				}));
+			}
+			if (type == 'new_report') {
+				$('#form_page').show();
+				$('#search_page').hide();
+				$('#vehicles_page').hide();
+				$('#players_page').hide();
+				$('#table_page').hide();
+				document.getElementById("current_page").value = 'new_report';
+				document.getElementById("warrants_memes").innerHTML = '';
+				document.getElementById("page_div").innerHTML = '';
+
+				$(".selected").removeClass("selected");
+				$("#report_menu").addClass("selected");
+			}
+		}
+		
+		function CloseTerminal() {
+			$.post('http://esx_policemdt/esx_policemdt:CloseTab', JSON.stringify({
+				id: 0
+			}));
+		}
+		
+		function pagination_stuff(page) {
+			$('#loading_preview').show();
+			var current_page = document.getElementById("current_page").value;
+			if (current_page == 'warrants') {
+				$.post('http://esx_policemdt/esx_policemdt:GetWarrantsClient', JSON.stringify({
+					page: page
+				}));
+			}
+			if (current_page == 'bolos') {
+				$.post('http://esx_policemdt/esx_policemdt:GetBolosClient', JSON.stringify({
+					page: page
+				}));
+			}
+			if (current_page == 'arrests') {
+				$.post('http://esx_policemdt/esx_policemdt:GetArrestsClient', JSON.stringify({
+					page: page
+				}));
+			}
+		}
+	</script>
+</body>
+</html>

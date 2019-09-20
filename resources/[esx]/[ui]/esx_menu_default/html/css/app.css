@@ -1,0 +1,606 @@
+@font-face {
+  font-family: SignPainter;
+  src: url('../fonts/pdown.ttf');
+}
+
+@font-face {
+  font-family: vo;
+  src: url('../fonts/bankgothic.ttf');
+}
+
+@font-face {
+  font-family: glitch;
+  src: url('../fonts/pdown.ttf');
+
+
+
+
+}
+
+.menu {
+  font-family: vo;
+  min-width  : 400px;
+  max-width: 380px;
+  color      : #fff;
+  left: 40;
+  top : 80; 
+  position   : absolute;
+}
+
+.menu.align-left {
+  right: : 40;
+  top : 80; 
+
+}
+
+.menu.align-top-left {
+  left: 40;
+  top : 100; 
+}
+
+.menu.align-top {
+  left: 40;
+  top : 80; 
+}
+
+.menu.align-top-right {
+  left: 40;
+  top : 280; 
+}
+
+.menu.align-right {
+  left: 40;
+  top : 80; 
+}
+
+.menu.align-bottom-right {
+  left: 40;
+  top : 80; 
+}
+
+.menu.align-bottom {
+  left: 40;
+  top : 80; 
+}
+
+.menu.align-bottom-left {
+  right: 40;
+  bottom : 80; 
+}
+.menu.align-center {
+  left: 40;
+  top : 80; 
+
+}
+
+.menu .head {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background: linear-gradient(to left bottom,   #181818,  #242424 );
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+
+
+}
+.menu .head_tatoo {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/tatoo.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.men
+.menu .head_dmv {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/autoecole.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_garage {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/garage.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_concess {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/Concessionnaire.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_vignerons {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/vignerons.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_identity {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/identite.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_vetement {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/suburban.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_lscustom {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/lscus.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_vehicle {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/vehicle.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_Magasin {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/masque.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+
+.menu .head_skin {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/skin_menu.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_perso {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/menu.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_accesoires {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/Accessoires.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+
+.menu .head_valider {
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/valider.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_Modo{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/moderation.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_Mecano{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/mecano.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+
+
+.menu .head_meconcernant{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/Me_concernant.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_gps{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/gpsrapide.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+
+.menu .head_Inventaire{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/Inventaire.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_mask{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/masque.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_emploi{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/poleemploi.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_emploid{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/universite.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_superete{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/247.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_job{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/actions_metier.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_patron{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/gestionpatron.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_employe{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/Sans_titre-1.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_entreprise{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/Entreprise.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+
+.menu .head_ammu{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/ammunation.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_lsmc{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/lsmc.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_anim{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/animations.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_Factures{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/factures.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .head_metier{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/actions_metier.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_vestiaire{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/vestiaire.jpg");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_tabac{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/tabac.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_immobilier{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/immobilier.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_bahama{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/bahama.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_nightclub{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/nightclub.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_police{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/police.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_pompiste{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/pompistes.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_gouvernement{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/gouvernement.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+.menu .head_unicorn{
+  font-family: SignPainter;  
+  font-size: 59px;
+
+  background-image: url("../img/header/unicorn.png");
+  text-align      : center;
+  height          : 90px;
+  line-height     : 105px;
+  color : white;
+  font-style: oblique;
+}
+
+.menu .categorie {
+  font-family:  glitch;
+  font-size       : 23px;
+  height          : 30px;
+  line-height     : 35px;
+    padding: 0 10px;
+  color: white ;
+  background-color: rgba(0, 0, 0, 1);
+  text-transform: uppercase;
+  font-size: 18px;
+font-weight: bold;
+padding: 0 10px;
+  position: left;
+  top: 0px;
+
+}
+.menu .menu-items {
+    max-height : 350px;
+    overflow-y : hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.menu .menu-items .menu-item {
+
+  display         : block;
+  font-size       : 21px;
+  height          : 35px;
+  line-height     : 35px;
+  color           : white;
+  text-align      : left;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu .menu-items .menu-item.selected {
+  background-color: white;
+
+  color :black;
+}
+
+
