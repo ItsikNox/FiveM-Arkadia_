@@ -2,15 +2,15 @@
 
 French FiveM Server developped & edited by ikNox#6088
 
-Changer le mot de passe de connexion/Change the login password :
+**Changer le mot de passe de connexion/Change the login password :**
 
 * resources\ServerPassword\server.lua ligne 7
 
-Changer la traduction du mot de passe/Change the password translation :
+**Changer la traduction du mot de passe/Change the password translation :**
 
 * resources\ServerPassword\client.lua ligne 56 & 65
 
-Discord Bot :
+**Discord Bot :**
 
 * "[admin]\FiveM-BanSql-1.0.8\config.lua"
 
@@ -18,64 +18,64 @@ Discord Bot :
 
 * "[esx]\\[discord]\esx_discord_bot\config.lua"
 
-Changer l'annonce de l'ip lors de l'ouverture du serveur/Change the IP announcement when opening the server :
+**Changer l'annonce de l'ip lors de l'ouverture du serveur/Change the IP announcement when opening the server :**
 
 * "[esx]\\[discord]\DiscordBot\server\Server.lua ligne 66
 
-DiscordRichPresence :
+**DiscordRichPresence :**
 
 * "[esx]\\[discord]\DiscordRichPresence\client.lua" lignz 5, 7, 24, 26, 28, 30, 35, 37, 39, 43, 45, 48, 50 & 52
 
-FRANCAIS
+**FRANCAIS**
 
-Les glitchs des coffres et des factures négatif sont patchés ainsi que les ressources sécurisées contre les Moddeurs en les kikants.
-(bien sûr ils pourront toujours passer à travers certaines choses avec des connaissances)
+**Les glitchs des coffres et des factures négatif sont patchés ainsi que les ressources sécurisées contre les Moddeurs en les kikants.
+(bien sûr ils pourront toujours passer à travers certaines choses avec des connaissances)**
 
-ENGLISH
+**ENGLISH**
 
-The glitch of the chests and negative invoices are patched as well as the resources secured against Moders by kikants.
-(of course they will always be able to go through certain things with knowledge)
+**The glitch of the chests and negative invoices are patched as well as the resources secured against Moders by kikants.
+(of course they will always be able to go through certain things with knowledge)**
 
-Pour changer les images des menus/To change menu images :
+**Pour changer les images des menus/To change menu images :**
 
 * "[esx]\\[ui]\esx_menu_default\html\img\header"
 
-Si vous avez une erreur avec screenshot-basic aller le retéléchargé/If you have an error with screenshot-basic go re-download it
+**Si vous avez une erreur avec screenshot-basic aller le retéléchargé/If you have an error with screenshot-basic go re-download it**
 
-Pour ajouter les images des métiers ou les changers/To add job images or changes :
+**Pour ajouter les images des métiers ou les changers/To add job images or changes :**
 
 "[hud]\esx_customui\html\img" (Nommer l'image avec le nom du job)/(Name the image with the job name)
 
-Changer le nom du menu de sélection du personnage/Change the name of the character selection menu :
+**Changer le nom du menu de sélection du personnage/Change the name of the character selection menu :**
 
 * "[esx]\\[base]\esx_kashacters\html\ui.html"
 
-Changer le LoadingScreen (Nom et Image)/Changing the LoadingScreen (Name and Image) : 
+**Changer le LoadingScreen (Nom et Image)/Changing the LoadingScreen (Name and Image) :**
 
 * "[hud]\panzar-load\edit_this.html"
 * "[hud]\panzar-load\keks.css"
 
-Changer l'argent de départ/Change the starting money :
+**Changer l'argent de départ/Change the starting money :**
 
 * "[essential]\essentialmode\server\util.lua"
 
-Un script de Semi-Whitelist est aussi disponible, pour l'utiliser lancer "esx_douane" ensuite direction/A Semi-Whitelist script is also available, to use it launch "esx_douane" then direction :
+**Un script de Semi-Whitelist est aussi disponible, pour l'utiliser lancer "esx_douane" ensuite direction/A Semi-Whitelist script is also available, to use it launch "esx_douane" then direction :**
 
-FRANCAIS
-"reboot\server" décommenté la ligne 32 à 37 et modifier l'heure à laquel vous voulez que la whiteliste se lance et à quelle heure vous voulez l'arrêter.
+**FRANCAIS
+"reboot\server" décommenté la ligne 32 à 37 et modifier l'heure à laquel vous voulez que la whiteliste se lance et à quelle heure vous voulez l'arrêter.**
 
-ENGLISH
-"reboot\server" uncommented line 32 to 37 and change the time at which you want the whitelist to start and at which time you want to stop it.
+**ENGLISH
+"reboot\server" uncommented line 32 to 37 and change the time at which you want the whitelist to start and at which time you want to stop it.**
 
-Changer le nom du menu pause/Change the name of the pause menu :
+**Changer le nom du menu pause/Change the name of the pause menu :**
 
 * resources\[esx]\\[non-esx]\pausemenu-title\server_name.lua ligne 12, 23 & 27
 
-Changer le nom de la map/Change the name of the map
+**Changer le nom de la map/Change the name of the map**
 
 * Renommé Arkadia_Map & Arkadia_Map_ / Renamed Arkadia_Map & Arkadia_Map_
 
-Changer l'image du menu F5/Change the image of the F5 menu
+**Changer l'image du menu F5/Change the image of the F5 menu**
 
 * resources\[esx]\\[non-esx]\Arkadia_personalmenu\stream\commonmenu.ytd
 
