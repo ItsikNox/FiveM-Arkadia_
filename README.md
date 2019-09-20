@@ -81,7 +81,7 @@ resources\[esx]\\[non-esx]\Arkadia_personalmenu\stream\commonmenu.ytd
 
 ouvrez commonmenu.ytd avec OpenIV et changer l'image/open commonmenu.ytd with OpenIV and change the image
 
-#Key Bindings
+# Key Bindings
 F2 Quick interaction menu - -
 F5 Interaction menu - -
 F6 Job Menu - -
@@ -106,7 +106,7 @@ Text Commands
 /r ID Respond privately to a /report
 /me 3D Text
 
-#Admin Commands
+# Admin Commands
 
 Ajouter un Métier à un joueur/Adding a Business to a Player
 /setjob ID NomMetier Grade
