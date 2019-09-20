@@ -82,6 +82,7 @@ resources\[esx]\\[non-esx]\Arkadia_personalmenu\stream\commonmenu.ytd
 ouvrez commonmenu.ytd avec OpenIV et changer l'image/open commonmenu.ytd with OpenIV and change the image
 
 # Key Bindings
+```
 F2 Quick interaction menu - -
 F5 Interaction menu - -
 F6 Job Menu - -
@@ -105,20 +106,33 @@ Text Commands
 /report Sent a message to the admin
 /r ID Respond privately to a /report
 /me 3D Text
+```
 
 # Jobs List
-
-Abatteur
-
+```
+Abatteur =
+Couturier = tailor
+Bûcheron = lumberjack
 Ambulance = ambulance
 Police = police
 Mécano = mecano
-Raffineur = raffineur
+Pompiste = pompiste
 Vigneron = vigne
 Taxi = taxi
 Armurerie = ammu
+Mixologist = fueler
+Journaliste = journaliste
+```
 
-
+# Organisation List
+```
+Famillies = famillies
+Clan Kano =kano
+LaZone = lazone
+Mercenaire = mercenaire
+Podolskaia = podolskaia
+Syndicat = syndicat
+```
 
 # Admin Commands
 
