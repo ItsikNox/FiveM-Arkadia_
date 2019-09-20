@@ -1,6 +1,6 @@
 Citizen.CreateThread(function()
 	while true do
-		SetDiscordAppId( )
+		SetDiscordAppId(DiscordAppID)
 		SetDiscordRichPresenceAsset('logo')
         SetDiscordRichPresenceAssetText('Arkadia, Rejoingnez-nous !.')
         SetDiscordRichPresenceAssetSmall('info')
