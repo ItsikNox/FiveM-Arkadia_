@@ -1,4 +1,4 @@
-
+loadscreen_manual_shutdown "yes"
 description 'panzarload'
 
 files {
