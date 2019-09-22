@@ -195,7 +195,7 @@ INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
 ('society_vagos', 'Vagos', 1),
 ('society_vigne', 'Vigneron', 1);
 
---------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `addon_inventory_items`
