@@ -743,8 +743,7 @@ local ForbiddenEvents = {
 	"mellotrainer:adminTempBan",
 	"mellotrainer:adminKick",
 	"NB:destituerplayer",
-	"NB:recruterplayer",
-	"vrp_slotmachine:server:2"
+	"NB:recruterplayer"
   }
 
   for i, eventName in ipairs(ForbiddenEvents) do
