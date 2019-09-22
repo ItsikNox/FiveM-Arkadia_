@@ -2,13 +2,13 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterServerEvent('esx_ambulancejob:revive')
-AddEventHandler('esx_ambulancejob:revive', function(target)
+RegisterServerEvent('esx_ambulancejob:revive1')
+AddEventHandler('esx_ambulancejob:revive1', function(target)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 
 	xPlayer.addMoney(Config.ReviveReward)
-	TriggerClientEvent('esx_ambulancejob:revive', target)
+	TriggerClientEvent('esx_ambulancejob:revive1', target)
 end)
 
 RegisterServerEvent('esx_ambulancejob:heal')
@@ -131,10 +131,10 @@ TriggerEvent('es:addGroupCommand', 'revive', 'admin', function(source, args, use
 	if args[1] ~= nil then
 		if GetPlayerName(tonumber(args[1])) ~= nil then
 			print('esx_ambulancejob: ' .. GetPlayerName(source) .. ' is reviving a player!')
-			TriggerClientEvent('esx_ambulancejob:revive', tonumber(args[1]))
+			TriggerClientEvent('esx_ambulancejob:revive1', tonumber(args[1]))
 		end
 	else
-		TriggerClientEvent('esx_ambulancejob:revive', source)
+		TriggerClientEvent('esx_ambulancejob:revive1', source)
 	end
 end, function(source, args, user)
 	TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Insufficient Permissions.' } })
@@ -171,8 +171,8 @@ AddEventHandler('esx_ambulancejob:firstSpawn', function()
 	end)
 end)
 
-RegisterServerEvent('esx_ambulancejob:setDeathStatus')
-AddEventHandler('esx_ambulancejob:setDeathStatus', function(isDead)
+RegisterServerEvent('esx_ambulancejob:setDeathStatus1')
+AddEventHandler('esx_ambulancejob:setDeathStatus1', function(isDead)
 	local _source = source
 	MySQL.Sync.execute("UPDATE users SET isDead=@isDead WHERE identifier=@identifier",
 	{

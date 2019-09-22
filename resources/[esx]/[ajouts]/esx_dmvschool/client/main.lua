@@ -51,7 +51,7 @@ function StartTheoryTest()
 		SetNuiFocus(true, true)
 	end)
 
-	TriggerServerEvent('esx_dmvschool:pay', Config.Prices['dmv'])
+	TriggerServerEvent('esx_dmvschool:pay1', Config.Prices['dmv'])
 end
 
 function StopTheoryTest(success)
@@ -64,7 +64,7 @@ function StopTheoryTest(success)
 	SetNuiFocus(false)
 
 	if success then
-		TriggerServerEvent('esx_dmvschool:addLicense', 'dmv')
+		TriggerServerEvent('esx_dmvschool:addLicense1', 'dmv')
 		ESX.ShowNotification(_U('passed_test'))
 	else
 		ESX.ShowNotification(_U('failed_test'))
@@ -87,12 +87,12 @@ function StartDriveTest(type)
 		TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
 	end)
 
-	TriggerServerEvent('esx_dmvschool:pay', Config.Prices[type])
+	TriggerServerEvent('esx_dmvschool:pay1', Config.Prices[type])
 end
 
 function StopDriveTest(success)
 	if success then
-		TriggerServerEvent('esx_dmvschool:addLicense', CurrentTestType)
+		TriggerServerEvent('esx_dmvschool:addLicense1', CurrentTestType)
 		ESX.ShowNotification(_U('passed_test'))
 	else
 		ESX.ShowNotification(_U('failed_test'))

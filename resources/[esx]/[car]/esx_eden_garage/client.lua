@@ -232,7 +232,7 @@ function reparation(prix,vehicle,vehicleProps)
 
 			menu.close()
 			if(data.current.value == 'yes') then
-				-- TriggerServerEvent('eden_garage:payhealth', prix)
+				-- TriggerServerEvent('eden_garage:payhealth1', prix)
 				ranger(vehicle,vehicleProps)
 			end
 			if(data.current.value == 'no') then

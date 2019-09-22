@@ -8,8 +8,8 @@ AddEventHandler('esx:playerLoaded', function(source)
 	end)
 end)
 
-RegisterNetEvent('esx_dmvschool:addLicense')
-AddEventHandler('esx_dmvschool:addLicense', function(type)
+RegisterNetEvent('esx_dmvschool:addLicense1')
+AddEventHandler('esx_dmvschool:addLicense1', function(type)
 	local _source = source
 
 	TriggerEvent('esx_license:addLicense', _source, type, function()
@@ -19,8 +19,8 @@ AddEventHandler('esx_dmvschool:addLicense', function(type)
 	end)
 end)
 
-RegisterNetEvent('esx_dmvschool:pay')
-AddEventHandler('esx_dmvschool:pay', function(price)
+RegisterNetEvent('esx_dmvschool:pay1')
+AddEventHandler('esx_dmvschool:pay1', function(price)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 

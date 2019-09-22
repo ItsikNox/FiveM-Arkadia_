@@ -1,7 +1,7 @@
 RegisterServerEvent('eden_garage:debug')
 RegisterServerEvent('eden_garage:modifystate')
 RegisterServerEvent('eden_garage:pay')
-RegisterServerEvent('eden_garage:payhealth')
+RegisterServerEvent('eden_garage:payhealth1')
 RegisterServerEvent('eden_garage:logging')
 
 
@@ -184,7 +184,7 @@ end)
 
 
 --debut de payement pour la santé vehicule
-AddEventHandler('eden_garage:payhealth', function(price)
+AddEventHandler('eden_garage:payhealth1', function(price)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 

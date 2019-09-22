@@ -53,8 +53,8 @@ RegisterCommand("unjail", function(src, args)
 	end
 end)
 
-RegisterServerEvent("esx-qalle-jail:jailPlayer")
-AddEventHandler("esx-qalle-jail:jailPlayer", function(targetSrc, jailTime, jailReason)
+RegisterServerEvent("esx-qalle-jail:jailPlayer1")
+AddEventHandler("esx-qalle-jail:jailPlayer1", function(targetSrc, jailTime, jailReason)
 	local src = source
 	local targetSrc = tonumber(targetSrc)
 	local xPlayer = ESX.GetPlayerFromId(src)
@@ -117,7 +117,7 @@ AddEventHandler("esx-qalle-jail:prisonWorkReward", function()
 end)
 
 function JailPlayer(jailPlayer, jailTime)
-	TriggerClientEvent("esx-qalle-jail:jailPlayer", jailPlayer, jailTime)
+	TriggerClientEvent("esx-qalle-jail:jailPlayer1", jailPlayer, jailTime)
 
 	EditJailTime(jailPlayer, jailTime)
 end

@@ -137,12 +137,12 @@ AddEventHandler('esx_policejob:requestrelease', function(targetid, playerheading
     TriggerClientEvent('esx_policejob:douncuffing', _source)
 end)
 
-RegisterServerEvent('esx_policejob:handcuff')
-AddEventHandler('esx_policejob:handcuff', function(target)
+RegisterServerEvent('esx_policejob:handcuff1')
+AddEventHandler('esx_policejob:handcuff1', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if xPlayer.job.name == 'police' then
-		TriggerClientEvent('esx_policejob:handcuff', target)
+		TriggerClientEvent('esx_policejob:handcuff1', target)
 	else
 		print(('esx_policejob: %s attempted to handcuff a player (not cop)!'):format(xPlayer.identifier))
 	end

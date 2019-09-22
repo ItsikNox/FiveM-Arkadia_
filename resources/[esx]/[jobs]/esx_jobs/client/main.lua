@@ -159,7 +159,7 @@ AddEventHandler('esx_jobs:action', function(job, zone)
               local driverPed = GetPedInVehicleSeat(vehicle, -1)
               for i=1, #myPlate, 1 do
                 if (myPlate[i] == plate) and (playerPed == driverPed) then
-                  TriggerServerEvent('esx_jobs:caution', "give_back", cautionVehicleInCaseofDrop, 0, 0)
+                  TriggerServerEvent('esx_jobs:caution1', "give_back", cautionVehicleInCaseofDrop, 0, 0)
                   DeleteVehicle(GetVehiclePedIsIn(playerPed, 0))
 
                   if w.Teleport ~= 0 then
@@ -279,7 +279,7 @@ end
 function spawncar(spawnPoint, vehicle)
   hintToDisplay = "no hint to display"
   hintIsShowed = false
-  TriggerServerEvent('esx_jobs:caution', "take", cautionVehicleInCaseofDrop, spawnPoint, vehicle)
+  TriggerServerEvent('esx_jobs:caution1', "take", cautionVehicleInCaseofDrop, spawnPoint, vehicle)
 end
 
 RegisterNetEvent('esx_jobs:spawnJobVehicle')

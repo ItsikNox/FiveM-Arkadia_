@@ -1752,7 +1752,7 @@ AddEventHandler('esx_policejob:getarrested', function(playerheading, playercoord
 	TaskPlayAnim(GetPlayerPed(-1), 'mp_arrest_paired', 'crook_p2_back_right', 8.0, -8, 3750 , 2, 0, 0, 0, 0)
 	Citizen.Wait(3760)
 	IsHandcuffed = true
-	TriggerEvent('esx_policejob:handcuff')
+	TriggerEvent('esx_policejob:handcuff1')
 	loadanimdict('mp_arresting')
 	TaskPlayAnim(GetPlayerPed(-1), 'mp_arresting', 'idle', 8.0, -8, -1, 49, 0.0, false, false, false)
 end)
@@ -1785,7 +1785,7 @@ AddEventHandler('esx_policejob:getuncuffed', function(playerheading, playercoord
 	TaskPlayAnim(GetPlayerPed(-1), 'mp_arresting', 'b_uncuff', 8.0, -8,-1, 2, 0, 0, 0, 0)
 	Citizen.Wait(5500)
 	IsHandcuffed = false
-	TriggerEvent('esx_policejob:handcuff')
+	TriggerEvent('esx_policejob:handcuff1')
 	ClearPedTasks(GetPlayerPed(-1))
 end)
 
@@ -1800,8 +1800,8 @@ end
 
 -------------------
 
-RegisterNetEvent('esx_policejob:handcuff')
-AddEventHandler('esx_policejob:handcuff', function()
+RegisterNetEvent('esx_policejob:handcuff1')
+AddEventHandler('esx_policejob:handcuff1', function()
 	local playerPed = PlayerPedId()
 	local text = "* La personne menotte est entrain d'être menotté *"
 

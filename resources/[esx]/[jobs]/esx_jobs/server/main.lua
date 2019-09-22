@@ -109,8 +109,8 @@ AddEventHandler('esx_jobs:stopWork', function()
   PlayersWorking[source] = false
 end)
 
-RegisterServerEvent('esx_jobs:caution')
-AddEventHandler('esx_jobs:caution', function(cautionType, cautionAmount, spawnPoint, vehicle)
+RegisterServerEvent('esx_jobs:caution1')
+AddEventHandler('esx_jobs:caution1', function(cautionType, cautionAmount, spawnPoint, vehicle)
   local source = source
   local xPlayer = ESX.GetPlayerFromId(source)
   

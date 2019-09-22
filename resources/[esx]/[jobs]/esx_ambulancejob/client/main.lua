@@ -306,7 +306,7 @@ function ShowTimer()
 end
 
 function RemoveItemsAfterRPDeath()
-	TriggerServerEvent('esx_ambulancejob:setDeathStatus', 0)
+	TriggerServerEvent('esx_ambulancejob:setDeathStatus1', 0)
 
 	Citizen.CreateThread(function()
 		DoScreenFadeOut(800)
@@ -336,7 +336,7 @@ function OnPlayerDeath()
         ClearPedTasksImmediately(GetPlayerPed(-1))
     until IsDead == false
   end)
-	TriggerServerEvent('esx_ambulancejob:setDeathStatus', 1)
+	TriggerServerEvent('esx_ambulancejob:setDeathStatus1', 1)
 
 	if Config.ShowDeathTimer == true then
 		ShowTimer()
@@ -533,7 +533,7 @@ function OpenMobileAmbulanceActionsMenu()
 									ClearPedTasks(playerPed)
 									
 									TriggerServerEvent('esx_ambulancejob:removeItem', 'medikit')
-									TriggerServerEvent('esx_ambulancejob:revive', GetPlayerServerId(closestPlayer))
+									TriggerServerEvent('esx_ambulancejob:revive1', GetPlayerServerId(closestPlayer))
 									IsBusy = false
 
 									-- Show revive award?
@@ -829,12 +829,12 @@ AddEventHandler('esx:onPlayerDeath', function(reason)
 	OnPlayerDeath()
 end)
 
-RegisterNetEvent('esx_ambulancejob:revive')
-AddEventHandler('esx_ambulancejob:revive', function()
+RegisterNetEvent('esx_ambulancejob:revive1')
+AddEventHandler('esx_ambulancejob:revive1', function()
 
   local playerPed = GetPlayerPed(-1)
   local coords    = GetEntityCoords(playerPed)
-  TriggerServerEvent('esx_ambulancejob:setDeathStatus', 0)
+  TriggerServerEvent('esx_ambulancejob:setDeathStatus1', 0)
   
   Citizen.CreateThread(function()
 
