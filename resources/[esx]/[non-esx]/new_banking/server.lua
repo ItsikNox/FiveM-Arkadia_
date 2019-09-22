@@ -5,8 +5,8 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterServerEvent('bank:deposit')
-AddEventHandler('bank:deposit', function(amount)
+RegisterServerEvent('bank:deposit1')
+AddEventHandler('bank:deposit1', function(amount)
 	local _source = source
 	
 	local xPlayer = ESX.GetPlayerFromId(_source)
@@ -19,8 +19,8 @@ AddEventHandler('bank:deposit', function(amount)
 end)
 
 
-RegisterServerEvent('bank:withdraw')
-AddEventHandler('bank:withdraw', function(amount)
+RegisterServerEvent('bank:withdraw1')
+AddEventHandler('bank:withdraw1', function(amount)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local base = 0

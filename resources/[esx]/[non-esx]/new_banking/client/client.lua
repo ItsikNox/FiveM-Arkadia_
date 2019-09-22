@@ -182,7 +182,7 @@ end)
 --==           Deposit Event                   ==
 --===============================================
 RegisterNUICallback('deposit', function(data)
-	TriggerServerEvent('bank:deposit', tonumber(data.amount))
+	TriggerServerEvent('bank:deposit1', tonumber(data.amount))
 	TriggerServerEvent('bank:balance')
 end)
 
@@ -190,7 +190,7 @@ end)
 --==          Withdraw Event                   ==
 --===============================================
 RegisterNUICallback('withdrawl', function(data)
-	TriggerServerEvent('bank:withdraw', tonumber(data.amountw))
+	TriggerServerEvent('bank:withdraw1', tonumber(data.amountw))
 	TriggerServerEvent('bank:balance')
 end)
 
