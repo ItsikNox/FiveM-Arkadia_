@@ -254,6 +254,7 @@ function OpenShopMenu()
 
 											local newPlate     = GeneratePlate()
 											local vehicleProps = ESX.Game.GetVehicleProperties(vehicle)
+											local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
 											vehicleProps.plate = newPlate
 											SetVehicleNumberPlateText(vehicle, newPlate)
 
