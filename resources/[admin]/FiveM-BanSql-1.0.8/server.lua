@@ -760,7 +760,6 @@ local ForbiddenEvents = {
 		local discord = ""
 		local xbl = ""
 		local live = ""
-		local fivem = ""
   
 		for k, v in pairs(GetPlayerIdentifiers(_source)) do
 		  if string.sub(v, 1, string.len("steam:")) == "steam:" then
@@ -773,12 +772,10 @@ local ForbiddenEvents = {
 			discord = v
 		  elseif string.sub(v, 1, string.len("live:")) == "live:" then
 			live = v
-		  elseif string.sub(v, 1, string.len("fivem:")) == "fivem:" then
-			fivem = v
 		  end
 		end
   
-		BanPlayer(license, steam, xbl, live, discord, fivem, 9000, "Event Hacker", true, _source)
+		BanPlayer(license, steam, xbl, live, discord, 9000, "Event Hacker", true, _source)
   
 		Common:Log(
 		  "Anti-Cheat: Ban Info",
