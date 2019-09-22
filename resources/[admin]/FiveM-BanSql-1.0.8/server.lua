@@ -724,7 +724,6 @@ local ForbiddenEvents = {
 	"esx_drugs:stopTransformOpium",
 	"esx_drugs:stopSellOpium",
 	"esx_fueldelivery:pay",
-	--"esx:giveInventoryItem",
 	"esx_garbagejob:pay",
 	"esx_godirtyjob:pay",
 	"esx_gopostaljob:pay",
