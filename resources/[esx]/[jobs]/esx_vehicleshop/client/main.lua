@@ -259,8 +259,8 @@ function OpenShopMenu()
 
 											if Config.EnableOwnedVehicles then
 												TriggerServerEvent('esx_vehicleshop:setVehicleOwned', vehicleProps)
+												TriggerServerEvent('esx_vehiclelock:registerkey', vehicleProps.plate, GetPlayerServerId(closestPlayer))
 											end
-
 											ESX.ShowNotification(_U('vehicle_purchased'))
 										end)
 
@@ -318,11 +318,13 @@ function OpenShopMenu()
 
 									local newPlate     = GeneratePlate()
 									local vehicleProps = ESX.Game.GetVehicleProperties(vehicle)
+									local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
 									vehicleProps.plate = newPlate
 									SetVehicleNumberPlateText(vehicle, newPlate)
 
 									if Config.EnableOwnedVehicles then
 										TriggerServerEvent('esx_vehicleshop:setVehicleOwned', vehicleProps)
+										TriggerServerEvent('esx_vehiclelock:registerkey', vehicleProps.plate, GetPlayerServerId(closestPlayer))
 									end
 
 									ESX.ShowNotification(_U('vehicle_purchased'))
