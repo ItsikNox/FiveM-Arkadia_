@@ -359,7 +359,7 @@ MySQL.Async.execute(
 
 		},
 		function(result)
-				TriggerClientEvent('esx:showNotification', xPlayer.source, 'Vous avez un nouvelle pair de clés ! ')
+				TriggerClientEvent('esx:showNotification', xPlayer.source, 'Vous avez une nouvelle paire de clés ! ')
 				TriggerClientEvent('esx:showNotification', _source, 'Clés bien enregistrer ! ')
 		end)
 
