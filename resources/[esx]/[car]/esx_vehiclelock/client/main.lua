@@ -347,7 +347,7 @@ function OpenSerrurierMenu()
         end
       )
 end
-
+--[[
 -- Create Blips
 Citizen.CreateThread(function()
 		local blip = AddBlipForCoord(Config.Zones.place.Pos.x, Config.Zones.place.Pos.y, Config.Zones.place.Pos.z)
@@ -430,7 +430,7 @@ Citizen.CreateThread(function()
     end
   end
 end)
-
+--]]
 
 Citizen.CreateThread(function()
     local dict = "anim@mp_player_intmenu@key_fob@"

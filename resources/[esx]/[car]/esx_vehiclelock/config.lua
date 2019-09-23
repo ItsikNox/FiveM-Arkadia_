@@ -7,7 +7,7 @@ Config.Type         = 27
 Config.coef         = 0.10
 Config.Locale = 'fr'
 
-
+--[[
 Config.Zones = {
 		place = {
 				Pos = {x = -29.38, y = -1103.39, z = 25.47},
@@ -16,7 +16,7 @@ Config.Zones = {
 				Type  = 27
 			}
 }
-
+--]]
 ---------------------------------
 --- Copyright by ikNox#6088 ---
 ---------------------------------
