@@ -181,12 +181,12 @@ AddEventHandler('DiscordBot:ToDiscord', function(WebHook, Name, Message, Image, 
 			print('ToDiscord event called without a specified webhook!')
 			return nil
 		end
-		
+
 		if Image:lower() == 'steam' then
 			Image = UserAvatar
-			--if GetIDFromSource('steam', Source) then
-			if not Source == 0 and GetIDFromSource('steam', Source) then
-				PerformHttpRequest('http://steamcommunity.com/profiles/' .. tonumber(GetIDFromSource('steam', Source), 16) .. '/?xml=1', function(Error, Content, Head)
+			local Source = source
+			if GetIDFromSource('steam', Source) then
+				PerformHttpRequest('http://steamcommunity.com/profiles/' .. tonumber(GetIDFromSource('steam', Source), 32) .. '/?xml=1', function(Error, Content, Head)
 					local SteamProfileSplitted = stringsplit(Content, '\n')
 					for i, Line in ipairs(SteamProfileSplitted) do
 						if Line:find('<avatarFull>') then
