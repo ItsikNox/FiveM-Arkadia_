@@ -418,7 +418,7 @@ MySQL.Async.fetchAll(
 		'INSERT INTO owned_vehicles (owner, plate) VALUES (@owner, @plate)',
 		{
 		['@owner']   = xPlayertarget.identifier,
-		['@plate'] = plate
+		['@plate'] = toplate
 		},
 		function(result)
 			print("insert into terminé")

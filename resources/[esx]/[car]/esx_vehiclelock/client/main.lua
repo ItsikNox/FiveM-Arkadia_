@@ -57,7 +57,8 @@ ESX.UI.Menu.Open(
        					  TriggerServerEvent('esx_vehiclelock:donnerkey', GetPlayerServerId(player), data2.current.value)
        					  TriggerServerEvent('esx_vehiclelock:deletekey', data2.current.value)
        					  -- print("avant changement owner")
-       					  TriggerServerEvent('esx_givecarkeys:frommenu')
+							-- TriggerServerEvent('esx_givecarkeys:frommenu')
+							 TriggerServerEvent('esx_vehiclelock:changeowner', GetPlayerServerId(player), vehicleProps)
        					  -- print("après changement owner")
        					end
       				 end
