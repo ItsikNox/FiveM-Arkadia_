@@ -779,7 +779,7 @@ function OpenPharmacyMenu()
 	)
 end
 
---[[
+
 AddEventHandler('playerSpawned', function()
 	IsDead = false
 
@@ -789,27 +789,19 @@ AddEventHandler('playerSpawned', function()
 		FirstSpawn = false
 	end
 end)
---]]
 
-AddEventHandler('playerSpawned', function()
+--[[
+RegisterNetEvent('esx_ambulancejob:multicharacter')
+AddEventHandler('esx_ambulancejob:multicharacter', function()
 	IsDead = false
 
 	if FirstSpawn then
+		TriggerServerEvent('esx_ambulancejob:firstSpawn')
 		exports.spawnmanager:setAutoSpawn(false) -- disable respawn
 		FirstSpawn = false
-
-		ESX.TriggerServerCallback('esx_ambulancejob:getDeathStatus', function(isDead)
-			if isDead and Config.AntiCombatLog then
-				while not PlayerLoaded do
-					Citizen.Wait(1000)
-				end
-
-				ESX.ShowNotification(_U('combatlog_message'))
-				RemoveItemsAfterRPDeath()
-			end
-		end)
 	end
 end)
+--]]
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
