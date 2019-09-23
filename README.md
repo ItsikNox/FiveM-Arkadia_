@@ -141,31 +141,31 @@ Syndicat = syndicat
 
 # Admin Commands
 
-Ajouter un Métier à un joueur/Adding a Business to a Player
-/setjob ID NomMetier Grade
+**Ajouter un Métier à un joueur/Adding a Business to a Player**
+* /setjob ID NomMetier Grade
 
-Ajouter une Organisation à un joueur/Adding an Organization to a Player
-/setjob2 ID NomMetier Grade
+**Ajouter une Organisation à un joueur/Adding an Organization to a Player**
+* /setjob2 ID NomMetier Grade
 
-Bannir un joueur/Banning a player
-/ban ID Jour(0 = Permanent) Raison
+**Bannir un joueur/Banning a player**
+* /ban ID Jour(0 = Permanent) Raison
 
-Bannir un joueur déconnecté/Banning an offline player
-/banoffline JOUR NomSteam
-/reason Raison
+**Bannir un joueur déconnecté/Banning an offline player**
+* /banoffline JOUR NomSteam
+* /reason Raison
 
-Unban un joueur/Unban one player
-/unban NomSteam
+**Unban un joueur/Unban one player**
+* /unban NomSteam
 
-Give un item/Donner un article
-/giveitem ID NomItem Nombre
+**Give un item/Donner un article**
+* /giveitem ID NomItem Nombre
 
-Give une arme/Give a weapon
-/giveweapon ID NomArme Munition
+**Give une arme/Give a weapon**
+* /giveweapon ID NomArme Munition
 
-Ouvrir le menu es_admin/Open the es_admin menu
-Touche HOME
+**Ouvrir le menu es_admin/Open the es_admin menu**
+* Touche HOME
 
-Ouvrir le menu Spectateur/Open the Spectator menu
-Touche 9 ou /spec.
-pour voir sont inventaire Touche G
+**Ouvrir le menu Spectateur/Open the Spectator menu**
+* Touche 9 ou /spec.
+* Voir sont inventaire Touche G
