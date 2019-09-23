@@ -116,6 +116,7 @@ RegisterNUICallback('chatResult', function(data, cb)
 
     if data.message:sub(1, 1) == '/' then
       ExecuteCommand(data.message:sub(2))
+      TriggerServerEvent('DiscordBot:ToDiscord', 'chat', GetPlayerName(id) .. ' [ID: ' .. GetPlayerServerId(id) .. ']', data.message, 'steam', GetPlayerServerId(id), false, true)
     else
       TriggerServerEvent('_chat:messageEntered', GetPlayerName(id), { r, g, b }, data.message)
     end
