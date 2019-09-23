@@ -11,3 +11,5 @@ files {
 }
 
 loadscreen 'edit_this.html'
+
+client_script "client.lua"
