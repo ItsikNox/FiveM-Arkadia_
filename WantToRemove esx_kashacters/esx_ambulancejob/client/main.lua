@@ -791,14 +791,23 @@ AddEventHandler('playerSpawned', function()
 end)
 --]]
 
-RegisterNetEvent('esx_ambulancejob:multicharacter')
-AddEventHandler('esx_ambulancejob:multicharacter', function()
+AddEventHandler('playerSpawned', function()
 	IsDead = false
 
 	if FirstSpawn then
-		TriggerServerEvent('esx_ambulancejob:firstSpawn')
 		exports.spawnmanager:setAutoSpawn(false) -- disable respawn
 		FirstSpawn = false
+
+		ESX.TriggerServerCallback('esx_ambulancejob:getDeathStatus', function(isDead)
+			if isDead and Config.AntiCombatLog then
+				while not PlayerLoaded do
+					Citizen.Wait(1000)
+				end
+
+				ESX.ShowNotification(_U('combatlog_message'))
+				RemoveItemsAfterRPDeath()
+			end
+		end)
 	end
 end)
 
