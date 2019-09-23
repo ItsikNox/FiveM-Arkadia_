@@ -4,9 +4,9 @@ DiscordWebhookKillinglogs = 'WEBHOOK_LINK_HERE'
 DiscordWebhookChat = 'WEBHOOK_LINK_HERE'
 DiscordWebhookCheat = 'WEBHOOK_LINK_HERE'
 
-SystemAvatar = 'URL_HERE'
+SystemAvatar = 'https://preview.redd.it/b2ogwpxt8d031.jpg?auto=webp&s=73fc9e5ecb21589772b2ae7ba4232d7a59890e28'
 
-UserAvatar = 'URL_HERE'
+UserAvatar = 'https://preview.redd.it/b2ogwpxt8d031.jpg?auto=webp&s=73fc9e5ecb21589772b2ae7ba4232d7a59890e28'
 
 SystemName = 'L\'Oeil de Dieu'
 
