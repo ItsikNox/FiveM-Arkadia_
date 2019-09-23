@@ -586,7 +586,7 @@ function OpenPopVehicleMenu()
 
 			DeleteShopInsideVehicles()
 
-			ESX.Game.SpawnVehicle(model, Config.Zones.ShopInside.Pos, Config.Zones.ShopInside.Heading, function (vehicle)
+			ESX.Game.SpawnVehicle(model, Config.Zones.ShopOutside.Pos, Config.Zones.ShopOutside.Heading, function (vehicle)
 				table.insert(LastVehicles, vehicle)
 
 				for i=1, #Vehicles, 1 do
