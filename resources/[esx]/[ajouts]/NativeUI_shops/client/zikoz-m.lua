@@ -180,9 +180,9 @@ AddShopsMenu(mainMenu)
 _menuPool:RefreshIndex()
 
 local zikoz = {
-    {x = 25.742, y = -1345.741, z = 28.497},
+    {x = 25.742, y = -1345.741, z = 28.57},
     {x = 373.875,   y = 325.896,  z = 102.66},
-	{x = 2557.458,  y = 382.282,  z = 107.622}, 
+	{x = 2557.458,  y = 382.282,  z = 107.722}, 
 	{x = -3038.939, y = 585.954,  z = 6.97},
 	{x = -3241.927, y = 1001.462, z = 11.850}, 
 	{x = 547.431,   y = 2671.710, z = 41.176}, 
@@ -202,7 +202,6 @@ local zikoz = {
 	{x = -707.67,  y = -914.22,  z = 18.26}, 
 	{x = -1820.523, y = 792.518,   z = 137.20},
 	{x = 1698.388,  y = 4924.404,  z = 41.083}
-
 }
 
 Citizen.CreateThread(function()
@@ -226,15 +225,43 @@ Citizen.CreateThread(function()
     end
 end)
 
+Drawing = setmetatable({}, Drawing)
+Drawing.__index = Drawing
+
+function Drawing.draw3DText(x,y,z,textInput,fontId,scaleX,scaleY,r, g, b, a)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    local dist = GetDistanceBetweenCoords(px,py,pz, x,y,z, 1)
+
+    local scale = (1/dist)*14
+    local fov = (1/GetGameplayCamFov())*100
+    local scale = scale*fov
+
+    SetTextScale(scaleX*scale, scaleY*scale)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(r, g, b, a)
+    SetTextDropshadow(0, 0, 0, 0, 255)
+    SetTextEdge(2, 0, 0, 0, 150)
+    SetTextDropShadow()
+    SetTextOutline()
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(textInput)
+    SetDrawOrigin(x,y,z+1, 0)
+    DrawText(0.0, 0.0)
+    ClearDrawOrigin()
+end
+
 -- Display markers
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(10)
-		local coords = GetEntityCoords(GetPlayerPed(-1))
+		Citizen.Wait(0)
+        local coords = GetEntityCoords(GetPlayerPed(-1))
 
 		for k,v in pairs(zikoz) do
 				if(Config.Type ~= -1 and GetDistanceBetweenCoords(coords, zikoz[k].x, zikoz[k].y, zikoz[k].z, true) < Config.DrawDistance) then
-					DrawMarker(Config.Type, zikoz[k].x, zikoz[k].y, zikoz[k].z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.Size.x, Config.Size.y, Config.Size.z, Config.Color.r, Config.Color.g, Config.Color.b, 100, false, true, 2, false, false, false, false)
+                    Drawing.draw3DText(zikoz[k].x, zikoz[k].y, zikoz[k].z, "Appuyez sur [~g~E~w~] pour faire vos achats", 4, 0.1, 0.05, 255, 255, 255, 255)
+                    DrawMarker(Config.Type, zikoz[k].x, zikoz[k].y, zikoz[k].z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.Size.x, Config.Size.y, Config.Size.z, Config.Color.r, Config.Color.g, Config.Color.b, 100, false, true, 2, false, false, false, false)
 			end
 		end
 	end
