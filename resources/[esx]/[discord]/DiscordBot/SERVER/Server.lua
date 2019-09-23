@@ -140,7 +140,7 @@ AddEventHandler('chatMessage', function(Source, Name, Message)
 		--Getting the steam avatar if available
 		local AvatarURL = UserAvatar
 		if GetIDFromSource('steam', Source) then
-			PerformHttpRequest('http://steamcommunity.com/profiles/' .. tonumber(GetIDFromSource('steam', Source), 16) .. '/?xml=1', function(Error, Content, Head)
+			PerformHttpRequest('http://steamcommunity.com/profiles/' .. tonumber(GetIDFromSource('steam', Source), 32) .. '/?xml=1', function(Error, Content, Head)
 				local SteamProfileSplitted = stringsplit(Content, '\n')
 				for i, Line in ipairs(SteamProfileSplitted) do
 					if Line:find('<avatarFull>') then
