@@ -56,10 +56,9 @@ ESX.UI.Menu.Open(
        					if distance ~= -1 and distance <= 3.0 then
        					  TriggerServerEvent('esx_vehiclelock:donnerkey', GetPlayerServerId(player), data2.current.value)
        					  TriggerServerEvent('esx_vehiclelock:deletekey', data2.current.value)
-       					  -- print("avant changement owner")
-							-- TriggerServerEvent('esx_givecarkeys:frommenu')
-							 TriggerServerEvent('esx_vehiclelock:changeowner', GetPlayerServerId(player), vehicleProps)
-       					  -- print("après changement owner")
+       					  print("avant changement owner")
+						  TriggerServerEvent('esx_vehiclelock:changeowner', GetPlayerServerId(player), vehicleProps)
+       					  print("après changement owner")
        					end
       				 end
       				 if data3.current.value == 'preterkey' then
