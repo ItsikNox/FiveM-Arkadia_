@@ -679,107 +679,47 @@ function doublecheck(player)
 	end
 end
 
-local ForbiddenEvents = {
-	"AdminMenu:giveCash",
-	"AdminMenu:giveBank",
-	"antilynx8:anticheat",
-	"antilynxr4:detect",
-	"bank:deposit",
-	"bank:withdraw",
-	"Banca:deposit",
-	"Banca:withdraw",
-	"dmv:success",
-	"eden_garage:payhealth",
-	"esx_ambulancejob:revive",
-	"esx_ambulancejob:setDeathStatus",
-	"esx_billing:sendBill",
-	"esx_banksecurity:pay",
-	"esx_blanchisseur:startWhitening",
-	"esx_carthief:alertcops",
-	"esx_carthief:pay",
-	"esx_dmvschool:addLicense",
-	"esx_dmvschool:pay",
-	"esx_drugs:startHarvestWeed",
-	"esx_drugs:startTransformWeed",
-	"esx_drugs:startSellWeed",
-	"esx_drugs:startHarvestCoke",
-	"esx_drugs:startTransformCoke",
-	"esx_drugs:startSellCoke",
-	"esx_drugs:startHarvestMeth",
-	"esx_drugs:startTransformMeth",
-	"esx_drugs:startSellMeth",
-	"esx_drugs:startHarvestOpium",
-	"esx_drugs:startTransformOpium",
-	"esx_drugs:startSellOpium",
-	"esx_drugs:stopHarvestCoke",
-	"esx_drugs:stopTransformCoke",
-	"esx_drugs:stopSellCoke",
-	"esx_drugs:stopHarvestMeth",
-	"esx_drugs:stopTransformMeth",
-	"esx_drugs:stopSellMeth",
-	"esx_drugs:stopHarvestWeed",
-	"esx_drugs:stopTransformWeed",
-	"esx_drugs:stopSellWeed",
-	"esx_drugs:stopHarvestOpium",
-	"esx_drugs:stopTransformOpium",
-	"esx_drugs:stopSellOpium",
-	"esx_fueldelivery:pay",
-	"esx_garbagejob:pay",
-	"esx_godirtyjob:pay",
-	"esx_gopostaljob:pay",
-	"esx_jail:sendToJail",
-	"esx_jailer:sendToJail",
-	"esx-qalle-jail:jailPlayer",
-	"esx_jobs:caution",
-	"esx_pizza:pay",
-	"esx_policejob:handcuff",
-	"esx_ranger:pay",
-	"esx_truckerjob:pay",
-	"esx_slotmachine:sv:2",
-	"js:jailuser",
-	"LegacyFuel:PayFuel",
-	"lscustoms:payGarage",
-	"mellotrainer:adminTempBan",
-	"mellotrainer:adminKick",
-	"NB:destituerplayer",
-	"NB:recruterplayer"
-  }
-
-  for i, eventName in ipairs(ForbiddenEvents) do
-	RegisterNetEvent(eventName)
-	AddEventHandler(
-	  eventName,
-	  function()
-		local _source = source
-		local name = GetPlayerName(_source)
-  
-		local steam = ""
-		local license = ""
-		local discord = ""
-		local xbl = ""
-		local live = ""
-  
-		for k, v in pairs(GetPlayerIdentifiers(_source)) do
-		  if string.sub(v, 1, string.len("steam:")) == "steam:" then
-			steam = v
-		  elseif string.sub(v, 1, string.len("license:")) == "license:" then
+RegisterServerEvent('Anticheat:AutoBan')
+AddEventHandler('Anticheat:AutoBan', function(source, args)
+	local _source = source
+	local xPlayer  = ESX.GetPlayerFromId(_source)  
+	local identifier
+	local license
+	local liveid    = ""
+	local xblid     = ""
+	local discord   = ""
+	local playerip
+	local duree = tonumber(args.period)
+	local reason = args.reason
+	local targetplayername = xPlayer.name
+	local sourceplayername = 'autobanned'
+		
+	if reason == "" then
+		reason = _U('no_reason')
+	end
+	
+	for k,v in ipairs(GetPlayerIdentifiers(_source))do
+		if string.sub(v, 1, string.len("steam:")) == "steam:" then
+			identifier = v
+		elseif string.sub(v, 1, string.len("license:")) == "license:" then
 			license = v
-		  elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
-			xbl = v
-		  elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+		elseif string.sub(v, 1, string.len("live:")) == "live:" then
+			liveid = v
+		elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+			xblid  = v
+		elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
 			discord = v
-		  elseif string.sub(v, 1, string.len("live:")) == "live:" then
-			live = v
-		  end
+		elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+			playerip = v
 		end
-  
-		BanPlayer(license, steam, xbl, live, discord, 9000, "Event Hacker", true, _source)
-  
-		Common:Log(
-		  "Anti-Cheat: Ban Info",
-		  "**Joueur:** " .. name .. "\n**Type:** Événement interdit \n**Information Supplémentaire:** " .. eventName,
-		  true
-		)
-	  end
-	)
-  end
+	end
+	if duree > 0 then
+		local permanent = 0
+		ban(_source,identifier,license,liveid,xblid,discord,playerip,targetplayername,sourceplayername,duree,reason,permanent)
+		DropPlayer(_source, reason)
+	else
+		local permanent = 1
+		ban(_source,identifier,license,liveid,xblid,discord,playerip,targetplayername,sourceplayername,duree,reason,permanent)
+		DropPlayer(_source, reason)
+	end
+end)
