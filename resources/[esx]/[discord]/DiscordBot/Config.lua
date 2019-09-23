@@ -1,14 +1,14 @@
-DiscordWebhookSystemInfos = ''
-DiscordWebhookStart = ''
-DiscordWebhookKillinglogs = ''
-DiscordWebhookChat = ''
-DiscordWebhookCheat = ''
+DiscordWebhookSystemInfos = 'WEBHOOK_LINK_HERE'
+DiscordWebhookStart = 'WEBHOOK_LINK_HERE'
+DiscordWebhookKillinglogs = 'WEBHOOK_LINK_HERE'
+DiscordWebhookChat = 'WEBHOOK_LINK_HERE'
+DiscordWebhookCheat = 'WEBHOOK_LINK_HERE'
 
-SystemAvatar = 'https://imgur.com/a/zQzOWqn'
+SystemAvatar = 'URL_HERE'
 
-UserAvatar = 'https://imgur.com/a/Yd43CUj'
+UserAvatar = 'URL_HERE'
 
-SystemName = 'L\'Oeil d\'Arkadia'
+SystemName = 'L\'Oeil de Dieu'
 
 
 --[[ Special Commands formatting
@@ -43,7 +43,7 @@ BlacklistedCommands = {
 
 -- These Commands will use their own webhook
 OwnWebhookCommands = {
-				--	  {'/ano', 'https://discordapp.com/api/webhooks/612930758239322122/NWCrST9iHtrvIvgUJaHlZI1w10xOFr7EeZoxP4xMF4AHo1CsSZbPg6ZStLUaKbQfCRpK'},
+					  {'/ano', 'WEBHOOK_LINK_HERE'},
 					  {'/AnotherCommand2', 'WEBHOOK_LINK_HERE'},
 					 }
 

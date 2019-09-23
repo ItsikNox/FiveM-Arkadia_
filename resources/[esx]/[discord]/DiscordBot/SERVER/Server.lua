@@ -100,7 +100,7 @@ AddEventHandler('chatMessage', function(Source, Name, Message)
 	end
 	
 	--Splitting the message in multiple strings
-	MessageSplitted = splitString(Message, ' ')
+	MessageSplitted = stringsplit(Message, ' ')
 	
 	--Checking if the message contains a blacklisted command
 	if not IsCommand(MessageSplitted, 'Blacklisted') then
@@ -141,7 +141,7 @@ AddEventHandler('chatMessage', function(Source, Name, Message)
 		local AvatarURL = UserAvatar
 		if GetIDFromSource('steam', Source) then
 			PerformHttpRequest('http://steamcommunity.com/profiles/' .. tonumber(GetIDFromSource('steam', Source), 16) .. '/?xml=1', function(Error, Content, Head)
-				local SteamProfileSplitted = splitString(Content, '\n')
+				local SteamProfileSplitted = stringsplit(Content, '\n')
 				for i, Line in ipairs(SteamProfileSplitted) do
 					if Line:find('<avatarFull>') then
 						AvatarURL = Line:gsub('	<avatarFull><!%[CDATA%[', ''):gsub(']]></avatarFull>', '')
@@ -184,9 +184,10 @@ AddEventHandler('DiscordBot:ToDiscord', function(WebHook, Name, Message, Image, 
 		
 		if Image:lower() == 'steam' then
 			Image = UserAvatar
-			if GetIDFromSource('steam', Source) then
+			--if GetIDFromSource('steam', Source) then
+			if not Source == 0 and GetIDFromSource('steam', Source) then
 				PerformHttpRequest('http://steamcommunity.com/profiles/' .. tonumber(GetIDFromSource('steam', Source), 16) .. '/?xml=1', function(Error, Content, Head)
-					local SteamProfileSplitted = splitString(Content, '\n')
+					local SteamProfileSplitted = stringsplit(Content, '\n')
 					for i, Line in ipairs(SteamProfileSplitted) do
 						if Line:find('<avatarFull>') then
 							Image = Line:gsub('	<avatarFull><!%[CDATA%[', ''):gsub(']]></avatarFull>', '')
@@ -256,7 +257,7 @@ function GetOwnWebhook(String)
 	end
 end
 
-function splitString(inputstr, sep)
+function stringsplit(inputstr, sep)
 	if sep == nil then
 		sep = "%s"
 	end
@@ -271,7 +272,7 @@ end
 function GetIDFromSource(Type, ID) --(Thanks To WolfKnight [forum.FiveM.net])
     local IDs = GetPlayerIdentifiers(ID)
     for k, CurrentID in pairs(IDs) do
-        local ID = splitString(CurrentID, ':')
+        local ID = stringsplit(CurrentID, ':')
         if (ID[1]:lower() == string.lower(Type)) then
             return ID[2]:lower()
         end
