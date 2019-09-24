@@ -1,12 +1,14 @@
 local BlockedExplosions = {1, 2, 4, 5, 25, 32, 33, 35, 36, 37, 38}
 
-AddEventHandler("explosionEvent", function(sender, ev)
+AddEventHandler(
+  "explosionEvent",
+  function(sender, ev)
     for _, v in ipairs(BlockedExplosions) do
       if ev.explosionType == v then
-        print(GetPlayerName(sender), json.encode(ev))
         CancelEvent()
-        --DropPlayer(source, 'Lua Execution/ModMenu')
+        -- ban the creator or so but be careful. always check owner id in some other ways to confirm he's cheating
         return
       end
     end
-  end)
+  end
+)
