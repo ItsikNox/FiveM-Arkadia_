@@ -461,7 +461,7 @@ Config.Menus = {
 		label = _U('engine'),
 		parent = 'upgrades',
 		modType = 11,
-		price = {6.20, 9.40, 13.60, 20.70}
+		price = {8.20, 12.40, 18.60, 26.70}
 	},
 	modBrakes = {
 		label = _U('brakes'),
@@ -473,7 +473,7 @@ Config.Menus = {
 		label = _U('transmission'),
 		parent = 'upgrades',
 		modType = 13,
-		price = {6.2, 13.3, 20.67}
+		price = {8.2, 16.3, 24.67}
 	},
 	modSuspension = {
 		label = _U('suspension'),
@@ -491,7 +491,7 @@ Config.Menus = {
 		label = _U('turbo'),
 		parent = 'upgrades',
 		modType = 17,
-		price = {28.60}
+		price = {35.60}
 	},
 	cosmetics = {
 		label				= _U('cosmetics'),
