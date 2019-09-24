@@ -1,5 +1,5 @@
 {
-  "reseau": "Atrium 5G",
+  "reseau": "Arkadia 5G",
   "warningMessageCount": 250,
   "themeColor": "#303f9f",
   "colors": [
@@ -27,9 +27,9 @@
   "useWebRTCVocal": true,
   "RTCConfig": {
     "iceServers": [{
-      "urls": ["turn:54.36.126.176:3478"],
-      "username": "AltisCity",
-      "credential": "AltisCity"
+      "urls": ["turn:numb.viagenie.ca"],
+      "username": "webrtc@live.com",
+      "credential": "muazkh"
     }]
   },
 
