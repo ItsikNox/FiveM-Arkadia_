@@ -21,7 +21,6 @@ local playerGroup, noclip, godmode, visible = nil, false, false, false
 
 local actualGPS, actualGPSIndex = _U('default_gps'), 1
 local actualDemarche, actualDemarcheIndex = _U('default_demarche'), 1
-local actualVoice, actualVoiceIndex = _U('default_voice'), 2
 
 local societymoney, societymoney2 = nil, nil
 
@@ -1916,18 +1915,10 @@ function AddMenuDemarcheVoixGPS(menu)
 		"Gangster"
 	}
 
-	personalmenu.nivVoix = {
-		_U('voice_whisper'),
-		_U('voice_normal'),
-		_U('voice_cry')
-	}
-
 	local gpsItem = NativeUI.CreateListItem(_U('mainmenu_gps_button'), personalmenu.gps, actualGPSIndex)
 	menu:AddItem(gpsItem)
 	local demarcheItem = NativeUI.CreateListItem(_U('mainmenu_approach_button'), personalmenu.demarche, actualDemarcheIndex)
 	menu:AddItem(demarcheItem)
-	local voixItem = NativeUI.CreateListItem(_U('mainmenu_voice_button'), personalmenu.nivVoix, actualVoiceIndex)
-	menu:AddItem(voixItem)
 
 	menu.OnListSelect = function(sender, item, index)
 		if item == gpsItem then
@@ -2037,19 +2028,6 @@ function AddMenuDemarcheVoixGPS(menu)
 					startAttitude("move_m@gangster@generic","move_m@gangster@generic")
 				end
 			end)
-		elseif item == voixItem then
-			actualVoice = item:IndexToItem(index)
-			actualVoiceIndex = index
-
-			ESX.ShowNotification(_U('voice', actualVoice))
-
-			if index == 1 then
-				NetworkSetTalkerProximity(1.0)
-			elseif index == 2 then
-				NetworkSetTalkerProximity(8.0)
-			elseif index == 3 then
-				NetworkSetTalkerProximity(14.0)
-			end
 		end
 	end
 end
