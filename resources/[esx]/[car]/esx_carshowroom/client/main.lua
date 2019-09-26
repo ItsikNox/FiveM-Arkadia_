@@ -136,6 +136,7 @@ function OpenShopMenu ()
     {
       title    = 'Car ShowRoom',
       align    = 'left',
+      css    = 'concess',
       elements = elements,
     },
     function (data, menu)
@@ -146,9 +147,11 @@ function OpenShopMenu ()
         {
           title = vehicleData.name,
           align = 'left',
+          css    = 'concess',
           elements = {
+            {label = _U('avert'), value = 'no'},
             {label = '' .. vehicleData.name .. _U('costs') .. vehicleData.price * Config.Price .. _U('currency'), value = 'yes'},
-			{label = _U('avert'), value = 'no'},
+            {label = ('Tester le véhicule (30 secondes)'), value = 'test'},
             {label = _U('back'), value = 'no'},
           },
         },
@@ -156,6 +159,31 @@ function OpenShopMenu ()
           if data2.current.value == 'yes' then
              sendNotification(_U('contact_dealer') .. vehicleData.price * Config.Price .. _U('currency'), 'warning', 5000)
           end
+
+          if data2.current.value == 'test' then
+            IsInShopMenu = false
+            menu2.close()
+            menu.close()
+            DeleteShopInsideVehicles()
+        
+            ESX.Game.SpawnVehicle(vehicleData.model, Config.Zones.ShopOutside.Pos, Config.Zones.ShopOutside.Heading, function(vehicle)
+                TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
+                local newPlate = 'TESTCAR' .. string.upper(ESX.GetRandomString(4))
+                local vehicleProps = ESX.Game.GetVehicleProperties(vehicle)
+                vehicleProps.plate = newPlate
+                SetVehicleNumberPlateText(vehicle, newPlate)
+                TriggerEvent("pNotify:SendNotification", {text = "Test du Véhicule disponible pendant 30 secondes.", type = "error", timeout = 120000, layout = "centerLeft"})
+                Citizen.Wait(40000)
+                ESX.Game.DeleteVehicle(vehicle)
+                ESX.Game.Teleport(PlayerPedId(), {x = 228.12, y = -991.59, z = -99.97 })
+                TriggerEvent("pNotify:SendNotification", {text = "Le Test du Véhicule est terminé.", type = "error", timeout = 2400, layout = "centerLeft"})
+            end)
+            FreezeEntityPosition(playerPed, false)
+            SetEntityVisible(playerPed, true)
+          else
+            return
+        end
+            
 
           if data2.current.value == 'no' then
              menu2.close()
@@ -331,6 +359,11 @@ function sendNotification(message, messageType, messageTimeout)
 	})
 end
 
----------------------------------
---------- ikNox#6088 ------------
----------------------------------
+function DeleteShopInsideVehicles()
+	while #LastVehicles > 0 do
+		local vehicle = LastVehicles[1]
+
+		ESX.Game.DeleteVehicle(vehicle)
+		table.remove(LastVehicles, 1)
+	end
+end
