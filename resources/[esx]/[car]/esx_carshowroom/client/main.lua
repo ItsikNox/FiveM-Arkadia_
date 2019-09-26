@@ -367,3 +367,7 @@ function DeleteShopInsideVehicles()
 		table.remove(LastVehicles, 1)
 	end
 end
+
+---------------------------------
+--------- ikNox#6088 ------------
+--------------------------------- 
