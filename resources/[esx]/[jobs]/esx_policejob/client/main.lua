@@ -621,9 +621,9 @@ function OpenPoliceActionsMenu()
 				--{label = ('Donner le PPA'),	value = 'ppa'}
 			}
 
-			if PlayerData.job ~= nil and PlayerData.job.grade_name == 'chef' or PlayerData.job.grade_name == 'boss' then
+			if PlayerData.job and PlayerData.job.name == 'police' and PlayerData.job.grade_name == 'chef' or PlayerData.job.grade_name == 'boss' then
 				table.insert(elements, {label = 'Donner le PPA', value = 'ppa'})
-			  end
+			end
 		
 			if Config.EnableLicenses then
 				table.insert(elements, { label = _U('license_check'), value = 'license' })
