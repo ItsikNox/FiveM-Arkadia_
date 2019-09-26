@@ -63,8 +63,7 @@ function RespawnPed(ped, coords)
 	SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
 	NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, coords.heading, true, false)
 	SetPlayerInvincible(ped, false)
-  TriggerEvent('playerSpawned', coords.x, coords.y, coords.z, coords.heading)
-  --TriggerEvent('esx_ambulancejob:multicharacter', coords.x, coords.y, coords.z, coords.heading)
+	TriggerEvent('playerSpawned', coords.x, coords.y, coords.z, coords.heading)
 	ClearPedBloodDamage(ped)
 
 	ESX.UI.Menu.CloseAll()
@@ -779,7 +778,6 @@ function OpenPharmacyMenu()
 	)
 end
 
-
 AddEventHandler('playerSpawned', function()
 	IsDead = false
 
@@ -789,19 +787,6 @@ AddEventHandler('playerSpawned', function()
 		FirstSpawn = false
 	end
 end)
-
---[[
-RegisterNetEvent('esx_ambulancejob:multicharacter')
-AddEventHandler('esx_ambulancejob:multicharacter', function()
-	IsDead = false
-
-	if FirstSpawn then
-		TriggerServerEvent('esx_ambulancejob:firstSpawn')
-		exports.spawnmanager:setAutoSpawn(false) -- disable respawn
-		FirstSpawn = false
-	end
-end)
---]]
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
@@ -1353,7 +1338,7 @@ end)
 RegisterNetEvent('esx_ambulancejob:requestDeath')
 AddEventHandler('esx_ambulancejob:requestDeath', function()
 	if Config.AntiCombatLog then
-		Citizen.Wait(8000)
+		Citizen.Wait(5000)
 		SetEntityHealth(GetPlayerPed(-1), 0)
 	end
 end)
@@ -1423,7 +1408,3 @@ Citizen.CreateThread(function()
 		end
     end
 end)
-
----------------------------------
---------- ikNox#6088 ------------
----------------------------------

@@ -57,7 +57,7 @@ Config.AuthorizedVehicles = {
 		label = 'Ambulance'
 	},
 	{
-		model = 'dodgeSamu',
+		model = 'dodgeEMS',
 		label = 'Dodge'
 	}
 
