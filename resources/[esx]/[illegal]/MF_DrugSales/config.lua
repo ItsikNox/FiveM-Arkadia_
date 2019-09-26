@@ -16,7 +16,7 @@ end)
 MFS.PoliceJobName = 'police' 
 
 -- For the door.
-MFS.ShowBlip = true
+MFS.ShowBlip = false
 MFS.DrawTextDist = 10.0
 MFS.NotificationTime = 5.0
 

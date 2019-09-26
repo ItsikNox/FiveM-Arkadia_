@@ -12,6 +12,7 @@ function MFS:Start(...)
   if self.dS and self.cS then self:Update(); end
 end
 
+
 function MFS:DoBlips()
   local blip = AddBlipForCoord(self.HintLocation.x, self.HintLocation.y, self.HintLocation.z)
   SetBlipSprite               (blip, 205)
@@ -24,6 +25,7 @@ function MFS:DoBlips()
   AddTextComponentString      ("Shady Backalley")
   EndTextCommandSetBlipName   (blip)
 end
+
 
 function MFS:Update(...)
   local noteTemplate = Utils.DrawTextTemplate()
