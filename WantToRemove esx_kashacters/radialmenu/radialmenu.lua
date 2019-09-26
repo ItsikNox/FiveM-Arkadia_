@@ -18,7 +18,7 @@ Citizen.CreateThread(function()
             if menuConfig:enableMenu() then
                 -- When keybind is pressed toggle UI
                 local keybindControl = keybindControls[menuConfig.data.keybind]
-                if IsControlPressed(0, keybindControl) then
+                if IsControlJustReleased(0, keybindControl) then
                     -- Init UI
                     showMenu = true
                     SendNUIMessage({
@@ -37,7 +37,7 @@ Citizen.CreateThread(function()
                     -- Prevent menu from showing again until key is released
                     while showMenu == true do Citizen.Wait(100) end
                     Citizen.Wait(100)
-                    while IsControlPressed(0, keybindControl) do Citizen.Wait(100) end
+                    while IsControlJustReleased(0, keybindControl) do Citizen.Wait(100) end
                 end
             end
         end

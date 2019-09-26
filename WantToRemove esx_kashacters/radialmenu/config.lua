@@ -36,8 +36,8 @@ menuConfigs = {
                     navAngle = 285,                 -- Oritentation of wheel
                     minRadiusPercent = 0.6,         -- Minimum radius of wheel in percentage
                     maxRadiusPercent = 0.9,         -- Maximum radius of wheel in percentage
-                    labels = {"Stopper Anim", "FINGER", "PEACE", "FACEPALM", "DAMN", "FAIL", "DEAD", "GANG1", "GANG2", "COP", "HOLSTER", "CROWDS"},
-                    commands = {"e cancel", "e finger", "e peace", "e palm", "e damn", "e fail", "e dead", "e gang1", "e gang2", "e copidle", "e holster", "e copcrowd2"}
+                    labels = {"Fermer", "Stopper Anim", "FINGER", "PEACE", "FACEPALM", "DAMN", "FAIL", "DEAD", "GANG1", "GANG2", "COP", "HOLSTER", "CROWDS"},
+                    commands = {"closemenu", "e cancel", "e finger", "e peace", "e palm", "e damn", "e fail", "e dead", "e gang1", "e gang2", "e copidle", "e holster", "e copcrowd2"}
                 }
             }
         }
@@ -71,8 +71,8 @@ menuConfigs = {
                     navAngle = 270,                 -- Oritentation of wheel
                     minRadiusPercent = 0.4,         -- Minimum radius of wheel in percentage
                     maxRadiusPercent = 0.9,         -- Maximum radius of wheel in percentage
-                    labels = {"imgsrc:engine.png", "imgsrc:key.png", "imgsrc:doors.png", "imgsrc:trunk.png", "imgsrc:hood.png"},
-                    commands = {"engine", "lock", "rdoors", "trunk", "hood"}
+                    labels = {"Fermer", "imgsrc:engine.png", "imgsrc:key.png", "imgsrc:doors.png", "imgsrc:trunk.png", "imgsrc:hood.png"},
+                    commands = {"closemenu", "engine", "lock", "rdoors", "trunk", "hood"}
                 }
             }
         }
@@ -109,8 +109,8 @@ menuConfigs = {
                     navAngle = 270,
                     minRadiusPercent = 0.25,
                     maxRadiusPercent = 0.55,
-                    labels = {"Animations", "Porter", "Objets", "Fermer"},
-                    commands = {"submenu1", "carry", "submenu2", "closemenu"}
+                    labels = {"Animations", "Porter", "Objets", "Personnage", "Fermer"},
+                    commands = {"submenu1", "carry", "submenu2", "switch", "closemenu"}
                 }
             }
         }
@@ -144,8 +144,8 @@ subMenuConfigs = {
                     navAngle = 270,
                     minRadiusPercent = 0.25,
                     maxRadiusPercent = 0.55,
-                    labels = {"Enlever Objet", "Cigare", "Cigare 2", "Cigarette", "Joint", "Tenir Cigare", "Tenir Cigarette", "Tenir Joint"},
-                    commands = {"e stuckprop", "e cigar", "e cigar2", "e cig", "e joint", "e holdcigar", "e holdcig", "e holdjoint"}
+                    labels = {"Fermer", "Enlever Objet", "Cigare", "Cigare 2", "Cigarette", "Joint", "Tenir Cigare", "Tenir Cigarette", "Tenir Joint"},
+                    commands = {"closemenu", "e stuckprop", "e cigar", "e cigar2", "e cig", "e joint", "e holdcigar", "e holdcig", "e holdjoint"}
                 }
             }
         }
@@ -175,15 +175,15 @@ subMenuConfigs = {
                     navAngle = 270,
                     minRadiusPercent = 0.25,
                     maxRadiusPercent = 0.55,
-                    labels = {"Stopper Anim", "Contre un mur", "Croisez bras", "Claquer mains", "Non"},
-                    commands = {"e stop", "e leanwall", "e kors", "e cheer", "e no"}
+                    labels = {"Fermer", "Stopper Anim", "Contre un mur", "Croisez bras", "Claquer mains", "Non"},
+                    commands = {"closemenu", "e stop", "e leanwall", "e kors", "e cheer", "e no"}
                 },
                 {
                     navAngle = 288,
                     minRadiusPercent = 0.6,
                     maxRadiusPercent = 0.9,
-                    labels = {"Salut", "Doigt", "Peace", "FacePalm", "Zut", "Fail", "Décédé", "Gang 1", "Gang 2"},
-                    commands = {"e salute", "e finger", "e peace", "e facepalm", "e damn", "e fail", "e dead", "e gang1", "e gang2"}
+                    labels = {"Fermer", "Salut", "Doigt", "Peace", "FacePalm", "Zut", "Fail", "Décédé", "Gang 1", "Gang 2"},
+                    commands = {"closemenu", "e salute", "e finger", "e peace", "e facepalm", "e damn", "e fail", "e dead", "e gang1", "e gang2"}
                 }
             }
         }
