@@ -253,13 +253,14 @@ Citizen.CreateThread(function()
     Citizen.Wait(0)
     _menuPool:ProcessMenus()
 
+    --[[
     if IsControlJustPressed(0, 311) then
       ESX.TriggerServerCallback("dqP:getSim", function(result2)
         SimTab = result2
         OpenMenu()
       end)
     end
-
+--]]
     if IsControlJustPressed(0, 57) then
       ESX.TriggerServerCallback('gcphone:getItemAmount', function(qtty)
         --print(myPhoneNumber)
