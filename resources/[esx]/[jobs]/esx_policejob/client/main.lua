@@ -617,9 +617,13 @@ function OpenPoliceActionsMenu()
 				{label = _U('put_in_vehicle'),	value = 'put_in_vehicle'},
 				{label = _U('out_the_vehicle'),	value = 'out_the_vehicle'},
 				{label = _U('fine'),			value = 'fine'},
-				{label = _U('unpaid_bills'),	value = 'unpaid_bills'},
-				{label = ('Donner le PPA'),	value = 'ppa'}
+				{label = _U('unpaid_bills'),	value = 'unpaid_bills'}
+				--{label = ('Donner le PPA'),	value = 'ppa'}
 			}
+
+			if PlayerData.job ~= nil and PlayerData.job.grade_name == 'chef' or PlayerData.job.grade_name == 'boss' then
+				table.insert(elements, {label = 'Donner le PPA', value = 'ppa'})
+			  end
 		
 			if Config.EnableLicenses then
 				table.insert(elements, { label = _U('license_check'), value = 'license' })
