@@ -433,6 +433,44 @@ end)
 --]]
 
 Citizen.CreateThread(function()
+	local resetSpeedOnEnter = true
+	local enabled = false
+	while true do
+		Citizen.Wait(10)
+		local playerPed = GetPlayerPed(-1)
+		local vehicle = GetVehiclePedIsIn(playerPed, false)
+
+		-- This should only happen on vehicle first entry to disable any old values
+		if GetPedInVehicleSeat(vehicle, -1) == playerPed and IsPedInAnyVehicle(playerPed, false) then
+			if resetSpeedOnEnter then
+				maxSpeed = GetVehicleHandlingFloat(vehicle,"CHandlingData","fInitialDriveMaxFlatVel")
+				SetEntityMaxSpeed(vehicle, maxSpeed)
+				resetSpeedOnEnter = false
+				enabled = false
+			end
+			if IsControlJustReleased(0, Keys['B']) and GetLastInputMethod(2) then
+				if not enabled then
+					cruise = GetEntitySpeed(vehicle)
+					SetEntityMaxSpeed(vehicle, cruise)
+					cruise = math.floor(cruise * 3.6 + 0.5)
+					--showHelpNotification(_U('speedlimiter_set', cruise))
+					ESX.ShowAdvancedColoredNotification(('Limiteur de Vitesse'), ("Notification"), ("Limiteur de vitesse réglé sur ~b~%s~s~ km/h", cruise), 'CHAR_PEGASUS_DELIVERY', 1, 2)
+					enabled = true
+				else
+					--showHelpNotification(_U('speedlimiter_disabled'))
+					ESX.ShowAdvancedColoredNotification(('Limiteur de Vitesse'), ("Notification"), ("Le limiteur de vitesse a été ~y~désactivé~s~"), 'CHAR_PEGASUS_DELIVERY', 1, 2)
+					maxSpeed = GetVehicleHandlingFloat(vehicle,"CHandlingData","fInitialDriveMaxFlatVel")
+					SetEntityMaxSpeed(vehicle, maxSpeed)
+					enabled = false
+				end
+			end
+		else
+			resetSpeedOnEnter = true
+		end
+	end
+end)
+
+Citizen.CreateThread(function()
     local dict = "anim@mp_player_intmenu@key_fob@"
     
     RequestAnimDict(dict)
