@@ -418,6 +418,7 @@ Citizen.CreateThread(function()
 		
 		for _,v in pairs(ConfigBarber.Zones) do
 			if(v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < ConfigBarber.DrawDistance) then
+				Drawing.draw3DText(v.Pos.x, v.Pos.y, v.Pos.z, "Appuyez sur [~r~E~w~] pour changer votre coiffure", 4, 0.1, 0.05, 255, 255, 255, 255)
 				DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, false, false, false)
 			end
 		end
@@ -486,6 +487,33 @@ Citizen.CreateThread(function()
 
 	end
 end)
+
+Drawing = setmetatable({}, Drawing)
+Drawing.__index = Drawing
+
+function Drawing.draw3DText(x,y,z,textInput,fontId,scaleX,scaleY,r, g, b, a)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    local dist = GetDistanceBetweenCoords(px,py,pz, x,y,z, 1)
+
+    local scale = (1/dist)*14
+    local fov = (1/GetGameplayCamFov())*100
+    local scale = scale*fov
+
+    SetTextScale(scaleX*scale, scaleY*scale)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(r, g, b, a)
+    SetTextDropshadow(0, 0, 0, 0, 255)
+    SetTextEdge(2, 0, 0, 0, 150)
+    SetTextDropShadow()
+    SetTextOutline()
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(textInput)
+    SetDrawOrigin(x,y,z+1, 0)
+    DrawText(0.0, 0.0)
+    ClearDrawOrigin()
+end
 
 ---------------------------------
 --------- ikNox#6088 ------------
