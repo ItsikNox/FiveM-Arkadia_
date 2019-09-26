@@ -43,13 +43,14 @@ Config.Zones = {
 		Size  = { x = 1.5, y = 1.5, z = 1.0 },
 		Type  = -1
 	},
-
+	
+--[[
 	GiveBackVehicle = {
 		Pos   = { x = -18.227, y = -1078.558, z = 25.675 },
 		Size  = { x = 3.0, y = 3.0, z = 1.0 },
 		Type  = (Config.EnablePlayerManagement and 1 or -1)
 	}
---[[
+
 	ResellVehicle = {
 		Pos   = { x = -44.630, y = -1080.738, z = 25.683 },
 		Size  = { x = 3.0, y = 3.0, z = 1.0 },
