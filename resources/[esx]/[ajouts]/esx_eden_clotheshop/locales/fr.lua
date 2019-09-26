@@ -2,8 +2,8 @@ Locales['fr'] = {
 
 	['valid_this_purchase'] = 'valider cet achat ?',
 	['yesdresseing'] = 'Sauvegarder dans la grade robe',
-	['yes'] = '~g~Payer',
-	['no'] = '~r~Annuler',
+	['yes'] = 'Payer',
+	['no'] = 'Annuler',
 	['name_outfit'] = 'nom de la tenue ?',
 	['not_enough_money'] = 'vous n\'avez pas assez d\'argent',
 	['press_menu'] = 'appuyez sur ~INPUT_CONTEXT~ pour accéder au menu',
