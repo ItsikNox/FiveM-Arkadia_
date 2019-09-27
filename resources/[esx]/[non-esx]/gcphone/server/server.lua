@@ -2,11 +2,36 @@
 -- #Author: Jonathan D @Gannon
 -- #Version 2.0
 --====================================================================================
+ESX = nil
+
+
+TriggerEvent('esx:getSharedObject', function(obj)
+    ESX = obj
+end)
+
+RegisterServerEvent("dqP:RenameSim")
+AddEventHandler("dqP:RenameSim", function(id, txt, _)
+  MySQL.Async.execute(
+    'UPDATE user_sim SET label = @label WHERE id=@id',
+    {
+      ['@id'] = id,
+      ['@label'] = txt
+
+    }
+  )
+end)
+
+ESX.RegisterServerCallback('gcphone:getItemAmount', function(source, cb, item)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local qtty = xPlayer.getInventoryItem(item).count
+	--print("phone qtty: " .. qtty)
+    cb(qtty)
+end)
 
 math.randomseed(os.time()) 
 
 --- Pour les numero du style XXX-XXXX
-function getPhoneRandomNumber()
+ function getPhoneRandomNumber()
      local numBase0 = math.random(555,555)
      local numBase1 = math.random(0,9999)
      local num = string.format("%03d-%04d", numBase0, numBase1 )
@@ -14,34 +39,190 @@ function getPhoneRandomNumber()
  end
 
 --- Exemple pour les numero du style 06XXXXXXXX
---function getPhoneRandomNumber()
- --   return '0' .. math.random(600000000,699999999)
---end
+---function getPhoneRandomNumber()
+---    return '0' .. math.random(600000000,699999999)
+---end
 
+RegisterServerEvent('dqP:SetNumber')
+AddEventHandler('dqP:SetNumber', function(numb)
 
---[[
-  Ouverture du téphone lié a un item
-  Un solution ESC basé sur la solution donnée par HalCroves
-  https://forum.fivem.net/t/tutorial-for-gcphone-with-call-and-job-message-other/177904
---]]
---[[
-local ESX = nil
-TriggerEvent('esx:getSharedObject', function(obj) 
-    ESX = obj 
-    ESX.RegisterServerCallback('gcphone:getItemAmount', function(source, cb, item)
-        print('gcphone:getItemAmount call item : ' .. item)
-        local xPlayer = ESX.GetPlayerFromId(source)
-        local items = xPlayer.getInventoryItem(item)
-        if items == nil then
-            cb(0)
-        else
-            cb(items.count)
-        end
-    end)
+  local _source = source
+  local xPlayer = ESX.GetPlayerFromId(_source)
+  
+  
+  phoneNumber = numb
+	TriggerClientEvent("gcPhone:myPhoneNumber",_source,numb)
+  TriggerClientEvent("dqP:UpdateNumber",_source,numb)
+  
+  MySQL.Async.execute(
+      'UPDATE users SET phone_number = @phone_number WHERE identifier = @identifier',
+      {
+          ['@identifier']   = xPlayer.identifier,
+          ['@phone_number'] = phoneNumber
+      }
+  )
+	TriggerClientEvent("dqP:shownotif",_source,"Numéro utilisé : " .. tostring(phoneNumber),26)  
+	
+
+	
 end)
---]]
 
+ESX.RegisterServerCallback('dqP:getSim', function(source, cb)
 
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
+    
+    
+  
+    MySQL.Async.fetchAll(
+      'SELECT * FROM user_sim WHERE identifier = @identifier',
+      {
+          ['@identifier'] = xPlayer.identifier
+      },
+      function(result)
+  
+        cb(result)
+      --  --(json.encode(result))
+  
+    end)
+  
+  end)
+
+RegisterServerEvent('dqP:Throw')
+AddEventHandler('dqP:Throw', function(number,data)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+
+			
+				MySQL.Async.execute(
+					'UPDATE users SET phone_number = @phone_number WHERE identifier = @identifier',
+					{
+						['@identifier']   = xPlayer.identifier,
+						['@phone_number'] = nil
+			
+					}
+				)
+				TriggerClientEvent("gcPhone:myPhoneNumber",_source,nil)
+				TriggerClientEvent("dqP:UpdateNumber",_source,nil)
+			
+			MySQL.Async.execute(
+				'DELETE FROM user_sim where identifier = @job AND number = @name ',
+				{
+					['@job']   = xPlayer.identifier,
+					['@count'] = "c",
+					['@name'] = number
+		
+				}
+            )
+			TriggerClientEvent('esx:showNotification', source, '~r~-1 SIM '.. number)
+end)
+
+ESX.RegisterUsableItem('sim', function(source)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+
+	xPlayer.removeInventoryItem('sim', 1)
+	phoneNumber = GenerateUniquePhoneNumber()
+
+	TriggerClientEvent('dqP:UpdateNumber', _source,phoneNumber)
+	MySQL.Async.execute(
+		'INSERT INTO user_sim (identifier,number,label) VALUES(@identifier,@phone_number,@label)',
+		{
+			['@identifier']   = xPlayer.identifier,
+			['@phone_number'] = phoneNumber,
+			['@label'] = "SIM "..phoneNumber,
+
+		}
+	)
+	TriggerClientEvent("dqP:shownotif",_source,"Nouvelle carte SIM : " .. phoneNumber ,26)  	
+	TriggerClientEvent("dqP:syncSim",source)
+end)
+
+function GenerateUniquePhoneNumber()
+    local running = true
+    local phone = nil
+    while running do
+        local rand = '555' .. math.random(1111,9999)
+      --  --('Recherche ... : ' .. rand)
+        local count = MySQL.Sync.fetchScalar("SELECT COUNT(number) FROM user_sim WHERE number = @phone_number", { ['@phone_number'] = rand })
+        if count < 1 then
+            phone = rand
+            running = false
+        end
+    end
+  --  --('Numero Choisi  : ' .. phone)
+    return phone
+end
+    
+RegisterServerEvent('dqP:useSim')
+AddEventHandler('dqP:useSim', function(number)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+	TriggerClientEvent("gcPhone:myPhoneNumber",_source,number)
+	TriggerClientEvent("dqP:UpdateNumber",_source,number)
+	
+	MySQL.Async.execute(
+		'UPDATE users SET phone_number = @phone_number WHERE identifier = @identifier',
+		{
+			['@identifier']   = xPlayer.identifier,
+			['@phone_number'] = number
+
+		}
+	)
+
+end)
+
+RegisterServerEvent('dqP:GiveNumber')
+AddEventHandler('dqP:GiveNumber', function(target,number)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+	local xPlayer2 = ESX.GetPlayerFromId(target)
+	MySQL.Async.fetchAll(
+		'SELECT * FROM `users` WHERE `identifier` = @identifier',
+		{
+			['@identifier'] = xPlayer.identifier,
+			
+		},
+		function(result)
+
+			if result[1].phone_number == number then
+				TriggerClientEvent("gcPhone:myPhoneNumber",_source,nil)
+				TriggerClientEvent("dqP:UpdateNumber",_source,nil)
+				MySQL.Async.execute(
+					'UPDATE users SET phone_number = @phone_number WHERE identifier = @identifier',
+					{
+						['@identifier']   = xPlayer.identifier,
+						['@phone_number'] = ""
+			
+					}
+				)
+			end
+			MySQL.Async.execute(
+				'DELETE FROM user_sim where identifier = @job AND number = @name ',
+				{
+					['@job']   = xPlayer.identifier,
+					['@count'] = "c",
+					['@name'] = number
+		
+				}
+			)
+			MySQL.Async.execute('INSERT INTO user_sim (identifier, number,label) VALUES (@name, @count,@job)',
+			{
+			  ['@name']   = xPlayer2.identifier,
+			  
+			  ['@count'] = number,
+			  ['@job'] = "SIM ".. number
+			},
+			function (_)
+			  
+			end)
+			TriggerClientEvent('esx:showNotification', _source, '~r~-1 SIM '.. number)
+			TriggerClientEvent('esx:showNotification', target, '~g~+1 SIM '.. number)
+			TriggerClientEvent("dqP:syncSim",_source)
+			TriggerClientEvent("dqP:syncSim",target)
+		end)
+
+end)
 
 --====================================================================================
 --  Utils

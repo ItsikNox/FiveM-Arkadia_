@@ -1,7 +1,62 @@
 --====================================================================================
 -- #Author: Jonathan D @ Gannon
 --====================================================================================
- 
+ESX              = nil
+local PlayerData = {}
+Citizen.CreateThread(function()
+  while ESX == nil do
+    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    Citizen.Wait(0)
+  end
+end)
+local SimTab = {}
+local Keys = {
+  ["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57,
+  ["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177,
+  ["TAB"] = 37, ["Q"] = 44, ["W"] = 32, ["E"] = 38, ["R"] = 45, ["T"] = 245, ["Y"] = 246, ["U"] = 303, ["P"] = 199, ["["] = 39, ["]"] = 40, ["ENTER"] = 18,
+  ["CAPS"] = 137, ["A"] = 34, ["S"] = 8, ["D"] = 9, ["F"] = 23, ["G"] = 47, ["H"] = 74, ["K"] = 311, ["L"] = 182,
+  ["LEFTSHIFT"] = 21, ["Z"] = 20, ["X"] = 73, ["C"] = 26, ["V"] = 0, ["B"] = 29, ["N"] = 249, ["M"] = 244, [","] = 82, ["."] = 81,
+  ["LEFTCTRL"] = 36, ["LEFTALT"] = 19, ["SPACE"] = 22, ["RIGHTCTRL"] = 70,
+  ["HOME"] = 213, ["PAGEUP"] = 10, ["PAGEDOWN"] = 11, ["DELETE"] = 178,
+  ["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
+  ["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
+}
+function PlayAnim(lib, anim)
+  --print(lib)
+  if IsPlayerDead(PlayerId()) then
+      return
+  end
+  if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+      return
+  end
+  loadAnimDict(lib)
+
+  TaskPlayAnim(GetPlayerPed(-1), lib, anim, 4.0, -1, -1, 50, 0, false, false, false)
+  -- TaskPlayAnim(GetPlayerPed(-1), dict, outAnim, 8.0, -8.0, -1, 50, 0, false, false, false)
+  --   lastAnim = inAnim
+  Citizen.Wait(2500)
+  ClearPedTasks(GetPlayerPed(-1))
+  --print("y")
+
+end
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+  PlayerData = xPlayer
+  ESX.TriggerServerCallback("dqP:getSim", function(result2)
+    SimTab = result2
+  end)
+end)
+
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
+  PlayerData.job = job
+end)
+RegisterNetEvent('esx:setAccountMoney')
+AddEventHandler('esx:setAccountMoney', function(account)
+  if account.name == 'bank' then
+    SendNUIMessage({event = 'updateBankbalance', banking = account.money})
+  end 
+end)
 -- Configuration
 local KeyToucheCloseEvent = {
   { code = 172, event = 'ArrowUp' },
@@ -28,46 +83,167 @@ local PhoneInCall = {}
 local currentPlaySound = false
 local soundDistanceMax = 8.0
 
-
 --====================================================================================
---  Check si le joueurs poséde un téléphone
---  Callback true or false
+--  Active ou Deactive une application (appName => config.json)
 --====================================================================================
-function hasPhone (cb)
-  cb(true)
-end
---====================================================================================
---  Que faire si le joueurs veut ouvrir sont téléphone n'est qu'il en a pas ?
---====================================================================================
-function ShowNoPhoneWarning ()
-end
-
---[[
-  Ouverture du téphone lié a un item
-  Un solution ESC basé sur la solution donnée par HalCroves
-  https://forum.fivem.net/t/tutorial-for-gcphone-with-call-and-job-message-other/177904
---]]
---[[
-ESX = nil
-Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-  end
+RegisterNetEvent('gcPhone:setEnableApp')
+AddEventHandler('gcPhone:setEnableApp', function(appName, enable)
+  SendNUIMessage({event = 'setEnableApp', appName = appName, enable = enable })
 end)
 
-function hasPhone (cb)
-  if (ESX == nil) then return cb(0) end
-  ESX.TriggerServerCallback('gcphone:getItemAmount', function(qtty)
-    cb(qtty > 0)
-  end, 'phone')
-end
-function ShowNoPhoneWarning () 
-  if (ESX == nil) then return end
-  ESX.ShowNotification("Vous n'avez pas de ~r~téléphone~s~")
-end
---]]
+_menuPool = NativeUI.CreatePool()
+_menuPool:RefreshIndex()
 
+RegisterNetEvent('dqP:syncSim')
+AddEventHandler('dqP:syncSim', function()
+    ESX.TriggerServerCallback("dqP:getSim", function(result)
+        SimTab = result
+    end)
+end)
+
+function UpMiniMapNotification(text)
+  SetNotificationTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawNotification(0, 1)
+end
+RegisterNetEvent("dqP:shownotif")
+AddEventHandler("dqP:shownotif", function(text, color)
+
+    if color == 210 then
+        color = 18
+    end
+
+    Citizen.InvokeNative(0x92F0DA1E27DB96DC, tonumber(color))
+    SetNotificationTextEntry("STRING")
+    AddTextComponentString(text)
+    DrawNotification(false, true)
+end)
+
+function OpenMenu()
+  _menuPool:CloseAllMenus()
+  simCardMenu = NativeUI.CreateMenu("Téléphone", "Carte SIM", 5, 200)
+  _menuPool:Add(simCardMenu)
+  menu = simCardMenu
+  number = {}
+  local index565 = nil
+  result = SimTab
+  if #result == 0 then
+
+      use = NativeUI.CreateItem("Aucun", "")
+
+      menu:AddItem(use)
+  end
+  for i = 1, #result, 1 do
+      table.insert(number, {
+          number = result[i].number,
+          label = result[i].label,
+      })
+      local c = _menuPool:AddSubMenu(menu, result[i].label, "Numéro de la carte SIM: " .. result[i].number, true, true, false)
+      use = NativeUI.CreateItem("Utiliser", "")
+      ren = NativeUI.CreateItem("Renommer", "")
+      donner = NativeUI.CreateItem("Donner", "")
+      jeter = NativeUI.CreateItem("Supprimer", "")
+      c:AddItem(use)
+      c:AddItem(ren)
+      c:AddItem(donner)
+      c:AddItem(jeter)
+      menumbk = menu
+      menu.OnItemSelect = function(_, _, Index3)
+          --(Index3)
+          index565 = Index3
+      end
+      c.OnItemSelect = function(menu, _, index)
+          --(index)
+          if index == 1 then
+              ESX.TriggerServerCallback('esx_ambulancejob:getItemAmount', function(qtty)
+                  if qtty > 0 then
+                      TriggerServerEvent("dqP:SetNumber", number[index565].number)
+                  else
+                      ESX.ShowNotification("~r~Pas de téléphone ! ")
+                  end
+              end, 'tel')
+              _menuPool:CloseAllMenus()
+          end
+          if index == 2 then
+              --(result[i].label)
+              txt = gettxt2(result[i].label)
+              txt = tostring(txt)
+              if txt ~= nil then
+                  if number[index565].number == myPhoneNumber then
+                    myPhoneNumber = nil
+                  end
+                  TriggerServerEvent("dqP:RenameSim", result[i].id, txt)
+                  k = menumbk:GetItemAt(i)
+                  k:UpdateText(txt)
+                  menu:GoBack()
+                  result[i].label = txt
+              end
+          end
+          if index == 3 then
+
+              local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+              local closestPed = GetPlayerPed(closestPlayer)
+
+              if IsPedSittingInAnyVehicle(closestPed) then
+                  ESX.ShowNotification('~r~Vous ne pouvez pas donner quelque chose à quelqu\'un dans un véhicule')
+                  return
+              end
+
+              if closestPlayer ~= -1 and closestDistance < 3.0 then
+                  PlayAnim("mp_common", "givetake1_a")
+                  TriggerServerEvent('dqP:GiveNumber', GetPlayerServerId(closestPlayer), number[index565].number)
+
+                  table.remove( SimTab, i )
+                   menumbk:RemoveItemAt(i)
+                   menu:GoBack()
+              else
+                  ESX.ShowNotification("~r~Personne à proximité")
+
+              end
+
+          end
+          if index == 4 then
+              TriggerServerEvent('dqP:Throw', number[index565].number,number[index565])
+              table.remove( SimTab, i )
+              menumbk:Clear()
+              menu:GoBack()
+              OpenMenu()
+          end
+      end
+  end
+  menumbk = menu
+  _menuPool:RefreshIndex()
+  menumbk:Visible(true)
+end
+
+RegisterNetEvent('NB:carteSIM')
+AddEventHandler('NB:carteSIM', function()
+	OpenMenu()
+end)
+
+
+function gettxt2(txtt)
+  AddTextEntry('FMMC_MPM_NA', "Texte")
+  DisplayOnscreenKeyboard(1, "FMMC_MPM_NA", "", txtt, "", "", "", 100)
+  while (UpdateOnscreenKeyboard() == 0) do
+      DisableAllControlActions(0);
+      Wait(0);
+  end
+  if (GetOnscreenKeyboardResult()) then
+  local result = GetOnscreenKeyboardResult()
+  if tonumber(result) ~= nil then
+    if tonumber(result) >= 1 then
+
+      return tonumber(result)
+    else
+      
+    end
+  else
+  return result
+  end
+  end
+
+end
 
 --====================================================================================
 --  
@@ -75,48 +251,47 @@ end
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
-    if takePhoto ~= true then
-      if IsControlJustPressed(1, KeyOpenClose) then
-        hasPhone(function (hasPhone)
-          if hasPhone == true then
-            TooglePhone()
-          else
-            ShowNoPhoneWarning()
-          end
-        end)
-      end
-      if menuIsOpen == true then
-        for _, value in ipairs(KeyToucheCloseEvent) do
-          if IsControlJustPressed(1, value.code) then
-            SendNUIMessage({keyUp = value.event})
-          end
-        end
-        if useMouse == true and hasFocus == ignoreFocus then
-          local nuiFocus = not hasFocus
-          SetNuiFocus(nuiFocus, nuiFocus)
-          hasFocus = nuiFocus
-        elseif useMouse == false and hasFocus == true then
-          SetNuiFocus(false, false)
-          hasFocus = false
+    _menuPool:ProcessMenus()
+
+    --[[
+    if IsControlJustPressed(0, 311) then
+      ESX.TriggerServerCallback("dqP:getSim", function(result2)
+        SimTab = result2
+        OpenMenu()
+      end)
+    end
+--]]
+    if IsControlJustPressed(0, 57) then
+      ESX.TriggerServerCallback('gcphone:getItemAmount', function(qtty)
+        --print(myPhoneNumber)
+        if tonumber(myPhoneNumber) ~= nil then
+          
+		  if qtty > 0 then
+          TooglePhone()
+          TriggerServerEvent("gcPhone:allUpdate")
+          --menuIsOpen = true
+          k = ESX.GetPlayerData().accounts[1].money
+          SendNUIMessage({event = 'updateBankbalance', banking = k})
+        else
+          UpMiniMapNotification("Pas de ~r~téléphone~s~")
         end
       else
-        if hasFocus == true then
-          SetNuiFocus(false, false)
-          hasFocus = false
+        UpMiniMapNotification("Pas de ~r~carte sim lié~s~")
+      end
+      end, 'tel')
+
+    end
+
+    if menuIsOpen == true then
+      for _, value in ipairs(KeyToucheCloseEvent) do
+        if IsControlJustPressed(1, value.code) then
+          SendNUIMessage({keyUp = value.event})
         end
       end
     end
   end
-end)
 
 
-
---====================================================================================
---  Active ou Deactive une application (appName => config.json)
---====================================================================================
-RegisterNetEvent('gcPhone:setEnableApp')
-AddEventHandler('gcPhone:setEnableApp', function(appName, enable)
-  SendNUIMessage({event = 'setEnableApp', appName = appName, enable = enable })
 end)
 
 --====================================================================================
@@ -234,16 +409,6 @@ function StopSoundJS (sound)
 end
 
 
-
-
-
-
-
-
-
-
-
-
 RegisterNetEvent("gcPhone:forceOpenPhone")
 AddEventHandler("gcPhone:forceOpenPhone", function(_myPhoneNumber)
   if menuIsOpen == false then
@@ -258,6 +423,20 @@ RegisterNetEvent("gcPhone:myPhoneNumber")
 AddEventHandler("gcPhone:myPhoneNumber", function(_myPhoneNumber)
   myPhoneNumber = _myPhoneNumber
   SendNUIMessage({event = 'updateMyPhoneNumber', myPhoneNumber = myPhoneNumber})
+end)
+
+RegisterNetEvent("dqP:UpdateNumber")
+AddEventHandler("dqP:UpdateNumber", function(_myPhoneNumber)
+  myPhoneNumber = _myPhoneNumber
+TriggerServerEvent("gcPhone:allUpdate")
+  SendNUIMessage({event = 'updateMyPhoneNumber', myPhoneNumber = myPhoneNumber})
+end)
+
+RegisterNetEvent('esx:setAccountMoney')
+AddEventHandler('esx:setAccountMoney', function(account)
+  if account.name == 'bank' then
+    SendNUIMessage({event = 'updateBankbalance', banking = account.money})
+  end 
 end)
 
 RegisterNetEvent("gcPhone:contactList")

@@ -1,4 +1,4 @@
-
+resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 ui_page 'html/index.html'
 
 files {
@@ -25,6 +25,38 @@ files {
 	'html/static/img/background/R6.jpg',
 	'html/static/img/background/sao.jpg',
 	'html/static/img/background/Tohka&Yoshinon.jpg',
+
+	'html/static/img/background/01.jpg',
+	'html/static/img/background/02.jpg',
+	'html/static/img/background/03.jpg',
+	'html/static/img/background/04.jpg',
+	'html/static/img/background/05.jpg',
+	'html/static/img/background/06.jpg',
+	'html/static/img/background/07.jpg',
+	'html/static/img/background/08.jpg',
+	'html/static/img/background/09.jpg',
+	'html/static/img/background/10.jpg',
+	'html/static/img/background/11.jpg',
+	'html/static/img/background/12.jpg',
+	'html/static/img/background/13.jpg',
+	'html/static/img/background/14.jpg',
+	'html/static/img/background/15.jpg',
+	'html/static/img/background/16.jpg',
+	'html/static/img/background/17.jpg',
+	'html/static/img/background/18.jpg',
+	'html/static/img/background/19.jpg',
+	'html/static/img/background/20.jpg',
+	'html/static/img/background/21.jpg',
+
+	'html/static/img/background/back001.jpg',
+	'html/static/img/background/back002.jpg',
+	'html/static/img/background/back003.jpg',
+	'html/static/img/background/back004.jpg',
+	'html/static/img/background/back005.jpg',
+	'html/static/img/background/back006.jpg',
+	'html/static/img/background/back007.jpg',
+	'html/static/img/background/back008.gif',
+	'html/static/img/background/back009.gif',
 	
 	'html/static/img/icons_app/9gag.png',
 	'html/static/img/icons_app/agent.png',
@@ -68,6 +100,7 @@ files {
 }
 
 client_script {
+	"NativeUI.lua",
 	"config.lua",
 	"client/animation.lua",
 	"client/client.lua",
