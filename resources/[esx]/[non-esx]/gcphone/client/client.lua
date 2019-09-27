@@ -86,8 +86,8 @@ local soundDistanceMax = 8.0
 --====================================================================================
 --  Active ou Deactive une application (appName => config.json)
 --====================================================================================
-RegisterNetEvent('gcPhone:setEnableApp')
-AddEventHandler('gcPhone:setEnableApp', function(appName, enable)
+RegisterNetEvent('gcphone:setEnableApp')
+AddEventHandler('gcphone:setEnableApp', function(appName, enable)
   SendNUIMessage({event = 'setEnableApp', appName = appName, enable = enable })
 end)
 
@@ -268,7 +268,7 @@ Citizen.CreateThread(function()
           
 		  if qtty > 0 then
           TooglePhone()
-          TriggerServerEvent("gcPhone:allUpdate")
+          TriggerServerEvent("gcphone:allUpdate")
           --menuIsOpen = true
           k = ESX.GetPlayerData().accounts[1].money
           SendNUIMessage({event = 'updateBankbalance', banking = k})
@@ -319,8 +319,8 @@ function TakeAppel (infoCall)
   TriggerEvent('gcphone:autoAcceptCall', infoCall)
 end
 
-RegisterNetEvent("gcPhone:notifyFixePhoneChange")
-AddEventHandler("gcPhone:notifyFixePhoneChange", function(_PhoneInCall)
+RegisterNetEvent("gcphone:notifyFixePhoneChange")
+AddEventHandler("gcphone:notifyFixePhoneChange", function(_PhoneInCall)
   PhoneInCall = _PhoneInCall
 end)
 
@@ -409,8 +409,8 @@ function StopSoundJS (sound)
 end
 
 
-RegisterNetEvent("gcPhone:forceOpenPhone")
-AddEventHandler("gcPhone:forceOpenPhone", function(_myPhoneNumber)
+RegisterNetEvent("gcphone:forceOpenPhone")
+AddEventHandler("gcphone:forceOpenPhone", function(_myPhoneNumber)
   if menuIsOpen == false then
     TooglePhone()
   end
@@ -419,8 +419,8 @@ end)
 --====================================================================================
 --  Events
 --====================================================================================
-RegisterNetEvent("gcPhone:myPhoneNumber")
-AddEventHandler("gcPhone:myPhoneNumber", function(_myPhoneNumber)
+RegisterNetEvent("gcphone:myPhoneNumber")
+AddEventHandler("gcphone:myPhoneNumber", function(_myPhoneNumber)
   myPhoneNumber = _myPhoneNumber
   SendNUIMessage({event = 'updateMyPhoneNumber', myPhoneNumber = myPhoneNumber})
 end)
@@ -428,7 +428,7 @@ end)
 RegisterNetEvent("dqP:UpdateNumber")
 AddEventHandler("dqP:UpdateNumber", function(_myPhoneNumber)
   myPhoneNumber = _myPhoneNumber
-TriggerServerEvent("gcPhone:allUpdate")
+TriggerServerEvent("gcphone:allUpdate")
   SendNUIMessage({event = 'updateMyPhoneNumber', myPhoneNumber = myPhoneNumber})
 end)
 
@@ -439,25 +439,25 @@ AddEventHandler('esx:setAccountMoney', function(account)
   end 
 end)
 
-RegisterNetEvent("gcPhone:contactList")
-AddEventHandler("gcPhone:contactList", function(_contacts)
+RegisterNetEvent("gcphone:contactList")
+AddEventHandler("gcphone:contactList", function(_contacts)
   SendNUIMessage({event = 'updateContacts', contacts = _contacts})
   contacts = _contacts
 end)
 
-RegisterNetEvent("gcPhone:allMessage")
-AddEventHandler("gcPhone:allMessage", function(allmessages)
+RegisterNetEvent("gcphone:allMessage")
+AddEventHandler("gcphone:allMessage", function(allmessages)
   SendNUIMessage({event = 'updateMessages', messages = allmessages})
   messages = allmessages
 end)
 
-RegisterNetEvent("gcPhone:getBourse")
-AddEventHandler("gcPhone:getBourse", function(bourse)
+RegisterNetEvent("gcphone:getBourse")
+AddEventHandler("gcphone:getBourse", function(bourse)
   SendNUIMessage({event = 'updateBourse', bourse = bourse})
 end)
 
-RegisterNetEvent("gcPhone:receiveMessage")
-AddEventHandler("gcPhone:receiveMessage", function(message)
+RegisterNetEvent("gcphone:receiveMessage")
+AddEventHandler("gcphone:receiveMessage", function(message)
   -- SendNUIMessage({event = 'updateMessages', messages = messages})
   SendNUIMessage({event = 'newMessage', message = message})
   table.insert(messages, message)
@@ -487,21 +487,21 @@ end)
 --  Function client | Contacts
 --====================================================================================
 function addContact(display, num) 
-    TriggerServerEvent('gcPhone:addContact', display, num)
+    TriggerServerEvent('gcphone:addContact', display, num)
 end
 
 function deleteContact(num) 
-    TriggerServerEvent('gcPhone:deleteContact', num)
+    TriggerServerEvent('gcphone:deleteContact', num)
 end
 --====================================================================================
 --  Function client | Messages
 --====================================================================================
 function sendMessage(num, message)
-  TriggerServerEvent('gcPhone:sendMessage', num, message)
+  TriggerServerEvent('gcphone:sendMessage', num, message)
 end
 
 function deleteMessage(msgId)
-  TriggerServerEvent('gcPhone:deleteMessage', msgId)
+  TriggerServerEvent('gcphone:deleteMessage', msgId)
   for k, v in ipairs(messages) do 
     if v.id == msgId then
       table.remove(messages, k)
@@ -512,15 +512,15 @@ function deleteMessage(msgId)
 end
 
 function deleteMessageContact(num)
-  TriggerServerEvent('gcPhone:deleteMessageNumber', num)
+  TriggerServerEvent('gcphone:deleteMessageNumber', num)
 end
 
 function deleteAllMessage()
-  TriggerServerEvent('gcPhone:deleteAllMessage')
+  TriggerServerEvent('gcphone:deleteAllMessage')
 end
 
 function setReadMessageNumber(num)
-  TriggerServerEvent('gcPhone:setReadMessageNumber', num)
+  TriggerServerEvent('gcphone:setReadMessageNumber', num)
   for k, v in ipairs(messages) do 
     if v.transmitter == num then
       v.isRead = 1
@@ -529,11 +529,11 @@ function setReadMessageNumber(num)
 end
 
 function requestAllMessages()
-  TriggerServerEvent('gcPhone:requestAllMessages')
+  TriggerServerEvent('gcphone:requestAllMessages')
 end
 
 function requestAllContact()
-  TriggerServerEvent('gcPhone:requestAllContact')
+  TriggerServerEvent('gcphone:requestAllContact')
 end
 
 
@@ -544,8 +544,8 @@ end
 local aminCall = false
 local inCall = false
 
-RegisterNetEvent("gcPhone:waitingCall")
-AddEventHandler("gcPhone:waitingCall", function(infoCall, initiator)
+RegisterNetEvent("gcphone:waitingCall")
+AddEventHandler("gcphone:waitingCall", function(infoCall, initiator)
   SendNUIMessage({event = 'waitingCall', infoCall = infoCall, initiator = initiator})
   if initiator == true then
     PhonePlayCall()
@@ -555,8 +555,8 @@ AddEventHandler("gcPhone:waitingCall", function(infoCall, initiator)
   end
 end)
 
-RegisterNetEvent("gcPhone:acceptCall")
-AddEventHandler("gcPhone:acceptCall", function(infoCall, initiator)
+RegisterNetEvent("gcphone:acceptCall")
+AddEventHandler("gcphone:acceptCall", function(infoCall, initiator)
   if inCall == false and USE_RTC == false then
     inCall = true
     NetworkSetVoiceChannel(infoCall.id + 1)
@@ -569,8 +569,8 @@ AddEventHandler("gcPhone:acceptCall", function(infoCall, initiator)
   SendNUIMessage({event = 'acceptCall', infoCall = infoCall, initiator = initiator})
 end)
 
-RegisterNetEvent("gcPhone:rejectCall")
-AddEventHandler("gcPhone:rejectCall", function(infoCall)
+RegisterNetEvent("gcphone:rejectCall")
+AddEventHandler("gcphone:rejectCall", function(infoCall)
   if inCall == true then
     inCall = false
     Citizen.InvokeNative(0xE036A705F989E049)
@@ -581,38 +581,38 @@ AddEventHandler("gcPhone:rejectCall", function(infoCall)
 end)
 
 
-RegisterNetEvent("gcPhone:historiqueCall")
-AddEventHandler("gcPhone:historiqueCall", function(historique)
+RegisterNetEvent("gcphone:historiqueCall")
+AddEventHandler("gcphone:historiqueCall", function(historique)
   SendNUIMessage({event = 'historiqueCall', historique = historique})
 end)
 
 
 function startCall (phone_number, rtcOffer, extraData)
-  TriggerServerEvent('gcPhone:startCall', phone_number, rtcOffer, extraData)
+  TriggerServerEvent('gcphone:startCall', phone_number, rtcOffer, extraData)
 end
 
 function acceptCall (infoCall, rtcAnswer)
-  TriggerServerEvent('gcPhone:acceptCall', infoCall, rtcAnswer)
+  TriggerServerEvent('gcphone:acceptCall', infoCall, rtcAnswer)
 end
 
 function rejectCall(infoCall)
-  TriggerServerEvent('gcPhone:rejectCall', infoCall)
+  TriggerServerEvent('gcphone:rejectCall', infoCall)
 end
 
 function ignoreCall(infoCall)
-  TriggerServerEvent('gcPhone:ignoreCall', infoCall)
+  TriggerServerEvent('gcphone:ignoreCall', infoCall)
 end
 
 function requestHistoriqueCall() 
-  TriggerServerEvent('gcPhone:getHistoriqueCall')
+  TriggerServerEvent('gcphone:getHistoriqueCall')
 end
 
 function appelsDeleteHistorique (num)
-  TriggerServerEvent('gcPhone:appelsDeleteHistorique', num)
+  TriggerServerEvent('gcphone:appelsDeleteHistorique', num)
 end
 
 function appelsDeleteAllHistorique ()
-  TriggerServerEvent('gcPhone:appelsDeleteAllHistorique')
+  TriggerServerEvent('gcphone:appelsDeleteAllHistorique')
 end
   
 
@@ -651,12 +651,12 @@ end)
 
 
 RegisterNUICallback('onCandidates', function (data, cb)
-  TriggerServerEvent('gcPhone:candidates', data.id, data.candidates)
+  TriggerServerEvent('gcphone:candidates', data.id, data.candidates)
   cb()
 end)
 
-RegisterNetEvent("gcPhone:candidates")
-AddEventHandler("gcPhone:candidates", function(candidates)
+RegisterNetEvent("gcphone:candidates")
+AddEventHandler("gcphone:candidates", function(candidates)
   SendNUIMessage({event = 'candidatesAvailable', candidates = candidates})
 end)
 
@@ -777,7 +777,7 @@ RegisterNUICallback('sendMessage', function(data, cb)
     local myPos = GetEntityCoords(PlayerPedId())
     data.message = 'GPS: ' .. myPos.x .. ', ' .. myPos.y
   end
-  TriggerServerEvent('gcPhone:sendMessage', data.phoneNumber, data.message)
+  TriggerServerEvent('gcphone:sendMessage', data.phoneNumber, data.message)
 end)
 RegisterNUICallback('deleteMessage', function(data, cb)
   deleteMessage(data.id)
@@ -799,13 +799,13 @@ end)
 --  Event - Contacts
 --====================================================================================
 RegisterNUICallback('addContact', function(data, cb) 
-  TriggerServerEvent('gcPhone:addContact', data.display, data.phoneNumber)
+  TriggerServerEvent('gcphone:addContact', data.display, data.phoneNumber)
 end)
 RegisterNUICallback('updateContact', function(data, cb)
-  TriggerServerEvent('gcPhone:updateContact', data.id, data.display, data.phoneNumber)
+  TriggerServerEvent('gcphone:updateContact', data.id, data.display, data.phoneNumber)
 end)
 RegisterNUICallback('deleteContact', function(data, cb)
-  TriggerServerEvent('gcPhone:deleteContact', data.id)
+  TriggerServerEvent('gcphone:deleteContact', data.id)
 end)
 RegisterNUICallback('getContacts', function(data, cb)
   cb(json.encode(contacts))
@@ -833,7 +833,7 @@ RegisterNUICallback('useMouse', function(um, cb)
   useMouse = um
 end)
 RegisterNUICallback('deleteALL', function(data, cb)
-  TriggerServerEvent('gcPhone:deleteALL')
+  TriggerServerEvent('gcphone:deleteALL')
   cb()
 end)
 
@@ -971,7 +971,7 @@ end)
 AddEventHandler('onClientResourceStart', function(res)
   DoScreenFadeIn(300)
   if res == "gcphone" then
-      TriggerServerEvent('gcPhone:allUpdate')
+      TriggerServerEvent('gcphone:allUpdate')
   end
 end)
 

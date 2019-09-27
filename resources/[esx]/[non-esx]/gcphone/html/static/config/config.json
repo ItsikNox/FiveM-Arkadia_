@@ -245,7 +245,7 @@
       "inHomePage": true
     },
     {
-      "name": "Bank",
+      "name": "Banque",
       "fr_FR__name": "Banque",
       "en_US__name": "Bankmanager",
       "cs_CZ__name": "Banka",
@@ -254,7 +254,19 @@
       "es_ES__name": "Banquillo",
       "icons": "/html/static/img/icons_app/bank.png",
       "routeName": "bank",
-      "inHomePage": false
+      "inHomePage": true
+    },
+    {
+      "name": "Facture",
+      "fr_FR__name": "Facture",
+      "tr_TR__name": "Faturalar",
+      "en_US__name": "Bills",
+      "de_DE__name": "Faturalar",
+      "pl_PL__name": "Czat czarny",
+      "es_ES__name": "Chat Oscuro",
+      "icons": "/html/static/img/factura/logo.png",
+      "routeName": "faturapages",
+      "inHomePage": true
     },
     {
       "name": "Bourse",

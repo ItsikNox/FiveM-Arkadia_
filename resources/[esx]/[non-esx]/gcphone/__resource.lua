@@ -80,6 +80,7 @@ files {
 	'html/static/img/icons_app/tchat.png',
 	'html/static/img/icons_app/twitter.png',
 	'html/static/img/icons_app/unicorn.png',
+	'html/static/img/factura/logo.png',
 	
 	'html/static/img/app_bank/logo_mazebank.jpg',
 
@@ -108,7 +109,8 @@ client_script {
 	"client/photo.lua",
 	"client/app_tchat.lua",
 	"client/bank.lua",
-	"client/twitter.lua"
+	"client/twitter.lua",
+	"client/fatura.lua"
 }
 
 server_script {
@@ -117,5 +119,7 @@ server_script {
 	"server/server.lua",
 
 	"server/app_tchat.lua",
+	"server/fatura.lua",
+	"server/bank.lua",
 	"server/twitter.lua"
 }

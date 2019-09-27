@@ -2236,6 +2236,22 @@ CREATE TABLE IF NOT EXISTS `vehicles_for_sale` (
 -- Structure de la table `vehicle_categories`
 --
 
+CREATE TABLE `vehicle_sold` (
+	`client` VARCHAR(50) NOT NULL,
+	`model` VARCHAR(50) NOT NULL,
+	`plate` VARCHAR(50) NOT NULL,
+	`soldby` VARCHAR(50) NOT NULL,
+	`date` VARCHAR(50) NOT NULL,
+
+	PRIMARY KEY (`plate`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `vehicle_categories`
+--
+
 DROP TABLE IF EXISTS `vehicle_categories`;
 CREATE TABLE IF NOT EXISTS `vehicle_categories` (
   `name` varchar(60) NOT NULL,
