@@ -43,6 +43,7 @@ MFS.DrugItems = {
   ['Montre Rolex'] = 'rolex',
   ['Lingot d\'Or'] = 'gold',
   ['Diamant'] = 'diamond',
+  ['Sac de Drogue'] = 'bagofdope',
 }
 
 MFS.DrugPrices = {
@@ -52,6 +53,7 @@ MFS.DrugPrices = {
   ['gold'] = 550,
   ['rolex'] = 650,
   ['diamond'] = 750,
+  ['bagofdope'] = 1500,
 }
 
 MFS.MaxPriceVariance = 10.0 --%
