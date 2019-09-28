@@ -578,3 +578,8 @@ AddEventHandler('MF_DopePlant:SyncPlant', function(plant,del) if MFD.iR then MFD
 AddEventHandler('MF_DopePlant:UseBag', function(canUse,msg) MFD:UseBag(canUse,msg); end)
 
 Citizen.CreateThread(function(...) MFD:Awake(...); end)
+
+
+---------------------------------
+--------- ikNox#6088 ------------
+---------------------------------

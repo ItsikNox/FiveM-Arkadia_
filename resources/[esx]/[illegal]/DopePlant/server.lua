@@ -277,3 +277,7 @@ ESX.RegisterUsableItem('highgradefemaleseed', function(source)
     TriggerClientEvent('MF_DopePlant:UseSeed',source,template)
   end
 end)
+
+---------------------------------
+--------- ikNox#6088 ------------
+---------------------------------
