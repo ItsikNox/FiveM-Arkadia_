@@ -172,7 +172,7 @@ function OpenShopMenu ()
                 local vehicleProps = ESX.Game.GetVehicleProperties(vehicle)
                 vehicleProps.plate = newPlate
                 SetVehicleNumberPlateText(vehicle, newPlate)
-                TriggerEvent("pNotify:SendNotification", {text = "Test du Véhicule disponible pendant 30 secondes.", type = "error", timeout = 120000, layout = "centerLeft"})
+                TriggerEvent("pNotify:SendNotification", {text = "Test du Véhicule disponible pendant 30 secondes.", type = "error", timeout = 40000, layout = "centerLeft"})
                 Citizen.Wait(40000)
                 ESX.Game.DeleteVehicle(vehicle)
                 ESX.Game.Teleport(PlayerPedId(), {x = 228.12, y = -991.59, z = -99.97 })
