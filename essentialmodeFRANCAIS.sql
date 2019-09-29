@@ -881,6 +881,7 @@ INSERT INTO `items` (`name`, `label`, `limit`, `rare`, `can_remove`) VALUES
 ('doliprane', 'Doliprane', 15, 0, 1),
 ('douille', 'Boite de douille', -1, 0, 1),
 ('drill', 'Perceuse (Banque)', 1, 0, 1),
+('weld', 'Torch Plasma', 1, 0, 1),
 ('drpepper', 'Dr. Pepper', 5, 0, 1),
 ('energy', 'Energy Drink', 5, 0, 1),
 ('essence', '⛽ Essence', 150, 0, 1),
