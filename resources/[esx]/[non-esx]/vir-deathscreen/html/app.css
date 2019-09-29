@@ -1,0 +1,144 @@
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+   -khtml-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+@font-face {
+	font-family: 'OSL';
+	src: url('../font/OSL.ttf') format('truetype');
+}
+
+body {
+    color:#131313;
+    font-family:sans-serif;
+    display: none;
+  }
+
+  #container {
+    background:#131313;
+    display: none;
+  }
+  
+  .loading {
+    width: 400%;
+    max-width: 1900px;
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+    top: 25vw;
+    left: 35vw;
+    }
+  
+  .loading svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .loading #pulsar{
+    stroke-dasharray:281;
+    -webkit-animation: dash 2.5s infinite linear forwards;
+  }
+  
+  /*Animation*/
+  @-webkit-keyframes dash{ from{stroke-dashoffset:814;} to {stroke-dashoffset:-814;}}
+
+  @import url(https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100);
+
+@keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+@-moz-keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+@-ms-keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+@-o-keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  animation: fadein 1s;
+}
+
+h1, p, h2, h3, h4, ul, li, div {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  font-family: Roboto;
+}
+
+.loading-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: -0.5vw;
+}
+.loading-page .counter {
+  text-align: center;
+}
+
+.loading-page .counter h1 {
+  font-size: 15.2px;
+  font-weight: 400;
+  color: #f60d54;
+  text-transform: uppercase;
+  font-family: 'OSL';
+  text-align: center;
+}
+
+.loading-page .counter p {
+  color: white;
+  font-size: 53px;
+  margin-top: -97px;
+  text-transform: uppercase;
+  font-family: 'OSL';
+  text-align: center;
+}
+.loading-page .counter hr {
+  background: #f60d54;
+  border: none;
+  height: 1px;
+}
+.loading-page .counter {
+  position: relative;
+  width: 200px;
+}
+.loading-page .counter h1.abs {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.loading-page .counter .color {
+  width: 0px;
+  overflow: hidden;
+  color: #f60d54;
+}
