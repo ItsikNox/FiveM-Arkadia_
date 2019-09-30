@@ -35,9 +35,18 @@ function OpenShopMenu()
   local elements = {}
 
 
-  table.insert(elements, {label = _U('shop_clothes'),  value = 'shop_clothes'})
+  --table.insert(elements, {label = _U('shop_clothes'),  value = 'shop_clothes'})
+  table.insert(elements, {
+	label = ('<span style="color:lightgreen;">Magasin de vêtements</span>'),(_U('shop_clothes')), 
+	value = 'shop_clothes'
+})
   table.insert(elements, {label = _U('player_clothes'), value = 'player_dressing'})
-  table.insert(elements, {label = _U('suppr_cloth'), value = 'suppr_cloth'})
+  --table.insert(elements, {label = _U('suppr_cloth'), value = 'suppr_cloth'})
+  --table.insert(elements, {label = ('<span style="color:red;">%s</span>'):format(_U('suppr_cloth'), value = 'suppr_cloth')})
+  table.insert(elements, {
+	label = ('<span style="color:red;">Supprimer tenue - garde robe</span>'),(_U('suppr_cloth')), 
+	value = 'suppr_cloth'
+})
 
   ESX.UI.Menu.CloseAll()
 
@@ -64,8 +73,8 @@ function OpenShopMenu()
 				title = _U('valid_this_purchase'),
 				align = 'right',
 				elements = {
-					{label = _U('yes'), value = 'yes'},
-					{label = _U('no'), value = 'no'},
+					{label = ('<span style="color:lightgreen;">Payer</span>'), value = 'yes'},
+					{label = ('<span style="color:red;">Annuler</span>'), value = 'no'},
 				}
 			},
 			function(data, menu)
@@ -97,8 +106,8 @@ function OpenShopMenu()
 											title = _U('save_in_dressing'),
 											align = 'right',
 											elements = {
-												{label = _U('yesdresseing'), value = 'yes'},
-												{label = _U('no'),  value = 'no'},
+												{label = ('<span style="color:lightgreen;">Sauvegarder dans la grade robe</span>'), value = 'yes'},
+												{label = ('<span style="color:red;">Annuler</span>'),  value = 'no'},
 											}
 										},
 										function(data2, menu2)
@@ -275,7 +284,7 @@ function OpenShopMenu()
             'default', GetCurrentResourceName(), 'supprime_cloth',
             {
 			  css	   = 'skin',
-              title    = _U('suppr_cloth'),
+              title    = ('<span style="color:red;">Supprimer tenue - garde robe</span>'), 
               align    = 'left',
               elements = elements,
             },
