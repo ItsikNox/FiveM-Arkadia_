@@ -4,7 +4,7 @@
 MF_PacificStandard = {}
 local MFP = MF_PacificStandard
 
-MFP.Version = '1.0.12'
+MFP.Version = '1.0.01'
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj; end)
 Citizen.CreateThread(function(...)
@@ -20,8 +20,8 @@ MFP.LoadDist = 50.0
 MFP.InteractDist = 2.0
 MFP.AudioBankName = "MF_Pacific"
 MFP.InteractTimer = 10 -- seconds
-MFP.MinPoliceCount = 1
-MFP.PoliceJobName = "police"
+MFP.MinPoliceCount = 0
+MFP.PoliceLabel = "LSPD"
 
 MFP.Actions = {
   ["LockpickA"]  = vector3(256.79,220.01,106.50),

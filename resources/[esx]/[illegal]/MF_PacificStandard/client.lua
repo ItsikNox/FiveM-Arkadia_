@@ -10,22 +10,15 @@ RegisterNetEvent('MF_PacificStandard:SetCops')
 
 local MFP = MF_PacificStandard
 
-MFP.PoliceOnline = 0
 function MFP:Start(...)
-    self.PlayerData = ESX.GetPlayerData()
+    while not ESX do Citizen.Wait(0) end
+    while not ESX.IsPlayerLoaded() do Citizen.Wait(0); end
     self.SoundID    = GetSoundId() 
     self.DoorCount  = 0
     if not RequestAmbientAudioBank(self.AudioBank, false) then RequestAmbientAudioBank(self.AudioBankName, false); end
-    ESX.TriggerServerCallback('MF_PacificStandard:GetStartData', function(cS,bankData,cops) 
-        self.BankData = bankData
-        self.PoliceOnline = cops
-        for k,v in pairs(self.BankData.DoorLocs) do 
-            if v then 
-                self.DoorCount = math.min(self.DoorCount + 1,7)
-            end
-        end
-        if cS then self.cS = cS; self.dS = cS; self:Update(); end
-    end)
+    ESX.TriggerServerCallback('MF_PacificStandard:GetBankData', function(bankData) self.BankData = bankData; for k,v in pairs(self.BankData.DoorLocs) do if v then self.DoorCount = math.min(self.DoorCount + 1,7); end; end; end)
+    while not self.BankData do Citizen.Wait(0); end
+    if self.dS and self.cS then self:Update(); end
 end
 
 function MFP:SpawnSafe()
@@ -44,10 +37,11 @@ function MFP:SpawnCash()
     SetModelAsNoLongerNeeded(hk)
 end
 
+MFP.PoliceOnline = 0
+MFP.GetPolTimer = 30 -- seconds
 function MFP:Update()
     local tick = 0
     local timer = GetGameTimer()
-    local lastKey = GetGameTimer()
     while true do
         Citizen.Wait(0)     
         tick = tick + 1
@@ -57,6 +51,7 @@ function MFP:Update()
 
         if dist < self.LoadDist then
             if not self.BankData or (not self.BankData.DoorLocs or self.DoorCount <= 0) then
+                print("NOT DOOR STUFF")                
                 ESX.TriggerServerCallback('MF_PacificStandard:GetBankData', function(bankData) self.BankData = bankData; end)
             end
 
@@ -120,8 +115,7 @@ function MFP:Update()
                 if self.BankData.DoorLocs[closestVal] or self.BankData.LootLocs[closestVal] then
                     Utils:DrawText3D(closestVal.x,closestVal.y,closestVal.z, closestText)
 
-                    if Utils:GetKeyPressed("E") and (GetGameTimer() - lastKey) > 150 then
-                        lastKey = GetGameTimer()
+                    if Utils:GetKeyPressed("E") then
                         if not self.DoingAction then
                             self.DoingAction = closestVal
                             self:DoAction(closestKey)
@@ -142,13 +136,11 @@ function MFP:Update()
 end
 
 function MFP:DoAction(act)
-    local doWait = false
     if act == "Hack" then
         TriggerEvent("mhacking:show")
         TriggerEvent("mhacking:start",7,35,self.HackingCb)
         FreezeEntityPosition(GetPlayerPed(-1),true)
     elseif act == "LockpickA" or act == "LockpickB" or act == "LockpickC" then
-        doWait = true
         ESX.TriggerServerCallback('MF_PacificStandard:GetLockpickCount', function(count)
             if count and count > 0 then
                 TriggerEvent('MF_LockPicking:StartMinigame')
@@ -156,7 +148,6 @@ function MFP:DoAction(act)
                 ESX.ShowNotification("You don't have any lockpicks.")
                 self.DoingAction = false
             end
-            doWait = false
         end)
     elseif act == "Identify" then
         self:HandleVaultDoor(self.DoingAction)
@@ -164,7 +155,6 @@ function MFP:DoAction(act)
         FreezeEntityPosition(GetPlayerPed(-1),true)
         TriggerEvent('MF_SafeCracker:StartMinigame', self.SafeRewards)
     elseif act == "LootA" or act == "LootB" or act == "LootC" or act == "LootD" or act == "LootE" or act == "LootF" or act == "LootG" or act == "LootH" then
-        doWait = true
         ESX.TriggerServerCallback('MF_PacificStandard:GetOxyCount', function(count)
             if count and count > 0 then
                 self:HandleLooting(act)
@@ -172,39 +162,33 @@ function MFP:DoAction(act)
                 ESX.ShowNotification("You need a plasma torch to cut this open.")
                 self.DoingAction = false
             end
-            doWait = false
         end)
     elseif act == "LootCash" then
         self:HandleLootCash()
     end
 
-    if doWait then while doWait do Citizen.Wait(0); end; end
-
-    if self.DoingAction then
-        TriggerServerEvent('MF_PacificStandard:NotifyPolice')
-    end
+    TriggerServerEvent('MF_PacificStandard:NotifyPolice')
 end
 
 function MFP:HandleLootCash()
     local plySkin
     TriggerEvent('skinchanger:getSkin', function(skin) plySkin = skin; end)
     if (plySkin["bags_1"] ~= 0 or plySkin["bags_2"] ~= 0) then
-        ESX.TriggerServerCallback('MF_PacificStandard:TryLootCash',function(canLoot)
-            if canLoot then  
-                TaskTurnPedToFaceCoord(plyPed, self.DoingAction.x, self.DoingAction.y, self.DoingAction.z, -1)
-                Wait(1500)
-                local plyPed = GetPlayerPed(-1)
+        Citizen.CreateThread(function(...)
+            TriggerServerEvent('MF_PacificStandard:LootCash')     
 
-                exports['progressBars']:startUI(self.InteractTimer * 1000, "Looting Cash")
-                ESX.Streaming.RequestAnimDict('mp_take_money_mg', function(...)
-                    TaskPlayAnim( plyPed, "mp_take_money_mg", "stand_cash_in_bag_loop", 8.0, 1.0, -1, 1, 0, 0, 0, 0 )     
-                end)
-                Wait(self.InteractTimer * 1000)
-                ClearPedTasksImmediately(plyPed)
-                Wait(1000)
-            else
-                ESX.ShowNotification("Somebody else is already looting this.")
-            end
+            TaskTurnPedToFaceCoord(plyPed, self.DoingAction.x, self.DoingAction.y, self.DoingAction.z, -1)
+            Wait(1500)
+            local plyPed = GetPlayerPed(-1)
+
+            exports['progressBars']:startUI(self.InteractTimer * 1000, "Looting Cash")
+            ESX.Streaming.RequestAnimDict('mp_take_money_mg', function(...)
+                TaskPlayAnim( plyPed, "mp_take_money_mg", "stand_cash_in_bag_loop", 8.0, 1.0, -1, 1, 0, 0, 0, 0 )     
+            end)
+            Wait(self.InteractTimer * 1000)
+            ClearPedTasksImmediately(plyPed)
+            Wait(1000)
+
             self.DoingAction = false
         end)
     else
@@ -216,36 +200,32 @@ end
 function MFP:Awake(...)
     while not ESX do Citizen.Wait(0); end
     while not ESX.IsPlayerLoaded() do Citizen.Wait(0); end
+    ESX.TriggerServerCallback('MF_PacificStandard:GetStartData', function(retVal) self.dS = true; self.cS = retVal; end)
+    while not self.dS do Citizen.Wait(0); end
     self:Start()
 end
 
 function MFP:HandleLooting(act)
     ESX.TriggerServerCallback('MF_PacificStandard:GetCutterCount', function(count)
         if count then
-            ESX.TriggerServerCallback('MF_PacificStandard:TryLoot',function(canLoot) 
-                if canLoot then
-                    local plyPed = GetPlayerPed(-1)
+            TriggerServerEvent('MF_PacificStandard:OpenLoot', self.DoingAction)
+            local plyPed = GetPlayerPed(-1)
 
-                    TaskTurnPedToFaceCoord(plyPed, self.DoingAction.x, self.DoingAction.y, self.DoingAction.z, -1)
-                    Wait(2000)
+            TaskTurnPedToFaceCoord(plyPed, self.DoingAction.x, self.DoingAction.y, self.DoingAction.z, -1)
+            Wait(2000)
 
-                    FreezeEntityPosition(plyPed,true)
-                    exports['progressBars']:startUI(self.InteractTimer * 1000, "Cutting")
-                    TaskStartScenarioInPlace(plyPed, "WORLD_HUMAN_WELDING", 0, true)
-                    Wait(self.InteractTimer * 1000)
+            FreezeEntityPosition(plyPed,true)
+            exports['progressBars']:startUI(self.InteractTimer * 1000, "Cutting")
+            TaskStartScenarioInPlace(plyPed, "WORLD_HUMAN_WELDING", 0, true)
+            Wait(self.InteractTimer * 1000)
 
-                    ClearPedTasksImmediately(plyPed)
-                    FreezeEntityPosition(plyPed,false)
-                    TriggerServerEvent('MF_PacificStandard:RewardPlayer', act)
-                else
-                    ESX.ShowNotification("Somebody else is already looting this.")
-                end
-                self.DoingAction = false
-            end,self.DoingAction)
+            ClearPedTasksImmediately(plyPed)
+            FreezeEntityPosition(plyPed,false)
+            TriggerServerEvent('MF_PacificStandard:RewardPlayer', act)
         else
-            self.DoingAction = false
             ESX.ShowNotification("You don't have any plasma cutters.")
         end
+        self.DoingAction = false
     end)
 end
 
@@ -326,49 +306,33 @@ function MFP:FinishLockpick(result)
 end
 
 function MFP:NotifyCops()
-  if self.PlayerData.job.name == self.PoliceJobName then
-    ESX.ShowNotification("Somebody is robbing Pacific Standard bank!")  
-    Citizen.CreateThread(function(...)
-      local blipA = AddBlipForRadius(246.78, 218.70, 106.30, 100.0)
-      SetBlipHighDetail(blipA, true)
-      SetBlipColour(blipA, 1)
-      SetBlipAlpha (blipA, 128)
+  ESX.ShowNotification("Somebody is robbing Pacific Standard bank!")  
+  Citizen.CreateThread(function(...)
+    local blipA = AddBlipForRadius(246.78, 218.70, 106.30, 100.0)
+    SetBlipHighDetail(blipA, true)
+    SetBlipColour(blipA, 1)
+    SetBlipAlpha (blipA, 128)
 
-      local blipB = AddBlipForCoord(246.78, 218.70, 106.30)
-      SetBlipSprite               (blipB, 458)
-      SetBlipDisplay              (blipB, 4)
-      SetBlipScale                (blipB, 1.0)
-      SetBlipColour               (blipB, 1)
-      SetBlipAsShortRange         (blipB, true)
-      SetBlipHighDetail           (blipB, true)
-      BeginTextCommandSetBlipName ("STRING")
-      AddTextComponentString      ("Robbery In Progress")
-      EndTextCommandSetBlipName   (blipB)
+    local blipB = AddBlipForCoord(246.78, 218.70, 106.30)
+    SetBlipSprite               (blipB, 458)
+    SetBlipDisplay              (blipB, 4)
+    SetBlipScale                (blipB, 1.0)
+    SetBlipColour               (blipB, 1)
+    SetBlipAsShortRange         (blipB, true)
+    SetBlipHighDetail           (blipB, true)
+    BeginTextCommandSetBlipName ("STRING")
+    AddTextComponentString      ("Robbery In Progress")
+    EndTextCommandSetBlipName   (blipB)
 
-      local timer = GetGameTimer()
-      while GetGameTimer() - timer < 30000 do
-        Citizen.Wait(0)
-      end
+    local timer = GetGameTimer()
+    while GetGameTimer() - timer < 30000 do
+      Citizen.Wait(0)
+    end
 
-      RemoveBlip(blipA)
-      RemoveBlip(blipB)
-    end)
-  end
+    RemoveBlip(blipA)
+    RemoveBlip(blipB)
+  end)
 end
-
-function MFP.SetJob(source,job)
-  local self = MFP
-  local lastData = self.PlayerData
-  if lastData.job.name == self.PoliceJobName then
-    TriggerServerEvent('MF_PacificStandard:CopLeft')
-  elseif lastData.job.name ~= self.PoliceJobName and job.name == self.PoliceJobName then
-    TriggerServerEvent('MF_PacificStandard:CopEnter')
-  end
-  self.PlayerData = ESX.GetPlayerData()
-end
-
-RegisterNetEvent('esx:setJob')
-AddEventHandler('esx:setJob', function(job) MFP.SetJob(source,job); end)
 
 AddEventHandler('MF_PacificStandard:RefreshBank', function(bankData) MFP.BankData = bankData; end)
 AddEventHandler('MF_PacificStandard:OpenDoor', function(doorloc,doorhash) MFP:OpenDoor(doorloc,doorhash); end)

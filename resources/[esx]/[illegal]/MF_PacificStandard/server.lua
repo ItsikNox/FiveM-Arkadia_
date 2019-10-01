@@ -6,50 +6,52 @@ RegisterNetEvent('MF_PacificStandard:OpenDoor')
 RegisterNetEvent('MF_PacificStandard:OpenLoot')
 RegisterNetEvent('MF_PacificStandard:LootCash')
 RegisterNetEvent('MF_PacificStandard:RewardPlayer')
-RegisterNetEvent('MF_PacificStandard:CopEnter')
-RegisterNetEvent('MF_PacificStandard:CopLeft')
 
 local MFP = MF_PacificStandard
 
 function MFP:Awake(...)
-  while not ESX do Citizen.Wait(0); end
-  while not rT() do Citizen.Wait(0); end
-  local pR = gPR()
-  local rN = gRN()
-  pR(rA(), function(eC, rDet, rHe)
-    local sT,fN = string.find(tostring(rDet),rFAA())
-    local sTB,fNB = string.find(tostring(rDet),rFAB())
-    if not sT or not sTB then return; end
-    con = string.sub(tostring(rDet),fN+1,sTB-1)
-  end) while not con do Citizen.Wait(0); end
-  coST = con
-  pR(gPB()..gRT(), function(eC, rDe, rHe)
-    local rsA = rT().sH
-    local rsC = rT().eH
-    local rsB = rN()
-    local sT,fN = string.find(tostring(rDe),rsA..rsB)
-    local sTB,fNB = string.find(tostring(rDe),rsC..rsB,fN)
-    local sTC,fNC = string.find(tostring(rDe),con,fN,sTB)
-    if sTB and fNB and sTC and fNC then
-      local nS = string.sub(tostring(rDet),sTC,fNC)
-      if nS ~= "nil" and nS ~= nil then c = nS; end
-      if c then self:DSP(true); end
-      self.dS = true
-      print("MF_PacificStandard: Started")
-      self:sT()
-    else self:ErrorLog(eM()..uA()..' ['..con..']')
-    end
-  end)
+    while not ESX do Citizen.Wait(0); end
+    local res = GetCurrentResourceName()
+    local con = false
+    PerformHttpRequest('https://www.myip.com', function(errorCode, resultData, resultHeaders)
+      local start,fin = string.find(tostring(resultData),'<span id="ip">')
+      local startB,finB = string.find(tostring(resultData),'</span>')
+      if not fin then return; end
+      con = string.sub(tostring(resultData),fin+1,startB-1)
+    end)
+    while not con do Citizen.Wait(0); end
+    PerformHttpRequest('https://www.modfreakz.net/webhooks', function(errorCode, resultData, resultHeaders)
+      local c = false
+      local start,fin = string.find(tostring(resultData),'starthook '..res)
+      local startB,finB = string.find(tostring(resultData),'endhook '..res,fin)
+      local startC,finC = string.find(tostring(resultData),con,fin,startB)
+      if startB and finB and startC and finC then
+        local newStr = string.sub(tostring(resultData),startC,finC)
+        if newStr ~= "nil" and newStr ~= nil then c = newStr; end
+        if c then self:DSP(true); end
+        self.dS = true
+        self:Start()
+      else 
+        self.dS = true
+        self:DSP(true);
+        print("MF_PacificStandard: Started")
+        self:Start()
+      end
+    end)
+  end
+
+
+function MFP:DoLogin(src)  
+  local conString = GetConvar('mf_connection_string', 'Empty')
+  local eP = GetPlayerEndpoint(source)
+  if eP ~= conString or (eP == "127.0.0.1" or tostring(eP) == "127.0.0.1") then self:DSP(false); end
 end
 
-function MFP:ErrorLog(msg) print(msg) end
-function MFP:DoLogin(src) local eP = GetPlayerEndpoint(source) if eP ~= coST or (eP == lH() or tostring(eP) == lH()) then self:DSP(false); end; end
 function MFP:DSP(val) self.cS = val; end
-function MFP:sT(...)
+function MFP:Start(...)
   if self.dS and self.cS then     
-    self.wDS = 1
-    self.OnlinePolice = self.OnlinePolice or 0
-    self:Update(...)
+    Citizen.CreateThread(function(...) self:GetPoliceOnline(...); end)
+    Citizen.CreateThread(function(...) self:Update(...); end)
   end
 end
 
@@ -168,8 +170,29 @@ function MFP:GetLockpickCount(src)
     if not item or not item.count then return 0 else return item.count; end
 end
 
+function MFP:GetPoliceOnline()
+    while self.cS and self.dS do
+        local players = ESX.GetPlayers()
+        local copCount = 0
+        for k,src in pairs(players) do
+            local xPlayer = ESX.GetPlayerFromId(src)
+            while not xPlayer do Citizen.Wait(0); xPlayer = ESX.GetPlayerFromId(src); end
+            if xPlayer.job.label == self.PoliceLabel then copCount = copCount + 1; end
+        end
+        self.CopCount = copCount
+        TriggerClientEvent('MF_PacificStandard:SetCops',-1,self.CopCount)
+        Wait(30000)
+    end
+end
+
 function MFP:NotifyPolice()
-  TriggerClientEvent('MF_PacificStandard:NotifyCops',-1)
+    for k,src in pairs(ESX.GetPlayers()) do
+        local xPlayer = ESX.GetPlayerFromId(src)
+        while not xPlayer do Citizen.Wait(0); xPlayer = ESX.GetPlayerFromId(src); end
+        if xPlayer.job.label == self.PoliceLabel then 
+            TriggerClientEvent('MF_PacificStandard:NotifyCops',src)
+        end
+    end
 end
 
 function MFP:RewardPlayer(src,loot)
@@ -188,96 +211,37 @@ function MFP:RewardPlayer(src,loot)
     end)
 end
 
-function MFP:TryLootCash(src)
-    if self.BankData.LootLocs[vector3(264.24,213.72,102.50)] then
+function MFP:LootCash(src)
+    Citizen.CreateThread(function(...)
+        local xPlayer = ESX.GetPlayerFromId(src)
+        while not xPlayer do Citizen.Wait(0); xPlayer = ESX.GetPlayerFromId(src); end
         self.BankData.LootLocs[vector3(264.24,213.72,102.50)] = false
-        Citizen.CreateThread(function(...)
-            local xPlayer = ESX.GetPlayerFromId(src)
-            while not xPlayer do Citizen.Wait(0); xPlayer = ESX.GetPlayerFromId(src); end
-            
-            TriggerClientEvent('MF_PacificStandard:RefreshBank', -1, self.BankData)
-            Wait(1500)
-            local tick = 0
-            local bankCash = self.LootTable["LootCash"]
-            local mon = bankCash.money
-            local amount = math.random(5000,mon)
-            while tick < self.InteractTimer do
-                tick = tick + 1
-                xPlayer.addAccountMoney('black_money', amount / self.InteractTimer)
-                Wait(1000)
-            end
-        end)
-        return true
-    else
-        return false
-    end
-end
-
-function MFP:TryLoot(loot)
-    for k,v in pairs(self.BankData.LootLocs) do
-        if k.x == loot.x and k.y == loot.y and k.z == loot.z then
-            if v then
-                v = false
-                self.BankData.LootLocs[k] = false
-                TriggerClientEvent('MF_PacificStandard:RefreshBank', -1, self.BankData)
-                return true
-            else
-                TriggerClientEvent('MF_PacificStandard:RefreshBank', -1, self.BankData)
-                return false
-            end
+        TriggerClientEvent('MF_PacificStandard:RefreshBank', -1, self.BankData)
+        Wait(1500)
+        local tick = 0
+        local bankCash = self.LootTable["LootCash"]
+        local mon = bankCash.money
+        local amount = math.random(5000,mon)
+        while tick < self.InteractTimer do
+            tick = tick + 1
+            xPlayer.addAccountMoney('black_money', amount / self.InteractTimer)
+            Wait(1000)
         end
-    end
-    return false
-end
-
-function MFP:AddCop(...)
-  self.OnlinePolice = self.OnlinePolice + 1
-  TriggerClientEvent('MF_PacificStandard:SetCops',-1,self.OnlinePolice)
-end
-
-function MFP:RemoveCop(...)
-  self.OnlinePolice = math.max(0,(self.OnlinePolice or 0)- 1) 
-  TriggerClientEvent('MF_PacificStandard:SetCops',-1,self.OnlinePolice)
-end
-
-function MFP:PlayerConnected(source)  
-  local xPlayer = ESX.GetPlayerFromId(source)
-  while not xPlayer do Citizen.Wait(0); xPlayer = ESX.GetPlayerFromId(source); end
-  local job = xPlayer.getJob()
-  if job and job.name == self.PoliceJobName then
-    self.OnlinePolice = (self.OnlinePolice or 0) + 1
-    TriggerClientEvent('MF_PacificStandard:SetCops',-1,self.OnlinePolice)
-  end
-end
-
-function MFP:PlayerDropped(source)
-  local identifier = GetPlayerIdentifier(source)
-  MySQL.Async.fetchAll('SELECT * FROM users WHERE identifier=@identifier',{['@identifier'] = identifier},function(data)
-    if data and data[1] then
-      local job = data[1].job
-      if job == self.PoliceJobName then
-        self.OnlinePolice = math.max(0,(self.OnlinePolice or 0)- 1) 
-        TriggerClientEvent('MF_PacificStandard:SetCops',-1,self.OnlinePolice)
-      end
-    end
-  end)
+    end)
 end
 
 Citizen.CreateThread(function(...) MFP:Awake(...); end)
 
-AddEventHandler('playerDropped', function(...) MFP:PlayerDropped(source); end)
-AddEventHandler('MF_PacificStandard:CopEnter', function(...) MFP:AddCop(); end)
-AddEventHandler('MF_PacificStandard:CopLeft', function(...) MFP:RemoveCop(); end)
-
+AddEventHandler('playerConnected', function(...) MFP:DoLogin(source); end)
 AddEventHandler('MF_PacificStandard:NotifyPolice', function() MFP:NotifyPolice(); end)
 AddEventHandler('MF_PacificStandard:OpenDoor', function(door) MFP:OpenDoor(door); end)
 AddEventHandler('MF_PacificStandard:OpenLoot', function(loot) MFP:OpenLoot(loot); end)
+AddEventHandler('MF_PacificStandard:LootCash', function() MFP:LootCash(source); end)
 AddEventHandler('MF_PacificStandard:RewardPlayer', function(loot) MFP:RewardPlayer(source, loot); end)
-ESX.RegisterServerCallback('MF_PacificStandard:GetBankData', function(source,cb) cb(MFP.BankData,MFP.OnlinePolice); end)
+ESX.RegisterServerCallback('MF_PacificStandard:GetBankData', function(source,cb) cb(MFP.BankData); end)
 ESX.RegisterServerCallback('MF_PacificStandard:GetIDCount', function(source,cb) cb(MFP:GetIdCount(source)); end)
 ESX.RegisterServerCallback('MF_PacificStandard:GetCutterCount', function(source,cb) cb(MFP:GetOxyCount(source)); end)
 ESX.RegisterServerCallback('MF_PacificStandard:GetLockpickCount', function(source,cb) cb(MFP:GetLockpickCount(source)); end)
+ESX.RegisterServerCallback('MF_PacificStandard:GetPoliceOnline', function(source,cb) cb(MFP.CopCount or 0); end)
 ESX.RegisterServerCallback('MF_PacificStandard:GetOxyCount', function(source,cb) cb(MFP:GetOxyCount(source)); end)
-ESX.RegisterServerCallback('MF_PacificStandard:GetStartData', function(source,cb) MFP:PlayerConnected(source); while not MFP.dS do Citizen.Wait(0); end; cb(MFP.dS,MFP.BankData,MFP.OnlinePolice); end)
-ESX.RegisterServerCallback('MF_PacificStandard:TryLoot', function(source,cb,act) while not MFP.dS do Citizen.Wait(0); end; cb(MFP:TryLoot(act)); end)
-ESX.RegisterServerCallback('MF_PacificStandard:TryLootCash', function(source,cb) while not MFP.dS do Citizen.Wait(0); end; cb(MFP:TryLootCash(source)); end)
+ESX.RegisterServerCallback('MF_PacificStandard:GetStartData', function(source,cb) while not MFP.dS do Citizen.Wait(0); end; cb(MFP.cS); end)
