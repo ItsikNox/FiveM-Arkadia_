@@ -29,8 +29,8 @@ menuConfigs = {
                     navAngle = 270,                 -- Oritentation of wheel
                     minRadiusPercent = 0.3,         -- Minimum radius of wheel in percentage
                     maxRadiusPercent = 0.6,         -- Maximum radius of wheel in percentage
-                    labels = {"Fermer", "Animations", "Porter", "Personnage"},
-                    commands = {"closemenu", "submenu1", "carry", "switch"}
+                    labels = {"Fermer", "Animations", "Porter"},
+                    commands = {"closemenu", "submenu1", "carry"}
                 },
                 {
                     navAngle = 285,                 -- Oritentation of wheel
