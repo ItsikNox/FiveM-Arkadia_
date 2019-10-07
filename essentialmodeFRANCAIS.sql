@@ -1414,16 +1414,13 @@ CREATE TABLE IF NOT EXISTS `phone_app_chat` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user_sim`
+-- Structure de la table `sim`
 --
 
-CREATE TABLE IF NOT EXISTS `user_sim` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(555) NOT NULL,
-  `number` varchar(555) NOT NULL,
-  `label` varchar(555) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `sim` (
+  `identifier` varchar(50) NOT NULL,
+  `phone_number` varchar(10) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
