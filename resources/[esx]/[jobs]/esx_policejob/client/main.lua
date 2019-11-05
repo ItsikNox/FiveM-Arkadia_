@@ -836,7 +836,7 @@ function OpenVehicleSpawnerMenu(station, partNum)
 				if Config.MaxInService == -1 then
 
 					ESX.Game.SpawnVehicle(model, vehicles[partNum].SpawnPoint, vehicles[partNum].Heading, function(vehicle)
-					local plate = 'WORK' .. math.random(100, 900)
+					local plate = 'LSPD' .. math.random(100, 900)
 						TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
 						SetVehicleMaxMods(vehicle)
 						TriggerServerEvent('esx_vehiclelock:givekey', 'no', plate) -- vehicle lock

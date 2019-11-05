@@ -22,7 +22,7 @@ local Keys = {
 }
 
 
-local voice = {default = 15.0, shout = 26.0, whisper = 2.0, current = 0, level = nil}
+local voice = {default = 12.0, shout = 26.0, whisper = 2.0, current = 0, level = nil}
 local voicecar = {incar = 5.0, nexttocar = 18.0, current = 0, level = nil}
 local voicepolice = {incar = 5.0, nexttocar = 18.0, speaker = 200.0, current = 0, level = nil}
 
@@ -51,6 +51,11 @@ Citizen.CreateThread(function()
         end
     end
 end) 
+
+-- 8.0 will be the default range, change it if you want
+Citizen.CreateThread(function()
+	NetworkSetTalkerProximity(12.0)
+end)
 
 function drawLevel(r, g, b, a)
 	SetTextFont(4)
@@ -93,7 +98,6 @@ Citizen.CreateThread(function()
 			local pos = GetEntityCoords(GetPlayerPed(-1), true)
 			if IsPedInAnyPoliceVehicle(GetPlayerPed(-1)) and GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1)), -1) == GetPlayerPed(-1) then
 				if voicepolice.current == 0 then
-					--DrawMarker(28,pos.x,pos.y,pos.z - 0.8, 0, 0, 0, 0, 0, 0, voicepolice.incar, voicepolice.incar, 0.5, 55, 160, 205, 105, 0, true, 2, 0, 0, 0, 0)
 					DrawMarker(1,pos.x,pos.y,pos.z - 0.5, 0, 0, 0, 0, 0, 0, voicepolice.incar, voicepolice.incar, 1.5, 255, 255, 178, 0, 0, true, 2, 0, 0, 0, 0)
 				elseif voicepolice.current == 1 then
 					DrawMarker(1,pos.x,pos.y,pos.z - 0.5, 0, 0, 0, 0, 0, 0, voicepolice.nexttocar, voicepolice.nexttocar, 1.5, 255, 255, 178, 0, 0, true, 2, 0, 0, 0, 0)

