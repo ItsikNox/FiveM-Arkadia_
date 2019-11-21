@@ -91,7 +91,7 @@ function GetPlayersPed()
 
     local players = {}
     local playerPed = GetPlayerPed()
-    for i = 0, 32, 1 do
+    for i = 0, 256, 1 do
         local ped = GetPlayerPed(i)
         if DoesEntityExist(ped) and id ~= playerPed then
           table.insert(players, i)
