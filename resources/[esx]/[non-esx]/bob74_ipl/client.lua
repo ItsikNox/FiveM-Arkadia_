@@ -1,5 +1,9 @@
 Citizen.CreateThread(function()
 
+	-- Ferris Wheel
+		RequestIpl("ferris_finale_anim")
+		RequestIpl("ferris_finale_anim_lod")
+
 	-- Simeon: -47.16170 -1115.3327 26.5
 		RequestIpl("shr_int")
 
@@ -128,6 +132,21 @@ Citizen.CreateThread(function()
 			RequestIpl("hei_yacht_heist_enginrm")
 			RequestIpl("hei_yacht_heist_LODLights")
 			RequestIpl("hei_yacht_heist_Lounge")
+			
+		-- Gunrunning Yacht: -1363.724, 6734.108, 2.44598
+			RequestIpl("gr_heist_yacht2")
+			RequestIpl("gr_heist_yacht2_bar")
+			RequestIpl("gr_heist_yacht2_bar_lod")
+			RequestIpl("gr_heist_yacht2_bedrm")
+			RequestIpl("gr_heist_yacht2_bedrm_lod")
+			RequestIpl("gr_heist_yacht2_bridge")
+			RequestIpl("gr_heist_yacht2_bridge_lod")
+			RequestIpl("gr_heist_yacht2_enginrm")
+			RequestIpl("gr_heist_yacht2_enginrm_lod")
+			RequestIpl("gr_heist_yacht2_lod")
+			RequestIpl("gr_heist_yacht2_lounge")
+			RequestIpl("gr_heist_yacht2_lounge_lod")
+			RequestIpl("gr_heist_yacht2_slod")
 			
 		-- Bunkers - Exteriors
 			--RequestIpl("gr_case0_bunkerclosed")

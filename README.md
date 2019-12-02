@@ -144,7 +144,7 @@ Syndicat = syndicat
 **Ajouter un Métier à un joueur/Adding a Business to a Player**
 * /setjob ID NomMetier Grade
 
-**Ajouter une Organisation à un joueur/Adding an Organization to a Player**
+**Ajouter un Gang à un joueur/Adding an Gang to a Player**
 * /setjob2 ID NomMetier Grade
 
 **Bannir un joueur/Banning a player**
